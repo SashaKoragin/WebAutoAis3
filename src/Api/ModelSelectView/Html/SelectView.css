@@ -1,0 +1,116 @@
+ ::ng-deep .mat-tooltip {
+  background: transparent grey!important;
+  font-size: 16px!important;
+}
+
+
+
+button {
+    background-color: green;
+    cursor: pointer;
+    align-items: center;
+    margin: 10px;
+}
+button:hover {
+       background-color: orange;
+}
+.head {
+    width:max-content;
+}
+
+
+.grid-container2 {
+    display: grid;
+    padding: 3px;
+    grid-template-columns: 300px max-content max-content max-content;
+    grid-column-gap: 10px;
+    width:inherit;
+    background: white;
+    border: 2px solid darkmagenta;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.lable{
+  font-size: 24px;
+}
+
+.lableerror{
+  color: red;
+  font-size: 14px;
+}
+
+.grid-item2 {
+
+   padding: 0px;
+   font-style: italic;
+   text-align: left;
+   align-self: center;
+}
+
+.select {
+    width: 350px;
+
+}
+.mat-form-field{
+  font-size: 14px;
+}
+
+ table {
+    border: groove;
+    width: 100%;
+
+  }
+
+
+
+  th, td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  th.mat-header-cell{
+     text-align: center;
+     white-space: pre-wrap;
+     padding-left: 5px;
+     padding-right: 5px;
+     border: groove;
+     background: cadetblue;
+     font-family: 'Times New Roman';
+     font-size: 16px;
+     font-weight: bold;
+  }
+
+  td.mat-cell{
+
+    text-align: left;
+    white-space: nowrap;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: groove;
+    background: darkkhaki;
+    font-family: 'Times New Roman';
+   font-size: 13px;
+   font-weight: bold;
+  }
+
+.container-table{
+  position: relative;
+  max-height: 600px;
+  width: 1800px;
+  overflow: auto;
+}
+
+.paginator{
+    position: relative;
+    width: 1800px;
+    overflow: auto;
+}
+
+  .search_blok{
+    width: 50%;
+  }
+
+  .search{
+    width: 50%;
+  }
