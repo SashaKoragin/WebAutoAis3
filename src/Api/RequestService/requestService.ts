@@ -43,8 +43,8 @@ export class AuthIdentification {
      this.isLoggedIn = false;
      this.user =  new Identification();
      this.IsVisibleButton = false;
+     this.permissionsService.flushPermissions()
   }
-
 }
 
 

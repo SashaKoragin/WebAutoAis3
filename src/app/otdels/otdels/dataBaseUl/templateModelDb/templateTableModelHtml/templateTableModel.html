@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="cont">
+    <div class="row justify-content-start align-items-end">
+      <div class="col">
+        <label class="text text-primary">ФИД: </label>
+      </div>
+      <div class="col">
+        <label class="content" matTooltip={{data.row.Fid}}>{{data.row.Fid}}</label>
+      </div>
+      <div class="w-100"></div>
+      <div class="col">
+        <label class="text text-primary">Наименование: </label>
+      </div>
+      <div class="col">
+        <label class="content" matTooltip={{data.row.NameSmall}}>{{data.row.NameSmall}}</label>
+      </div>
+      <div class="w-100"></div>
+      <div class="col">
+        <label class="text text-primary">ИНН: </label>
+      </div>
+      <div class="col">
+        <label class="content" matTooltip={{data.row.Inn}}>{{data.row.Inn}}</label>
+      </div>
+      <div class="w-100"></div>
+      <div class="col">
+        <label class="text text-primary">КПП: </label>
+      </div>
+      <div class="col">
+        <label class="content" matTooltip={{data.row.Kpp}}>{{data.row.Kpp}}</label>
+      </div>
+      <div class="w-100"></div>
+      <div class="col">
+        <label class="text text-primary">Адрес: </label>
+      </div>
+      <div class="col">
+        <label class="content" matTooltip={{data.row.Address}}>{{data.row.Address}}</label>
+      </div>
+      <div class="w-100"></div>
+      <div class="col">
+        <label class="text text-primary">Статус: </label>
+      </div>
+      <div class="col">
+        <label class="content" matTooltip={{data.row.StatusUl}}>{{data.row.StatusUl}}</label>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-start align-items-center">
+    <div class="col-auto mr-auto">
+      <label class="text text-primary">Модель организации: </label>
+    </div>
+    <div class="col">
+      <mat-form-field class="categoria">
+        <mat-label>Модель</mat-label>
+        <mat-select [(value)]="data.selectModelMenu" name="model" (selectionChange)="eventSelection($event.value)">
+          <mat-option *ngFor="let model of data.data.modelMenu" [value]="model">
+            {{model.categoria}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row justify-content-start align-items-center">
+    <div class="col tableContent">
+      <SqlSelectDataBase [logicstooltable]="LOGICS"></SqlSelectDataBase>
+    </div>
+  </div>
+  <div class="close">
+    <button class="mt-2 btn btn-lg btn-primary btn-block" type="submit" (click)="closeDialog()">Закрыть
+      карточку</button>
+  </div>
+</div>
+
+
+
+<ng-template #LOGICS let-row='row'>
+  <label></label>
+</ng-template>

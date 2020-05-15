@@ -40,10 +40,6 @@ export class PublicFunction{
              }
             }
         }
-        return model as any;      
+        return model as any;
   }
-
-
-
-
 }

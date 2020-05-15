@@ -1,0 +1,44 @@
+::ng-deep.mat-dialog-container {
+  background: white;
+}
+
+
+.container{
+  max-width: 100%;
+  margin: 0px;
+  border: solid;
+  background: ghostwhite;
+}
+.cont{
+  width: 51.5%;
+}
+
+.text{
+  justify-items: baseline;
+  font-size: 24px;
+  font-style: normal;
+  color: black;
+  margin-right: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.categoria{
+  width: 500px;
+}
+
+.content{
+  justify-items: baseline;
+  font-size: 24px;
+  font-style: normal;
+  color: black;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 700px;
+}
+
+.tableContent{
+  max-width: max-content;
+}

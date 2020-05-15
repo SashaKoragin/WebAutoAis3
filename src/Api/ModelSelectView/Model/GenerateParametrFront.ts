@@ -32,7 +32,7 @@ class SelectCompanent {
 export class FormSelect {
    public  numberPole = new FormControl('', [forbiddenNameValidator(/^((\d{1,10}\/{1})+(\d{1,10})|(\d{0,10})|(^$))$/)]);
    public  stringPole = new FormControl();
-   public  datePole = new FormControl('', [forbiddenNameValidator(/^((((3[01]|[12][0-9]|0[1-9])\.(1[012]|0[1 9])\.((?:19|20)\d{2}))\/{1})+((3[01]|[12][0-9]|0[1-9])\.(1[012]|0[1 9])\.((?:19|20)\d{2}))|((3[01]|[12][0-9]|0[1-9])\.(1[012]|0[1 9])\.((?:19|20)\d{2}))|(^$))$/)]);
+   public  datePole = new FormControl('', [forbiddenNameValidator(/^((((3[01]|[12][0-9]|0[1-9])\.(1[012]|0[1-9])\.((?:19|20)\d{2}))\/{1})+((3[01]|[12][0-9]|0[1-9])\.(1[012]|0[1-9])\.((?:19|20)\d{2}))|((3[01]|[12][0-9]|0[1-9])\.(1[012]|0[1-9])\.((?:19|20)\d{2}))|(^$))$/)]);
    public  elementRefPole = new FormControl();
 }
 //Параметры создания на вместе с подстановкой

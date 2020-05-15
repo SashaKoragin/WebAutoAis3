@@ -1,6 +1,5 @@
-import { Component,Input,ViewChild, ElementRef,Renderer2, AfterViewInit, Output, EventEmitter, TemplateRef} from '@angular/core';
+import { Component,Input,ViewChild, ElementRef, TemplateRef} from '@angular/core';
 import {GenerateParametrs, LogicaDataBase } from '../Model/GenerateParametrFront';
-import { MatTableDataSource} from '@angular/material/table';
 import { MatPaginator} from '@angular/material/paginator';
 import { SelectAllParametrs } from '../Model/PostRequest';
 import * as XLSX from 'xlsx';
@@ -15,8 +14,8 @@ import { Table } from '../Model/DynamicTableModel';
 export class Select {
 
     @ViewChild('TABLE',{static: false}) table: ElementRef;
-    
-    //Шаблон кнопок в таблице 
+
+    //Шаблон кнопок в таблице
     @Input() logicstooltable: TemplateRef<any>;
     //Шаблон Панель инструментов
     @Input() toolpanel: TemplateRef<any>;
@@ -30,34 +29,33 @@ export class Select {
     @Input() select:SelectAllParametrs;
 
     @ViewChild('tables',{static: false}) paginator: MatPaginator;
-    
-    allcountproblem:number = 0
-    displayedColumns:any
-    dataSource:MatTableDataSource<any> = new MatTableDataSource<any>();
 
-    update(){
+
+   public update(child:number = 0){
        try {
            if(this.selecting.errorModel())
            {
-            this.logica.logicaselect(); //Закрываем логику выбора
-            this.logica.logicaprogress();  //Открываем логику загрузки
+             if(child ==0){
+              this.logica.logicaselect(); //Закрываем логику выбора
+              this.logica.logicaprogress();  //Открываем логику загрузки
+             }
             this.columns.Colums = [];    //Обнулить колонки
-            this.columns.Model = [];
             this.select.selectusersql(this.selecting.generatecommandxml(this.columns)).subscribe((model:string)=>{
             this.logica.errornull = true;
               if(model !== "null")
               {
-               this.columns.Model = (JSON.parse(model)[this.columns.Type])
-               this.dataSource.data = this.columns.Model;
-               this.displayedColumns = this.columns.Colums.map(c => c.columnDef);
-               this.allcountproblem = this.dataSource.data.length;
+               this.columns.Model.data = (JSON.parse(model)[this.columns.Type])
+               this.columns.displayedColumns = this.columns.Colums.map(c => c.columnDef);
+               this.columns.allCountRow = this.columns.Model.data.length;
               }
               else{
                  this.logica.errornull = false;  //Показать ошибку пустых данных
               }
-              this.dataSource.paginator = this.paginator;
-              this.logica.logicaprogress();    //Открываем логику данных
-              this.logica.logicadatabase();    //Закрываем логику загрузки
+              this.columns.Model.paginator = this.paginator;
+              if(child ==0){
+                this.logica.logicaprogress();    //Открываем логику данных
+                this.logica.logicadatabase();    //Закрываем логику загрузки
+              }
              })
               }
             else{
@@ -72,11 +70,11 @@ export class Select {
     back() {
         this.logica.logicadatabase();; //Закрываем логику Данных
         this.logica.logicaselect(); //Открываем логику загрузки
-        this.displayedColumns = null;
+        this.columns.displayedColumns = null;
     }
 
     FilterDataTable(filterValue: string) {
-        this.dataSource.filter = filterValue.trim().toLowerCase();
+      this.columns.Model.filter = filterValue.trim().toLowerCase();
     }
 
     ExportTOExcel(){

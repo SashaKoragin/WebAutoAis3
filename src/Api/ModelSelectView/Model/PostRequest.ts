@@ -1,5 +1,5 @@
-import { HttpClient,HttpHeaders } from '@angular/common/http';
-import { Injectable} from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { AdressService } from '../../AdressGetPost/adressService';
 import { ModelSelect, LogicsSelectAutomation } from './ParametrModel';
 const url: AdressService = new AdressService();
@@ -9,26 +9,61 @@ const httpOptionsJson = {
 
 
 @Injectable()
-export class SelectAllParametrs{
-    constructor(private http: HttpClient) { }
-   
-    ///Запрос на получение генерируемых параметров
-   addselectallparametrs(model:ModelSelect){
-        return this.http.post(url.selectparametr,model,httpOptionsJson);
-    }
+export class SelectAllParametrs {
+  constructor(private http: HttpClient) { }
 
-    ///Запрос на получение данных
-    selectusersql(model:LogicsSelectAutomation){
-        return this.http.post(url.selectxml,model,httpOptionsJson);
-    }
+  ///Запрос на получение генерируемых параметров
+  addselectallparametrs(model: ModelSelect) {
+    return this.http.post(url.selectparametr, model, httpOptionsJson);
+  }
 
-    ///Выгрузка файла
-   async donloadFile(modelRow:any):Promise<Blob>{
-    var blob = await this.http.post(url.donloadFileOkp2,modelRow,
-        { responseType: 'arraybuffer', headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).toPromise().then(data=>{
+  ///Запрос на получение данных
+  selectusersql(model: LogicsSelectAutomation) {
+    return this.http.post(url.selectxml, model, httpOptionsJson);
+  }
+
+  ///Выгрузка файла
+  async donloadFile(modelRow: any, type: string): Promise<Blob> {
+    var urls = null;
+    switch (type) {
+      case "TaxJournalAutoWebPage":
+        urls = url.donloadFileOkp2;
+        break;
+      case "TaxJournal121AutoWebPage":
+        urls = url.donloadFile121;
+        break;
+      default:
+        urls = null;
+        break;
+    }
+    console.log(urls);
+    if (urls) {
+      var blob = await this.http.post(urls, modelRow,
+        { responseType: 'arraybuffer', headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).toPromise().then(data => {
           var blob = new Blob([data], { type: 'application/pdf' });
           return blob;
         });
-    return blob;
+      return blob;
     }
+    return null;
+  }
+  ///Загрузка ИНН для отработки
+  public loadInn(inn: string) {
+    return this.http.post(url.addInnModel, inn, httpOptionsJson);
+  }
+  ///Снятие статуса для повторной отработки
+  public checkStatus(idModel: number) {
+    return this.http.post(url.checkStatusNone, idModel, httpOptionsJson);
+  }
+
+  //Генерация докладной записки по ЮЛ
+  public noteGenerateUl(inn: string) {
+    return this.http.post(url.generateNoteReportUl, inn,
+      { responseType: 'arraybuffer', headers: new HttpHeaders({ 'Content-Type': 'application/json' }) })
+  }
+
+  //Запрос на модели таблиц для разкладки динамически
+  public detalDataBaseNote(modelParameter: ModelSelect) {
+    return this.http.post(url.dynamicModelTable, modelParameter, httpOptionsJson);
+  }
 }
