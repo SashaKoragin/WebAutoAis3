@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { ModelSelect } from '../../ModelSelectView/Model/ParametrModel';
 import { SelectAllParametrs } from '../../ModelSelectView/Model/PostRequest';
 import { ModelMenuAndModel } from '../../../app/otdels/otdels/dataBaseUl/modelDataBase/modelDataBase';
+import { trigger, style, animate, state, transition } from '@angular/animations';
 
 @Component({
   selector: 'SqlSelectDataBase',
@@ -32,7 +33,7 @@ export class ModelSqlTable {
   //Привязка к Paginator
   @ViewChild('tables', { static: false }) paginator: MatPaginator;
   //Прогресс запроса
-  public  progress: boolean;
+  public progress: boolean;
   //Данные отражать или нет
   public date: boolean;
   //Ошибка если нет данных
@@ -41,7 +42,7 @@ export class ModelSqlTable {
   //Предроверочный анализ База данных
   public columns: Table = { Type: null, Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 };
 
-  public async postDataSql(modelParameter: ModelMenuAndModel,inn:string = null,regNumber:number = 0) {
+  public async postDataSql(modelParameter: ModelMenuAndModel, inn: string = null, regNumber: number = 0) {
     try {
       var model = new ModelSelect(modelParameter.idSelect, modelParameter.parameterSelectProcedure, inn, regNumber);
       await this.delay(1);

@@ -1,17 +1,18 @@
 <div class="he d-flex align-items-center">
   <b class="h3 text-primary ">Выбор представления данных:</b>
-      <mat-form-field class="selectin_sql text-primary">
-          <mat-label class="text-primary">Выборки</mat-label>
-          <mat-select class="text-primary" placeholder="Выборки" [(ngModel)]="dinamicmodel.mainselectPre"  name="sel" (selectionChange)="serverInn($event)">
-              <mat-option class="text-primary" *ngFor="let sel of dinamicmodel.selectserverPre" [value]="sel">
-                  {{sel.text}}
-              </mat-option>
-          </mat-select>
-      </mat-form-field>
-  </div>
+  <mat-form-field class="selectin_sql text-primary">
+    <mat-label class="text-primary">Выборки</mat-label>
+    <mat-select class="text-primary" placeholder="Выборки" [(ngModel)]="dinamicmodel.mainselectPre" name="sel"
+      (selectionChange)="serverInn($event)">
+      <mat-option class="text-primary" *ngFor="let sel of dinamicmodel.selectserverPre" [value]="sel">
+        {{sel.text}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
 
 <selectsql #TABLETEMPLATE [(logica)]="logica" [(selecting)]="selecting" [(columns)]="columnsPre" [(select)]="select"
-[logicstooltable]="dinamicmodel.mainselectPre.indexsevr==8?LOGICSTOOLTABLE:null" [toolpanel]='TOOLPANEL'></selectsql>
+  [logicstooltable]="dinamicmodel.mainselectPre.indexsevr==8?LOGICSTOOLTABLE:null" [toolpanel]='TOOLPANEL'></selectsql>
 
 <ng-template class="panel" #TOOLPANEL>
 
@@ -19,8 +20,9 @@
     <div class="p-1 bd-highlight align-self-center">
       <label class="mr-2">Ввод ИНН:</label>
       <input class="mr-2" placeholder="ИНН" [formControl]="inputInn">
-      <label class="mr-2 lableerror" *ngIf="inputInn.invalid" >Не соответствует ИНН!</label>
-      <button class="mr-2 font btn btn-primary" mat-button (click)="loadinn(inputInn.value)"  [disabled]="inputInn.invalid">Загрузить ИНН</button>
+      <label class="mr-2 lableerror" *ngIf="inputInn.invalid">Не соответствует ИНН!</label>
+      <button class="mr-2 font btn btn-primary" mat-button (click)="loadinn(inputInn.value)"
+        [disabled]="inputInn.invalid">Загрузить ИНН</button>
     </div>
   </div>
   <div>
@@ -28,8 +30,13 @@
   </div>
 </ng-template>
 
-<ng-template #LOGICSTOOLTABLE  let-row='row' >
-  <button mat-icon-button [disabled]="disableCheck(row)" color="primary" matTooltip="Снять статус отработки"  (click)="checkStatus(row)" >
+<ng-template #LOGICSTOOLTABLE let-row='row'>
+  <button mat-icon-button [disabled]="check(row)" color="primary" matTooltip="Проставить статус обработан"
+    (click)="checkStatus(row,'Ок!')">
     <i class="material-icons">check</i>
+  </button>
+  <button mat-icon-button [disabled]="disable(row)" color="primary" matTooltip="Снять статус обработан"
+    (click)="checkStatus(row)">
+    <i class="material-icons">cancel</i>
   </button>
 </ng-template>

@@ -10,12 +10,12 @@
   background: ghostwhite;
 }
 .cont{
-  width: 51.5%;
+  width: 100%;
 }
 
 .text{
   justify-items: baseline;
-  font-size: 24px;
+  font-size: 20px;
   font-style: normal;
   color: black;
   margin-right: 10px;
@@ -30,7 +30,7 @@
 
 .content{
   justify-items: baseline;
-  font-size: 24px;
+  font-size: 20px;
   font-style: normal;
   color: black;
   overflow: hidden;
@@ -42,3 +42,35 @@
 .tableContent{
   max-width: max-content;
 }
+
+
+.content{
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.before{
+  width: 64px;
+  align-self: stretch;
+
+}
+
+.next{
+  width: 64px;
+  align-self: stretch;
+}
+
+.beforeButton{
+  height: 100%;
+  text-align: center;
+  padding-left: 0px;
+}
+.nextButton{
+  height: 100%;
+  text-align: center;
+  padding-left: 0px;
+
+}
+
+

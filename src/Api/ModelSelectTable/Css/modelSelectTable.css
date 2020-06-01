@@ -1,4 +1,9 @@
-
+.container-table{
+  position: relative;
+  max-height: 600px;
+  width: 1500px;
+  overflow: auto;
+}
 
 th, td {
   overflow: hidden;

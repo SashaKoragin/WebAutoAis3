@@ -7,10 +7,6 @@ import { ModelMenuAndModel, ModelDialog } from '../modelDataBase/modelDataBase';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModelDialogTemplateDataBase } from '../templateModelDb/templateTableModelTs/templateTableModel';
 
-
-
-
-
 @Component({
   templateUrl: '../html/databaseAutoUl.html',
   styleUrls: ['../css/databaseAutoUl.css'],
@@ -78,12 +74,8 @@ export class DatabaseAutoUl implements OnInit {
 
   selectOpenDialogModel(modelMenu: ModelMenuAndModel, row: any) {
     this.modelDataBase.row = row;
-    console.log(row);
+    this.modelDataBase.allDataRow = this.columnsPreDataBase.Model.data
     this.modelDataBase.selectModelMenu = modelMenu;
-    console.log(this.modelDataBase.selectModelMenu.categoria);
-    var dialogRef = this.dialog.open(ModelDialogTemplateDataBase, this.configDialogForm);
+    this.dialog.open(ModelDialogTemplateDataBase, this.configDialogForm);
   }
-
-
-
 }

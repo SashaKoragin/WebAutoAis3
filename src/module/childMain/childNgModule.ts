@@ -9,7 +9,7 @@ import { ModelOkp2 } from '../../app/otdels/otdels/okp2/ts/viewOkp2';
 import { Select } from '../../Api/ModelSelectView/View/SelectView';
 import { ModelPreCheck } from '../../app/otdels/otdels/PreCheck/ts/wiewPreCheck';
 import { DatabaseAutoUl } from '../../app/otdels/otdels/dataBaseUl/ts/databaseAutoUl';
-import { ModelDialogTemplateDataBase } from '../../app/otdels/otdels/dataBaseUl/templateModelDb/templateTableModelTs/templateTableModel';
+import { ModelDialogTemplateDataBase, FilterParametrs } from '../../app/otdels/otdels/dataBaseUl/templateModelDb/templateTableModelTs/templateTableModel';
 import { ModelSqlTable } from '../../Api/ModelSelectTable/View/modelSelectTable';
 
 
@@ -24,7 +24,7 @@ import { ModelSqlTable } from '../../Api/ModelSelectTable/View/modelSelectTable'
     ReactiveFormsModule
   ],
   declarations: [
-    MainChildOtdel,ModelOkp2,Select,ModelPreCheck,DatabaseAutoUl,ModelDialogTemplateDataBase,ModelSqlTable
+    MainChildOtdel,ModelOkp2,Select,ModelPreCheck,DatabaseAutoUl,ModelDialogTemplateDataBase,ModelSqlTable,FilterParametrs
   ]
 
 

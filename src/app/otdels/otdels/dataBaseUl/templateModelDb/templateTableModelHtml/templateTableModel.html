@@ -1,77 +1,107 @@
-<div class="container">
-  <div class="cont">
-    <div class="row justify-content-start align-items-end">
-      <div class="col">
-        <label class="text text-primary">ФИД: </label>
+<div class="content">
+
+  <div class="before">
+    <button mat-button class="beforeButton" matTooltip={{toolTipBefore()}} type="submit" (click)="before()">
+      <mat-icon>navigate_before</mat-icon>
+    </button>
+  </div>
+  <div class="container">
+    <div class="cont">
+      <div class="row justify-content-start align-items-end">
+        <div class="col-2">
+          <label class="text text-primary">ФИД: </label>
+        </div>
+        <div class="col-8">
+          <label class="content" matTooltip={{data.row.Fid}}>{{data.row.Fid}}</label>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-2">
+          <label class="text text-primary">Наименование: </label>
+        </div>
+        <div class="col-8">
+          <label class="content" matTooltip={{data.row.NameSmall}}>{{data.row.NameSmall}}</label>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-2">
+          <label class="text text-primary">ИНН: </label>
+        </div>
+        <div class="col-8">
+          <label class="content" matTooltip={{data.row.Inn}}>{{data.row.Inn}}</label>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-2">
+          <label class="text text-primary">КПП: </label>
+        </div>
+        <div class="col-8">
+          <label class="content" matTooltip={{data.row.Kpp}}>{{data.row.Kpp}}</label>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-2">
+          <label class="text text-primary">Адрес: </label>
+        </div>
+        <div class="col-8">
+          <label class="content" matTooltip={{data.row.Address}}>{{data.row.Address}}</label>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-2">
+          <label class="text text-primary">Статус: </label>
+        </div>
+        <div class="col-8">
+          <label class="content" matTooltip={{data.row.StatusUl}}>{{data.row.StatusUl}}</label>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-start align-items-center">
+      <div class="col-auto mr-auto">
+        <label class="text text-primary">Модель организации: </label>
       </div>
       <div class="col">
-        <label class="content" matTooltip={{data.row.Fid}}>{{data.row.Fid}}</label>
+        <mat-form-field class="categoria">
+          <mat-label>Модель</mat-label>
+          <mat-select [(value)]="data.selectModelMenu" name="model" (selectionChange)="eventSelection($event.value)">
+            <mat-option *ngFor="let model of data.data.modelMenu" [value]="model">
+              {{model.categoria}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-      <div class="w-100"></div>
-      <div class="col">
-        <label class="text text-primary">Наименование: </label>
+    </div>
+    <div class="row justify-content-start align-items-center">
+      <div class="col tableContent" [@state]="animate?'active':'inactive'">
+         <SqlSelectDataBase #SqlSelect [logicstooltable]="LOGICS"></SqlSelectDataBase>
       </div>
-      <div class="col">
-        <label class="content" matTooltip={{data.row.NameSmall}}>{{data.row.NameSmall}}</label>
+      <div class="col tableContent" [@state]="animate?'inactive':'active'">
+        <SqlSelectDataBase #SqlSelectDetal [toolpanel]="PANEL"></SqlSelectDataBase>
       </div>
-      <div class="w-100"></div>
-      <div class="col">
-        <label class="text text-primary">ИНН: </label>
-      </div>
-      <div class="col">
-        <label class="content" matTooltip={{data.row.Inn}}>{{data.row.Inn}}</label>
-      </div>
-      <div class="w-100"></div>
-      <div class="col">
-        <label class="text text-primary">КПП: </label>
-      </div>
-      <div class="col">
-        <label class="content" matTooltip={{data.row.Kpp}}>{{data.row.Kpp}}</label>
-      </div>
-      <div class="w-100"></div>
-      <div class="col">
-        <label class="text text-primary">Адрес: </label>
-      </div>
-      <div class="col">
-        <label class="content" matTooltip={{data.row.Address}}>{{data.row.Address}}</label>
-      </div>
-      <div class="w-100"></div>
-      <div class="col">
-        <label class="text text-primary">Статус: </label>
-      </div>
-      <div class="col">
-        <label class="content" matTooltip={{data.row.StatusUl}}>{{data.row.StatusUl}}</label>
-      </div>
+    </div>
+    <div class="close">
+      <button class="mt-2 btn btn-lg btn-primary" type="submit" (click)="closeDialog()">Закрыть
+        карточку</button>
     </div>
   </div>
-  <div class="row justify-content-start align-items-center">
-    <div class="col-auto mr-auto">
-      <label class="text text-primary">Модель организации: </label>
-    </div>
-    <div class="col">
-      <mat-form-field class="categoria">
-        <mat-label>Модель</mat-label>
-        <mat-select [(value)]="data.selectModelMenu" name="model" (selectionChange)="eventSelection($event.value)">
-          <mat-option *ngFor="let model of data.data.modelMenu" [value]="model">
-            {{model.categoria}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </div>
-  <div class="row justify-content-start align-items-center">
-    <div class="col tableContent">
-      <SqlSelectDataBase [logicstooltable]="LOGICS"></SqlSelectDataBase>
-    </div>
-  </div>
-  <div class="close">
-    <button class="mt-2 btn btn-lg btn-primary btn-block" type="submit" (click)="closeDialog()">Закрыть
-      карточку</button>
+  <div class="next">
+    <button mat-button class="nextButton" matTooltip={{toolTipNext()}} type="submit" (click)="next()">
+      <mat-icon>navigate_next</mat-icon>
+    </button>
   </div>
 </div>
 
-
+<ng-template #PANEL let-row='row'>
+  <button class="mt-2 btn btn-lg btn-primary" type="submit" (click)="backSelect()">Назад на главную
+  </button>
+</ng-template>
 
 <ng-template #LOGICS let-row='row'>
-  <label></label>
+  <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{row: row}" color="primary"
+    matTooltip="Меню">
+    <mat-icon>more_vert</mat-icon>
+  </button>
 </ng-template>
+
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent let-row='row'>
+    <div *ngFor="let modelCategoria of data.data.modelDetal | filters:data.selectModelMenu.keyDetal">
+      <button mat-menu-item (click)="selectOpenDetal(modelCategoria,row)">{{modelCategoria.categoria}}</button>
+    </div>
+  </ng-template>
+</mat-menu>

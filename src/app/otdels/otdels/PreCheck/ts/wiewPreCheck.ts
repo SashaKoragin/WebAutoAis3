@@ -46,7 +46,7 @@ export class ModelPreCheck implements OnInit {
   serverInn(type: any) {
     this.select.addselectallparametrs(new ModelSelect(this.dinamicmodel.mainselectPre.indexsevr)).subscribe((model: ModelSelect) => {
       this.selecting = new GenerateParametrs(model);
-      this.columnsPre = this.dinamicmodel.columnsPre[this.dinamicmodel.mainselectPre.indexcolumnmodel]
+      this.columnsPre = this.dinamicmodel.columnsPre[this.dinamicmodel.mainselectPre.indexcolumnmodel];
     })
   }
 
@@ -59,17 +59,25 @@ export class ModelPreCheck implements OnInit {
     })
   }
 
-  checkStatus(row: any) {
-    this.select.checkStatus(row.IdModel).subscribe(() => {
+  checkStatus(row: any, status: string = null) {
+    this.select.checkStatus(row.IdModel, status).subscribe(() => {
       console.log("Статус снят: " + row.IdModel);
       this.selectionChild.update(1);
     })
   }
 
-  disableCheck(row: any): boolean {
-    if (row.StatusModel) {
-      return false;
+
+  disable(row: any): boolean {
+    if (row.StatusModel !== 'Ок!') {
+      return true;
     }
-    return true;
+    return false;
+  }
+
+  check(row: any): boolean {
+    if (row.StatusModel) {
+      return true;
+    }
+    return false;
   }
 }

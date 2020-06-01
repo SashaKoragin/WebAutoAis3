@@ -52,8 +52,8 @@ export class SelectAllParametrs {
     return this.http.post(url.addInnModel, inn, httpOptionsJson);
   }
   ///Снятие статуса для повторной отработки
-  public checkStatus(idModel: number) {
-    return this.http.post(url.checkStatusNone, idModel, httpOptionsJson);
+  public checkStatus(idModel: number, status: string = null) {
+    return this.http.post((status) ? url.checkStatus.concat("?status=", status) : url.checkStatus, idModel, httpOptionsJson);
   }
 
   //Генерация докладной записки по ЮЛ
