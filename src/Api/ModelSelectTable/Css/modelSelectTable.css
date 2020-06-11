@@ -19,7 +19,7 @@ th.mat-header-cell{
    border: groove;
    background: cadetblue;
    font-family: 'Times New Roman';
-   font-size: 18px;
+   font-size: 14px;
    font-weight: bold;
 }
 
@@ -32,7 +32,7 @@ td.mat-cell{
   border: groove;
   background: darkkhaki;
   font-family: 'Times New Roman';
- font-size: 18px;
+ font-size: 14px;
  font-weight: bold;
 }
 .search_blok{

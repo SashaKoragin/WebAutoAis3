@@ -5,6 +5,7 @@ import { AuthInventar } from '../../app/security/model/securityModel';
 import { ModelOkp2 } from '../../app/otdels/otdels/okp2/ts/viewOkp2';
 import { ModelPreCheck } from '../../app/otdels/otdels/PreCheck/ts/wiewPreCheck';
 import { DatabaseAutoUl } from '../../app/otdels/otdels/dataBaseUl/ts/databaseAutoUl';
+import { ModelRaschetBudgPayment } from '../../app/otdels/otdels/raschetBudg/ts/viewRaschetBudg';
 
 const appRoutes: Routes = [
   {
@@ -22,6 +23,10 @@ const appRoutes: Routes = [
         {
           path:'modelUl',
           component:DatabaseAutoUl
+        },
+        {
+          path:'payment',
+          component:ModelRaschetBudgPayment
         }
       ]
   }];

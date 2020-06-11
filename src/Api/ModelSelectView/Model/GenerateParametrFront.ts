@@ -225,7 +225,7 @@ class GenerateFullCommand {
       else {
         str = str.concat(param.nameparametr + ', ')
       }
-      columnDynamic.Colums.push({ columnDef: param.nameparametr, header: param.name.trim(), cell: (element: any) => `${element[param.nameparametr.split('.')[1]]}`, color: (param.nameparametr.split('.')[1].search('Error') == -1) ? 'null' : 'red' })
+      columnDynamic.Colums.push({ columnDef: param.nameparametr, header: param.name.trim(), cell: (element: any) => `${element[param.nameparametr.split('.')[1]]}`, color: (param.nameparametr.split('.')[1].search('Errors') == -1) ? 'null' : 'red' })
     }
     if (str == '') {
       str = str.concat(' * ')

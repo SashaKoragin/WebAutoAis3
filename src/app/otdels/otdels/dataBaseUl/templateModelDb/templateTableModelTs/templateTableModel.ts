@@ -108,6 +108,11 @@ export class ModelDialogTemplateDataBase implements AfterViewInit {
       this.selectionChildDetal.postDataSql(modelDetalSelect, null, row.RegNumDecl);
       this.backSelect()
     }
+    if (this.data.selectModelMenu.keyDetal === 2) {
+      this.selectionChildDetal.postDataSql(modelDetalSelect, row.Inn, 0);
+      this.backSelect()
+    }
+
   }
 
   backSelect() {

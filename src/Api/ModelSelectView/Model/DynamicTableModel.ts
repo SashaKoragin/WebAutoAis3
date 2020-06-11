@@ -16,13 +16,26 @@ export class DynamicTableColumnModel{
   public selectserverPre:SelectTableModel[]=[
       {text:"Добавление ИНН", indexsevr:5,indexcolumnmodel:0},
       {text:"Статусы (Отработанных веток)", indexsevr:8,indexcolumnmodel:1}
-  ]
+  ];
   //Предроверочный анализ
   public mainselectPre:SelectTableModel = this.selectserverPre[0];
   //Предроверочный анализ
   public columnsPre:Table[] = [{Type:"AddUlFace", Colums:[],Model:new MatTableDataSource<any>(),displayedColumns:null,allCountRow:0},
                                {Type:"ModelTree", Colums:[],Model:new MatTableDataSource<any>(),displayedColumns:null,allCountRow:0},
                               ];
+
+  //Расчеты с бюджетом
+  public selectserverRaschetBudg:SelectTableModel[]=[
+    {text:"Анализ платежей обработаные автоматом", indexsevr:14,indexcolumnmodel:0},
+    {text:"Справочник КБК участвующих в автомате", indexsevr:15,indexcolumnmodel:1}
+  ];
+  //Расчеты с бюджетом
+  public mainselectRaschetBudg:SelectTableModel = this.selectserverRaschetBudg[0];
+  //Расчеты с бюджетом
+  public columnsRaschetBudg:Table[] = [
+    {Type:"ModelKbkOnKbk", Colums:[],Model:new MatTableDataSource<any>(), displayedColumns:null, allCountRow:0},
+    {Type:"HelpKbkAuto", Colums:[], Model:new MatTableDataSource<any>(), displayedColumns:null, allCountRow:0},
+  ];
 
   //Предроверочный анализ База данных
   public selectserverPreDataBase:SelectTableModel[]=[

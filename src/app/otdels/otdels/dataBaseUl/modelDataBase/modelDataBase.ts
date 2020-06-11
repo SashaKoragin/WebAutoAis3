@@ -13,6 +13,7 @@ export class ModelDataBase {
   public modelMenu: ModelMenuAndModel[] = [
     { categoria: "Учередители ЮЛ", idSelect: 8, parameterSelectProcedure: 10, keyDetal: null },
     { categoria: "Руководители и учередители", idSelect: 3, parameterSelectProcedure: 5, keyDetal: 2 },
+    { categoria: "Счета", idSelect: 10, parameterSelectProcedure: 12, keyDetal: null },
     { categoria: "НДС", idSelect: 4, parameterSelectProcedure: 6, keyDetal: 1 },
     { categoria: "Прибыль", idSelect: 5, parameterSelectProcedure: 7, keyDetal: 1 },
     { categoria: "Баланс", idSelect: 6, parameterSelectProcedure: 8, keyDetal: 1 },
@@ -24,6 +25,7 @@ export class ModelDataBase {
 
   public modelDetal: ModelMenuAndModel[] = [
     { categoria: "Детализация декларации", idSelect: 2, parameterSelectProcedure: 4, keyDetal: 1 },
+    { categoria: "Объекты имущества лица", idSelect: 9, parameterSelectProcedure: 11, keyDetal: 2 },
   ]
 
 }

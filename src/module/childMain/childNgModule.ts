@@ -11,6 +11,7 @@ import { ModelPreCheck } from '../../app/otdels/otdels/PreCheck/ts/wiewPreCheck'
 import { DatabaseAutoUl } from '../../app/otdels/otdels/dataBaseUl/ts/databaseAutoUl';
 import { ModelDialogTemplateDataBase, FilterParametrs } from '../../app/otdels/otdels/dataBaseUl/templateModelDb/templateTableModelTs/templateTableModel';
 import { ModelSqlTable } from '../../Api/ModelSelectTable/View/modelSelectTable';
+import { ModelRaschetBudgPayment } from '../../app/otdels/otdels/raschetBudg/ts/viewRaschetBudg';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { ModelSqlTable } from '../../Api/ModelSelectTable/View/modelSelectTable'
     ReactiveFormsModule
   ],
   declarations: [
-    MainChildOtdel,ModelOkp2,Select,ModelPreCheck,DatabaseAutoUl,ModelDialogTemplateDataBase,ModelSqlTable,FilterParametrs
+    MainChildOtdel,ModelOkp2,Select,ModelPreCheck,DatabaseAutoUl,ModelDialogTemplateDataBase,ModelSqlTable,FilterParametrs,ModelRaschetBudgPayment
   ]
 
 

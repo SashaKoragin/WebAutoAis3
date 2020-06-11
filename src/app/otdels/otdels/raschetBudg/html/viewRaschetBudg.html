@@ -1,0 +1,23 @@
+<div class="he d-flex align-items-center">
+  <b class="h3 text-primary ">Выбор представления данных:</b>
+  <mat-form-field class="selectin_sql text-primary">
+    <mat-label class="text-primary">Выборки</mat-label>
+    <mat-select class="text-primary" placeholder="Выборки" [(ngModel)]="dinamicmodel.mainselectRaschetBudg" name="sel"
+      (selectionChange)="serverInn($event)">
+      <mat-option class="text-primary" *ngFor="let sel of dinamicmodel.selectserverRaschetBudg" [value]="sel">
+        {{sel.text}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<selectsql #TABLETEMPLATE [(logica)]="logica" [(selecting)]="selecting" [(columns)]="columnsPre" [(select)]="select"></selectsql>
+
+<!-- <mat-tab-group>
+  <mat-tab label="Уточненные платежи (Анализ)" >
+
+  </mat-tab>
+  <mat-tab label="Справочник КБК (Участников)" >
+
+  </mat-tab>
+</mat-tab-group> -->
