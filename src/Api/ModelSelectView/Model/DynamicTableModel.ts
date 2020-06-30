@@ -46,6 +46,18 @@ export class DynamicTableColumnModel{
   //Предроверочный анализ База данных
   public columnsPreDataBase:Table[] = [{Type:"UlFace", Colums:[],Model:new MatTableDataSource<any>(),displayedColumns:null,allCountRow:0},
                                       ];
+
+  //Общий журнал 129
+  public selectserverAll129:SelectTableModel[]=[
+    {text:"Журнал 129", indexsevr:16,indexcolumnmodel:0},
+  ]
+  //Общий журнал 129 База данных
+  public mainselectAll129:SelectTableModel = this.selectserverAll129[0];
+
+    //Общий журнал 129 База данных
+  public columnsAll129:Table[] = [{Type:"AllJournal129", Colums:[],Model:new MatTableDataSource<any>(),displayedColumns:null,allCountRow:0},
+  ];
+
 }
 
 ///Класс селектора

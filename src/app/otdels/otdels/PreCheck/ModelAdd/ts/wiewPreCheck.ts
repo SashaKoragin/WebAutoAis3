@@ -1,10 +1,10 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { SelectAllParametrs } from '../../../../../Api/ModelSelectView/Model/PostRequest';
-import { DynamicTableColumnModel, Table } from '../../../../../Api/ModelSelectView/Model/DynamicTableModel';
-import { LogicaDataBase, GenerateParametrs } from '../../../../../Api/ModelSelectView/Model/GenerateParametrFront';
-import { ModelSelect } from '../../../../../Api/ModelSelectView/Model/ParametrModel';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { SelectAllParametrs } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
+import { DynamicTableColumnModel, Table } from '../../../../../../Api/ModelSelectView/Model/DynamicTableModel';
+import { LogicaDataBase, GenerateParametrs } from '../../../../../../Api/ModelSelectView/Model/GenerateParametrFront';
+import { ModelSelect } from '../../../../../../Api/ModelSelectView/Model/ParametrModel';
 import { FormControl, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { Select } from '../../../../../Api/ModelSelectView/View/SelectView';
+import { Select } from '../../../../../../Api/ModelSelectView/View/SelectView';
 
 
 

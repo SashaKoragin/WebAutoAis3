@@ -24,7 +24,10 @@ export class Report {
       }], types: null, pages: null, model: null, isrule: null
     }, {
       otdel: 'Отдел предпроверочного анализа',
-      children: [
+      children: [{
+        otdel: null,
+        children: null, types: 'Журнал налоговых нарушений', pages: './JournalPreCheck129', model: 'Журнал налоговых нарушений', isrule: ['i7751-Informatizatsii', 'i7751-L-ServersAdmins', 'i7751-PAiID']
+      },
         {
           otdel: null,
           children: null, types: 'Создание карточек ЮЛ (Просмотр)', pages: './modelUl', model: 'Создание карточек ЮЛ (Просмотр)', isrule: ['i7751-Informatizatsii', 'i7751-L-ServersAdmins', 'i7751-PAiID']

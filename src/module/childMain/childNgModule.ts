@@ -7,11 +7,13 @@ import { AngularMaterialModule } from '../materialModule/matrialModule';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { ModelOkp2 } from '../../app/otdels/otdels/okp2/ts/viewOkp2';
 import { Select } from '../../Api/ModelSelectView/View/SelectView';
-import { ModelPreCheck } from '../../app/otdels/otdels/PreCheck/ts/wiewPreCheck';
 import { DatabaseAutoUl } from '../../app/otdels/otdels/dataBaseUl/ts/databaseAutoUl';
 import { ModelDialogTemplateDataBase, FilterParametrs } from '../../app/otdels/otdels/dataBaseUl/templateModelDb/templateTableModelTs/templateTableModel';
 import { ModelSqlTable } from '../../Api/ModelSelectTable/View/modelSelectTable';
 import { ModelRaschetBudgPayment } from '../../app/otdels/otdels/raschetBudg/ts/viewRaschetBudg';
+import { ModelPreCheck } from 'src/app/otdels/otdels/PreCheck/ModelAdd/ts/wiewPreCheck';
+import { JournalPreCheck } from '../../app/otdels/otdels/PreCheck/Journal129/ts/Journal129';
+
 
 
 @NgModule({
@@ -25,7 +27,7 @@ import { ModelRaschetBudgPayment } from '../../app/otdels/otdels/raschetBudg/ts/
     ReactiveFormsModule
   ],
   declarations: [
-    MainChildOtdel,ModelOkp2,Select,ModelPreCheck,DatabaseAutoUl,ModelDialogTemplateDataBase,ModelSqlTable,FilterParametrs,ModelRaschetBudgPayment
+    MainChildOtdel,ModelOkp2,Select,ModelPreCheck,DatabaseAutoUl,ModelDialogTemplateDataBase,ModelSqlTable,FilterParametrs,ModelRaschetBudgPayment,JournalPreCheck
   ]
 
 
