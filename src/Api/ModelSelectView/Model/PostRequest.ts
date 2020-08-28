@@ -66,4 +66,14 @@ export class SelectAllParametrs {
   public detalDataBaseNote(modelParameter: ModelSelect) {
     return this.http.post(url.dynamicModelTable, modelParameter, httpOptionsJson);
   }
+
+  //Генерация выписки для анализа
+  public generateStatementUl(modelParameter: ModelSelect) {
+    return this.http.post(url.generateStatement, modelParameter,
+      { responseType: 'arraybuffer', headers: new HttpHeaders({ 'Content-Type': 'application/json' }) })
+  }
+  //Изменение подписывающего лица
+  public actualizationSignature(signatureSenderTaxJournalOkp2: number) {
+    return this.http.post(url.actualizationSignature, signatureSenderTaxJournalOkp2, httpOptionsJson);
+  }
 }

@@ -1,0 +1,6 @@
+<selectsql #TABLETEMPLATESIGNATURE [(logica)]="logica" [(selecting)]="selecting" [(columns)]="columns" [(select)]="select" [logicstooltable]='LOGICSTOOLTABLE'></selectsql>
+<ng-template #LOGICSTOOLTABLE let-row='row'>
+  <button mat-icon-button [disabled]="check(row)" color="primary" matTooltip="Актулизировать подпись" (click)="checkStatus(row)">
+    <i class="material-icons">check</i>
+  </button>
+</ng-template>

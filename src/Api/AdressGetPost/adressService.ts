@@ -18,4 +18,8 @@ export class AdressService {
   public generateNoteReportUl = `http://${ServerHost}:${ServerPort}/ServiceAutomation/GenerateNoteReportUl`;
   ///Генерация моделй таблиц для просмотра и анализа данных на шаблоне
   public dynamicModelTable = `http://${ServerHost}:${ServerPort}/ServiceAutomation/ResultSelectProcedure`;
+  ///Генерация выписки для просмотра
+  public generateStatement = `http://${ServerHost}:${ServerPort}/ServiceAutomation/GenerateStatement`;
+  ///Изменения актуальной подписи подписанта
+  public actualizationSignature = `http://${ServerHost}:${ServerPort}/ServiceAutomation/ActualizationSignature`;
 }

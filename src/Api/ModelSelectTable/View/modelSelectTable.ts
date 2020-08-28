@@ -1,4 +1,4 @@
-import { Component, TemplateRef, Input, ViewChild, ElementRef, Output } from '@angular/core';
+import { Component, TemplateRef, Input, ViewChild, ElementRef } from '@angular/core';
 import { Table } from '../../ModelSelectView/Model/DynamicTableModel';
 import { MatTableDataSource } from '@angular/material/table';
 import * as XLSX from 'xlsx';
@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { ModelSelect } from '../../ModelSelectView/Model/ParametrModel';
 import { SelectAllParametrs } from '../../ModelSelectView/Model/PostRequest';
 import { ModelMenuAndModel } from '../../../app/otdels/otdels/dataBaseUl/modelDataBase/modelDataBase';
-import { trigger, style, animate, state, transition } from '@angular/animations';
+
 
 @Component({
   selector: 'SqlSelectDataBase',

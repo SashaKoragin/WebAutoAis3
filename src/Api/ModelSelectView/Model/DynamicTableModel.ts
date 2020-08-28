@@ -1,83 +1,90 @@
 import { MatTableDataSource } from '@angular/material/table';
 
-export class DynamicTableColumnModel{
+export class DynamicTableColumnModel {
   //Окп2
-  public selectserver:SelectTableModel[]=[
-      {text:"Выборка 121 статьи", indexsevr:3,indexcolumnmodel:0},
-      {text:"Выборка 129 статьи", indexsevr:2,indexcolumnmodel:1},
+  public selectserver: SelectTableModel[] = [
+    { text: "Выборка 121 статьи", indexsevr: 3, indexcolumnmodel: 0 },
+    { text: "Выборка 129 статьи", indexsevr: 2, indexcolumnmodel: 1 },
   ]
   //Окп2
-  public mainselect:SelectTableModel = this.selectserver[0];
+  public mainselect: SelectTableModel = this.selectserver[0];
   //Окп2
-  public columns:Table[] = [{Type:"TaxJournal121AutoWebPage", Colums:[],Model:new MatTableDataSource<any>(),displayedColumns:null,allCountRow:0},
-                            {Type:"TaxJournalAutoWebPage", Colums:[],Model:new MatTableDataSource<any>(),displayedColumns:null,allCountRow:0},
-                           ];
+  public columns: Table[] = [{ Type: "TaxJournal121AutoWebPage", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
+  { Type: "TaxJournalAutoWebPage", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
+  ];
+
+  //Окп2 подписант на документах
+  public selectserverSignature: SelectTableModel[] = [{ text: "Подпись руководителя", indexsevr: 17, indexcolumnmodel: 0 },];
+  //Окп2 подписант на документах
+  public mainselectSignature: SelectTableModel = this.selectserverSignature[0];
+  //Окп2 подписант на документах
+  public columnsSignature: Table[] = [{ Type: "SignatureBoss", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },];
+
   //Предроверочный анализ
-  public selectserverPre:SelectTableModel[]=[
-      {text:"Добавление ИНН", indexsevr:5,indexcolumnmodel:0},
-      {text:"Статусы (Отработанных веток)", indexsevr:8,indexcolumnmodel:1}
+  public selectserverPre: SelectTableModel[] = [
+    { text: "Добавление ИНН", indexsevr: 5, indexcolumnmodel: 0 },
+    { text: "Статусы (Отработанных веток)", indexsevr: 8, indexcolumnmodel: 1 }
   ];
   //Предроверочный анализ
-  public mainselectPre:SelectTableModel = this.selectserverPre[0];
+  public mainselectPre: SelectTableModel = this.selectserverPre[0];
   //Предроверочный анализ
-  public columnsPre:Table[] = [{Type:"AddUlFace", Colums:[],Model:new MatTableDataSource<any>(),displayedColumns:null,allCountRow:0},
-                               {Type:"ModelTree", Colums:[],Model:new MatTableDataSource<any>(),displayedColumns:null,allCountRow:0},
-                              ];
+  public columnsPre: Table[] = [{ Type: "AddUlFace", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
+  { Type: "ModelTree", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
+  ];
 
   //Расчеты с бюджетом
-  public selectserverRaschetBudg:SelectTableModel[]=[
-    {text:"Анализ платежей обработаные автоматом", indexsevr:14,indexcolumnmodel:0},
-    {text:"Справочник КБК участвующих в автомате", indexsevr:15,indexcolumnmodel:1}
+  public selectserverRaschetBudg: SelectTableModel[] = [
+    { text: "Анализ платежей обработаные автоматом", indexsevr: 14, indexcolumnmodel: 0 },
+    { text: "Справочник КБК участвующих в автомате", indexsevr: 15, indexcolumnmodel: 1 }
   ];
   //Расчеты с бюджетом
-  public mainselectRaschetBudg:SelectTableModel = this.selectserverRaschetBudg[0];
+  public mainselectRaschetBudg: SelectTableModel = this.selectserverRaschetBudg[0];
   //Расчеты с бюджетом
-  public columnsRaschetBudg:Table[] = [
-    {Type:"ModelKbkOnKbk", Colums:[],Model:new MatTableDataSource<any>(), displayedColumns:null, allCountRow:0},
-    {Type:"HelpKbkAuto", Colums:[], Model:new MatTableDataSource<any>(), displayedColumns:null, allCountRow:0},
+  public columnsRaschetBudg: Table[] = [
+    { Type: "ModelKbkOnKbk", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
+    { Type: "HelpKbkAuto", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
   ];
 
   //Предроверочный анализ База данных
-  public selectserverPreDataBase:SelectTableModel[]=[
-    {text:"Юридические лица", indexsevr:13,indexcolumnmodel:0},
+  public selectserverPreDataBase: SelectTableModel[] = [
+    { text: "Юридические лица", indexsevr: 13, indexcolumnmodel: 0 },
   ]
   //Предроверочный анализ База данных
-  public mainselectPreDataBase:SelectTableModel = this.selectserverPreDataBase[0];
+  public mainselectPreDataBase: SelectTableModel = this.selectserverPreDataBase[0];
   //Предроверочный анализ База данных
-  public columnsPreDataBase:Table[] = [{Type:"UlFace", Colums:[],Model:new MatTableDataSource<any>(),displayedColumns:null,allCountRow:0},
-                                      ];
+  public columnsPreDataBase: Table[] = [{ Type: "UlFace", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
+  ];
 
   //Общий журнал 129
-  public selectserverAll129:SelectTableModel[]=[
-    {text:"Журнал 129", indexsevr:16,indexcolumnmodel:0},
+  public selectserverAll129: SelectTableModel[] = [
+    { text: "Журнал 129", indexsevr: 16, indexcolumnmodel: 0 },
   ]
   //Общий журнал 129 База данных
-  public mainselectAll129:SelectTableModel = this.selectserverAll129[0];
+  public mainselectAll129: SelectTableModel = this.selectserverAll129[0];
 
-    //Общий журнал 129 База данных
-  public columnsAll129:Table[] = [{Type:"AllJournal129", Colums:[],Model:new MatTableDataSource<any>(),displayedColumns:null,allCountRow:0},
+  //Общий журнал 129 База данных
+  public columnsAll129: Table[] = [{ Type: "AllJournal129", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
   ];
-
 }
 
 ///Класс селектора
-export class SelectTableModel{
-  text:string;
-  indexsevr:number;
-  indexcolumnmodel:number;
+export class SelectTableModel {
+  text: string;
+  indexsevr: number;
+  indexcolumnmodel: number;
 }
 
-export class Table{
-  public Type:string;
-  public Colums:Colums[] = null;
-  public Model:MatTableDataSource<any> = null;
-  public displayedColumns:any = null;
-  public allCountRow:number = 0
- }
+export class Table {
+  public Type: string;
+  public Colums: Colums[] = null;
+  public Model: MatTableDataSource<any> = null;
+  public displayedColumns: any = null;
+  public allCountRow: number = 0
+}
 
- export class Colums{
-  public columnDef:string;
-  public header:string;
-  public cell :any;
-  public color:string;
- }
+export class Colums {
+  public columnDef: string;
+  public header: string;
+  public cell: any;
+  public color: string;
+}

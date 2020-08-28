@@ -18,7 +18,6 @@ class ParametrsSelect {
   public idCodeProcedureField: number;
   public innField: string;
   public regNumberField: number;
-
 }
 
 export class LogicsSelectAutomation {

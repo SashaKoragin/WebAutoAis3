@@ -1,9 +1,9 @@
 import { Component, OnInit} from '@angular/core';
-import { SelectAllParametrs } from '../../../../../Api/ModelSelectView/Model/PostRequest';
-import { LogicaDataBase, GenerateParametrs } from '../../../../../Api/ModelSelectView/Model/GenerateParametrFront';
-import { DynamicTableColumnModel, Table } from '../../../../../Api/ModelSelectView/Model/DynamicTableModel';
-import { ModelSelect } from '../../../../../Api/ModelSelectView/Model/ParametrModel';
-import { PublicFunction } from '../../../../../Api/PublicFunction/PublicFunction';
+import { SelectAllParametrs } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
+import { LogicaDataBase, GenerateParametrs } from '../../../../../../Api/ModelSelectView/Model/GenerateParametrFront';
+import { DynamicTableColumnModel, Table } from '../../../../../../Api/ModelSelectView/Model/DynamicTableModel';
+import { ModelSelect } from '../../../../../../Api/ModelSelectView/Model/ParametrModel';
+import { PublicFunction } from '../../../../../../Api/PublicFunction/PublicFunction';
 
 
 @Component({
@@ -104,14 +104,4 @@ export class ModelOkp2 implements OnInit{
        alert('Отсутствует файл для выгрузки!');
      }
   }
-
-
-
-        // var iFrame = <HTMLIFrameElement>document.createElement('iframe');
-        // iFrame.id = 'print-frame';
-        // iFrame.style.display = 'none';
-        // iFrame.src = url;
-        // document.body.appendChild(iFrame);
-        // iFrame.contentWindow.print();
-        //document.body.removeChild(iFrame);
 }

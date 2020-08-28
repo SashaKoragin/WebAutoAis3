@@ -1,0 +1,41 @@
+<div *ngIf="isSelectSqlIsNull; else notfound">
+
+  <button mat-button (click)="exportToWord()">Выгрузить данные выписки</button>
+  <table mat-table  [dataSource]="dataSource" multiTemplateDataRows class="tableStatement">
+
+  <ng-container matColumnDef="NameIndex">
+    <th class="mainHeader" mat-header-cell *matHeaderCellDef>Содержание выписки</th>
+    <td class="mainCell" mat-cell *matCellDef="let row">{{row.NameIndex}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element">
+      <div class="element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+        <div class="container-fluid " *ngFor="let item of element.StatementFull">
+          <div class="row justify-content-start align-items-end border border-warning">
+            <div class="col-1 text-center border border-primary text-primary text">
+              <p class="text">{{item.VarIndex}}</p>
+            </div>
+            <div class="col w-50 border border-primary text">
+              <p class="text">{{item.NameParametr}}</p>
+            </div>
+            <div class="col border border-primary text">
+              <p class="text" matTooltip={{item.ValuesStatement}}>{{item.ValuesStatement}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="element-row" (click)="expandElement(element)">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+</table>
+<mat-paginator class="paginator"  #expandedTables [pageSizeOptions]="[5, 10, 15, countMaxPaginator]" showFirstLastButtons ="true"></mat-paginator>
+</div>
+
+<ng-template #notfound>
+  <h4>По данной выборки нет данных!!!</h4>
+</ng-template>
