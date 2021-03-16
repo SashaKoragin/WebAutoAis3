@@ -2,10 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SelectAllParametrs } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
 import { DynamicTableColumnModel, Table } from '../../../../../../Api/ModelSelectView/Model/DynamicTableModel';
 import { LogicaDataBase, GenerateParametrs } from '../../../../../../Api/ModelSelectView/Model/GenerateParametrFront';
-import { ModelSelect } from '../../../../../../Api/ModelSelectView/Model/ParametrModel';
-import { FormControl, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { ModelSelect, TemplateModel, TemplateProcedure } from '../../../../../../Api/ModelSelectView/Model/ParametrModel';
+import { FormControl, Validators, AbstractControl, ValidationErrors, FormGroup } from '@angular/forms';
 import { Select } from '../../../../../../Api/ModelSelectView/View/SelectView';
-
+import { AuthIdentificationSignalR } from '../../../../../../Api/RequestService/requestService';
+import { BroadcastEventListener } from 'ng2-signalr';
 
 
 
@@ -16,31 +17,73 @@ import { Select } from '../../../../../../Api/ModelSelectView/View/SelectView';
 })
 
 export class ModelPreCheck implements OnInit {
-  constructor(public select: SelectAllParametrs) { }
+  constructor(public select: SelectAllParametrs, public SignalR: AuthIdentificationSignalR) { }
 
+
+
+  public subscribeMessageSql: any = null;
+  public subscribeservers() {
+    this.subscribeMessageSql = new BroadcastEventListener<string>('SqlServer');
+    this.SignalR.conect.listen(this.subscribeMessageSql);
+    this.subscribeMessageSql.subscribe((message: string) => {
+      //alert(message);
+      this.serverresult.push(message);
+      if (message === 'Обработка закончена!') {
+        this.selectionChild.update(1);
+      }
+    });
+  }
+
+  public TemplateModel: TemplateModel[] = []
+  public selectedTemplate: TemplateModel = undefined;
 
   @ViewChild(Select) selectionChild: Select;
-  public serverresult: string = null;
+  public serverresult: string[] = [];
   dinamicmodel: DynamicTableColumnModel = new DynamicTableColumnModel();
   logica: LogicaDataBase = new LogicaDataBase();
   selecting: GenerateParametrs;
   columnsPre: Table = this.dinamicmodel.columnsPre[this.dinamicmodel.mainselectPre.indexcolumnmodel];
 
-  public inputInn: FormControl = new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(10), this.validationNumber]);
 
-  ngOnInit(): void {
-    this.serverInn(null)
-  }
 
-  public validationNumber(control: AbstractControl): ValidationErrors {
+  public validationTemplate(control: AbstractControl): ValidationErrors {
+    var nameModel = control.value as TemplateModel;
+
+    return (nameModel == undefined || nameModel.IdTemplate == undefined) ? { 'error': true } : null
+  };
+
+  public validationArrayInn(control: AbstractControl): ValidationErrors {
     control.value
-    var regx = new RegExp(/^\d+$/, 'g')
+    var regx = new RegExp(/^((\d{10,12}\/{1})+(\d{10,12})|(\d{10,12}))$/, 'g')
     if (regx.test(control.value)) {
       return null;
     }
     else {
       return { 'error': true };
     }
+  }
+
+  public groupValidationTemplateModel: FormGroup = new FormGroup({
+    'Inn': new FormControl(null, [Validators.required, this.validationArrayInn]),
+    'Template': new FormControl(new TemplateModel, [Validators.required, this.validationTemplate])
+  })
+
+
+
+  ngOnInit(): void {
+    this.serverInn(null);
+    this.allTemplateDataBase();
+    this.subscribeservers();
+  }
+
+
+
+  allTemplateDataBase() {
+    this.select.allTemplateDataBase().subscribe((model: TemplateModel[]) => {
+      console.log(model);
+      this.TemplateModel = model;
+
+    });
   }
 
   serverInn(type: any) {
@@ -50,17 +93,45 @@ export class ModelPreCheck implements OnInit {
     })
   }
 
-  ///Загрузка ИНН в модель
-  public loadinn(inn: string) {
-    this.serverresult = null;
-    this.select.loadInn(inn).subscribe((message: string) => {
-      this.serverresult = message;
-      this.selectionChild.update(1);
-    })
+  public isDisableType(): boolean {
+    if (this.columnsPre.Type == "ModelTree" && this.columnsPre.Model.data.length > 0) {
+      return false;
+    }
+    return true;
   }
 
-  checkStatus(row: any, status: string = null) {
-    this.select.checkStatus(row.IdModel, status).subscribe(() => {
+
+
+  ///Загрузка ИНН в модель
+  public loadinn() {
+    var model = new TemplateProcedure();
+    model.idTemplateField = this.selectedTemplate.IdTemplate;
+    model.innField = this.groupValidationTemplateModel.get('Inn').value.split('/');
+    this.serverresult = [];
+    this.select.loadInn(model, this.SignalR.iduser).subscribe(() => {
+    });
+  }
+
+  ///Массовое снятие отобранных веток
+  public checkStatusArrayTree(status: string = null) {
+    var arrayIdTree = [];
+    this.columnsPre.Model.data.forEach(element => {
+      arrayIdTree.push(element.IdModel);
+    });
+    if (arrayIdTree.length > 0) {
+      this.select.checkStatus(arrayIdTree, status).subscribe(() => {
+        this.selectionChild.update(1);
+      })
+    }
+    else {
+      alert('Не выбранно не одного значения для снятия статуса ветки!');
+    }
+  }
+
+  ///Снятие статуса обработанна ветка
+  public checkStatus(row: any, status: string = null) {
+    var arrayIdModels = [row.IdModel];
+    this.select.checkStatus(arrayIdModels, status).subscribe(() => {
       console.log("Статус снят: " + row.IdModel);
       this.selectionChild.update(1);
     })

@@ -1,4 +1,4 @@
-import { Component, Inject, ViewChild, AfterViewInit, Pipe, PipeTransform, OnInit } from '@angular/core';
+import { Component, Inject, ViewChild, AfterViewInit, Pipe, PipeTransform} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ModelDialog, ModelMenuAndModel } from '../../modelDataBase/modelDataBase';
 import { SelectAllParametrs } from '../../../../../../Api/ModelSelectView/Model/PostRequest';

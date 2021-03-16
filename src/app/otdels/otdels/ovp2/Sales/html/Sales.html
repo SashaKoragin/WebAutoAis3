@@ -1,0 +1,23 @@
+<selectsql [(logica)]="logica" [(selecting)]="selecting" [(columns)]="columnsOvp2" [(select)]="select"
+  [logicstooltable]="LOGICSTOOLTABLE"></selectsql>
+
+
+<ng-template #LOGICSTOOLTABLE let-row='row'>
+  <button mat-icon-button [disabled]="disableDonloadTemplate(row)" color="primary"
+    matTooltip="Выгрузить докладную записку" (click)="donloadFile(row)">
+    <i class="material-icons">input</i>
+  </button>
+  <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{row: row}" color="primary"
+    matTooltip="Меню">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+</ng-template>
+
+
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent let-row='row'>
+    <div *ngFor="let modelCategoria of modelDataBase.modelMenu">
+      <button mat-menu-item (click)="selectOpenDialogModel(modelCategoria,row)">{{modelCategoria.categoria}}</button>
+    </div>
+  </ng-template>
+</mat-menu>

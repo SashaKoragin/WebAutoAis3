@@ -1,6 +1,132 @@
-<selectsql #TABLETEMPLATESIGNATURE [(logica)]="logica" [(selecting)]="selecting" [(columns)]="columns" [(select)]="select" [logicstooltable]='LOGICSTOOLTABLE'></selectsql>
-<ng-template #LOGICSTOOLTABLE let-row='row'>
-  <button mat-icon-button [disabled]="check(row)" color="primary" matTooltip="Актулизировать подпись" (click)="checkStatus(row)">
-    <i class="material-icons">check</i>
-  </button>
-</ng-template>
+<h1>Подписи руководителей</h1>
+<mat-tab-group [style.display]="isload ? 'none' : 'grid'">
+  <mat-tab label="Подписи Акты Извещения Решения">
+    <div>
+      <form class="search">
+        <mat-form-field class="search_blok">
+          <span matPrefix><i class="material-icons">youtube_searched_for</i></span>
+          <input matInput (keyup)="senderTableTaxJournal.filterstable($event.target.value)" placeholder="Поиск данных">
+        </mat-form-field>
+        <button class="actual" mat-button (click)="excel.ExportTOExcel(tableSender)">Выгрузить отделы и
+          подписантов</button>
+      </form>
+      <div class="tables" #TABLESENDER>
+        <table mat-table [dataSource]="senderTableTaxJournal.dataSource" matSort>
+
+          <ng-container matColumnDef="Logic">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Функции</th>
+            <td mat-cell *matCellDef="let row">
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+            <td mat-cell *matCellDef="let row" [matTooltip]="row?.Id">
+              {{row?.Id}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="SenderTaxJournalOkp2.NameUser">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Подписант документа</th>
+            <td mat-cell *matCellDef="let row" [matTooltip]="row.SenderTaxJournalOkp2?.NameUser">
+              <Label [style.display]="row.ModelIsEdit ? 'none':'inline'">{{row.SenderTaxJournalOkp2?.NameUser}}</Label>
+              <div [ngClass]=row.Id.toString() id="{{row.Id}}" [style.display]="!row.ModelIsEdit ? 'none':'block'">
+              </div>
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="NameDepartament">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Наименование отдела</th>
+            <td mat-cell *matCellDef="let row" [matTooltip]="row.NameDepartament">
+              <Label [style.display]="row.ModelIsEdit ? 'none':'block'">{{row.NameDepartament}}</Label>
+              <div [ngClass]=row.Id.toString() id="{{row.Id}}" [style.display]="!row.ModelIsEdit ? 'none':'block'">
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="NameDepartamentActiveDerectory">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ключ отдела в Active Derectory</th>
+            <td mat-cell *matCellDef="let row" [matTooltip]="row.NameDepartamentActiveDerectory">
+              <Label [style.display]="row.ModelIsEdit ? 'none':'inline'">{{row.NameDepartamentActiveDerectory}}</Label>
+              <div [ngClass]=row.Id.toString() id="{{row.Id}}" [style.display]="!row.ModelIsEdit ? 'none':'block'">
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="ActionsColumn">
+            <th mat-header-cell *matHeaderCellDef>
+                <button mat-icon-button color="primary" [disabled]="senderTableTaxJournal.isAdd" focusable="false"
+                  (click)="senderTableTaxJournal.add()">
+                  <i class="material-icons">person_add</i>
+                </button>
+            </th>
+
+            <td mat-cell *matCellDef="let row">
+                <button mat-icon-button *ngIf="!row.ModelIsEdit" [disabled]="senderTableTaxJournal.isEdit"
+                  color="accent" (click)="senderTableTaxJournal.edit(row);">
+                  <i class="material-icons">edit</i>
+                </button>
+                <button mat-icon-button *ngIf="!row.ModelIsEdit" [disabled]="senderTableTaxJournal.isEdit"
+                  (click)="senderTableTaxJournal.delete(row)">
+                  <i class="material-icons">delete</i>
+                </button>
+              <div *ngIf="row.ModelIsEdit">
+                <button mat-icon-button type="submit" color="primary" focusable="false"
+                  (click)="senderTableTaxJournal.save()">
+                  <i class="material-icons">check</i>
+                </button>
+                <button mat-icon-button color="primary" focusable="false" (click)="senderTableTaxJournal.cancel(row)">
+                  <i class="material-icons">cancel</i>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="senderTableTaxJournal.displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: senderTableTaxJournal.displayedColumns;"></tr>
+        </table>
+        <mat-paginator class="paginator" #senders [pageSizeOptions]="[5, 10, 25, paginatorSender.length]"
+          showFirstLastButtons="true"></mat-paginator>
+      </div>
+      <div [style.display]="'none'" #TEMPLATESENDER>
+
+        <mat-form-field id="template" class="validation">
+          <mat-select (click)="senderTableTaxJournal.calbackfiltersAll()"
+            [placeholder]="senderTableTaxJournal.model.SenderTaxJournalOkp2?.NameUser"
+            [(ngModel)]="senderTableTaxJournal.model.SenderTaxJournalOkp2" name="sender">
+            <mat-select-filter class="filter" [placeholder]="senderTableTaxJournal.model.SenderTaxJournalOkp2?.NameUser"
+              [displayMember]="'NameUser'" [array]="senderTableTaxJournal.sender"
+              (filteredReturn)="senderTableTaxJournal.filterSender =$event">
+            </mat-select-filter>
+            <mat-option [value]='null'>None</mat-option>
+            <mat-option *ngFor="let sender of senderTableTaxJournal.filterSender" [value]="sender">
+              {{sender.NameUser}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Отдел -->
+        <mat-form-field id="template" class="validation">
+          <input matInput placeholder="Отдел" [ngModel]="senderTableTaxJournal.model?.NameDepartament"
+            (ngModelChange)="senderTableTaxJournal.model.NameDepartament = $event" />
+        </mat-form-field>
+
+        <!--Отдел Active Derectory-->>
+        <mat-form-field id="template" class="validation">
+          <input matInput placeholder="Отдел Active Derectory"
+            [ngModel]="senderTableTaxJournal.model?.NameDepartamentActiveDerectory"
+            (ngModelChange)="senderTableTaxJournal.model.NameDepartamentActiveDerectory = $event" />
+        </mat-form-field>
+      </div>
+
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+
+<div [style.display]="isload ? 'inline':'none'">
+  <p>Идет загрузка данных подождите пожалуйста!!!</p>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  <div class="messages" *ngFor="let message of loadMessage">
+    <p>{{message}}</p>
+  </div>
+</div>

@@ -3,9 +3,10 @@ import { SelectAllParametrs } from '../../../../../Api/ModelSelectView/Model/Pos
 import { LogicaDataBase, GenerateParametrs } from '../../../../../Api/ModelSelectView/Model/GenerateParametrFront';
 import { DynamicTableColumnModel, Table } from '../../../../../Api/ModelSelectView/Model/DynamicTableModel';
 import { ModelSelect } from '../../../../../Api/ModelSelectView/Model/ParametrModel';
-import { ModelMenuAndModel, ModelDialog } from '../modelDataBase/modelDataBase';
+import { ModelMenuAndModel, ModelDialog, YearModeReport, ModelDataBase } from '../modelDataBase/modelDataBase';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModelDialogTemplateDataBase } from '../templateModelDb/templateTableModelTs/templateTableModel';
+import { ModelDialogSelectYear } from './dialogSelectYear/dialogYearTs/dialogSelectYear';
 
 @Component({
   templateUrl: '../html/databaseAutoUl.html',
@@ -17,10 +18,12 @@ export class DatabaseAutoUl implements OnInit {
   constructor(public select: SelectAllParametrs, public dialog: MatDialog) { }
 
 
-  modelDataBase: ModelDialog = new ModelDialog()
+  modelYear: YearModeReport = new YearModeReport();
+  modelDataBase: ModelDialog = new ModelDialog(new ModelDataBase().modelMenu, new ModelDataBase().modelDetal)
   dinamicmodel: DynamicTableColumnModel = new DynamicTableColumnModel();
   logica: LogicaDataBase = new LogicaDataBase();
   selecting: GenerateParametrs;
+
 
   configDialogForm: MatDialogConfig = {
     position: {
@@ -51,18 +54,28 @@ export class DatabaseAutoUl implements OnInit {
   }
 
   public async donloadFile(row: any) {
-    console.log(row.Inn);
-    await this.select.noteGenerateUl(row.Inn).subscribe(async model => {
-      var blob = new Blob([model], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-      var url = window.URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = row.Inn;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(url);
-    });
+    const dialogRef = this.dialog.open(ModelDialogSelectYear, {
+      data: this.modelYear
+    })
+    dialogRef.afterClosed().subscribe(async (result: YearModeReport) => {
+      if (this.modelYear.selectedYears) {
+        console.log("Выгружаем ИНН: " + row.Inn + " и год отчета: " + this.modelYear.selectedYears);
+        await this.select.noteGenerateUl(row.Inn, this.modelYear.selectedYears).subscribe(async model => {
+          var blob = new Blob([model], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+          var url = window.URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = row.Inn;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+        });
+      }
+      else {
+        alert("Не введен год: " + this.modelYear.selectedYears)
+      }
+    })
   }
 
   disableDonloadTemplate(row: any): boolean {

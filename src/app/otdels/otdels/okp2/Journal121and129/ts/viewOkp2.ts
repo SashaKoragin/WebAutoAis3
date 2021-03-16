@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SelectAllParametrs } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
 import { LogicaDataBase, GenerateParametrs } from '../../../../../../Api/ModelSelectView/Model/GenerateParametrFront';
 import { DynamicTableColumnModel, Table } from '../../../../../../Api/ModelSelectView/Model/DynamicTableModel';
@@ -12,39 +12,39 @@ import { PublicFunction } from '../../../../../../Api/PublicFunction/PublicFunct
   providers: [SelectAllParametrs]
 })
 
-export class ModelOkp2 implements OnInit{
-  constructor(public select:SelectAllParametrs) { }
+export class ModelOkp2 implements OnInit {
+  constructor(public select: SelectAllParametrs) { }
 
 
-  public valueProgress:number = 0;
-  public IsVisible:boolean = false;
-  public statusText:string = null;
-  public publicFunction:PublicFunction = new PublicFunction();
-  public serverresult:string = null;
-  dinamicmodel:DynamicTableColumnModel = new DynamicTableColumnModel();
-  logica:LogicaDataBase = new LogicaDataBase();
-  selecting:GenerateParametrs;
+  public valueProgress: number = 0;
+  public IsVisible: boolean = false;
+  public statusText: string = null;
+  public publicFunction: PublicFunction = new PublicFunction();
+  public serverresult: string = null;
+  dinamicmodel: DynamicTableColumnModel = new DynamicTableColumnModel();
+  logica: LogicaDataBase = new LogicaDataBase();
+  selecting: GenerateParametrs;
 
-  columns:Table= this.dinamicmodel.columns[this.dinamicmodel.mainselect.indexcolumnmodel];
+  columns: Table = this.dinamicmodel.columns[this.dinamicmodel.mainselect.indexcolumnmodel];
   ngOnInit(): void {
     this.errorserver(null)
   }
 
-  errorserver(type:any){
-    this.select.addselectallparametrs(new ModelSelect(this.dinamicmodel.mainselect.indexsevr)).subscribe((model:ModelSelect)=>{
-        this.selecting = new GenerateParametrs(model);
-        this.columns = this.dinamicmodel.columns[this.dinamicmodel.mainselect.indexcolumnmodel]
+  errorserver(type: any) {
+    this.select.addselectallparametrs(new ModelSelect(this.dinamicmodel.mainselect.indexsevr)).subscribe((model: ModelSelect) => {
+      this.selecting = new GenerateParametrs(model);
+      this.columns = this.dinamicmodel.columns[this.dinamicmodel.mainselect.indexcolumnmodel]
     })
   }
 
-  async donloadAllFile(){
-      this.startDonload();
-      var modelServer = JSON.parse(JSON.stringify(this.columns.Model));
-      var progress = 1/this.columns.Model.data.length*100;
-       for (var row of modelServer){
-        if(row.Extensions){
-           var blob = await this.select.donloadFile(row.Id,this.columns.Type);
-         if(blob){
+  async donloadAllFile() {
+    this.startDonload();
+    var modelServer = JSON.parse(JSON.stringify(this.columns.Model.filteredData));
+    var progress = 1 / this.columns.Model.data.length * 100;
+    for (var row of modelServer) {
+      if (row.Extensions) {
+        var blob = await this.select.donloadFile(row.Id, this.columns.Type);
+        if (blob) {
           var nameFile = `${row.Inn}_${row.TypeDocument}_${row.Extensions}`;
           var url = window.URL.createObjectURL(blob);
           this.statusText = `Загрузка файла ${nameFile}`;
@@ -56,25 +56,25 @@ export class ModelOkp2 implements OnInit{
           document.body.removeChild(a);
           window.URL.revokeObjectURL(url);
         }
-        else{
+        else {
           alert('Отсутствует маршрут url для файла!')
         }
       }
-      else{
+      else {
         this.statusText = 'Отсутствует файл для выгрузки!';
-       }
-       this.valueProgress=progress+this.valueProgress
-      };
-      this.finishDonload();
+      }
+      this.valueProgress = progress + this.valueProgress
+    };
+    this.finishDonload();
   }
 
-  startDonload(){
+  startDonload() {
     this.serverresult = "Количество файлов в выборке" + this.columns.Model.data.length
     this.IsVisible = true;
     this.statusText = "Начало загрузки ждите!!!"
   }
 
-  finishDonload(){
+  finishDonload() {
     this.serverresult = null;
     this.IsVisible = false;
     this.valueProgress = 0;
@@ -82,10 +82,10 @@ export class ModelOkp2 implements OnInit{
   }
 
 
- async donloadFile(row: any) {
-     if(row.Extensions){
-       var blob = await this.select.donloadFile(row.Id,this.columns.Type);
-       if(blob){
+  async donloadFile(row: any) {
+    if (row.Extensions) {
+      var blob = await this.select.donloadFile(row.Id, this.columns.Type);
+      if (blob) {
         var nameFile = `${row.Inn}_${row.TypeDocument}_${row.Extensions}`;
         var url = window.URL.createObjectURL(blob);
         var a = document.createElement('a');
@@ -95,13 +95,13 @@ export class ModelOkp2 implements OnInit{
         a.click();
         document.body.removeChild(a);
         window.URL.revokeObjectURL(url);
-       }
-       else{
-         alert('Отсутствует маршрут url для файла!')
-       }
-     }
-     else{
-       alert('Отсутствует файл для выгрузки!');
-     }
+      }
+      else {
+        alert('Отсутствует маршрут url для файла!')
+      }
+    }
+    else {
+      alert('Отсутствует файл для выгрузки!');
+    }
   }
 }

@@ -50,6 +50,8 @@ export class ModelSqlTable {
       this.errornull = false;  //Не показывать ошибки
       this.columns = { Type: null, Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 };
       this.select.detalDataBaseNote(model).subscribe((modelsParameter: ModelSelect) => {
+        console.log(modelsParameter.resultSelectProcedureWebField);
+        console.log(modelsParameter.parameterProcedureWebField.modelClassFindField);
         var data = (JSON.parse(modelsParameter.resultSelectProcedureWebField)[modelsParameter.parameterProcedureWebField.modelClassFindField]);
         if (data.length !== 0) {
           for (var parameter of modelsParameter.infoViewAutomationField) {

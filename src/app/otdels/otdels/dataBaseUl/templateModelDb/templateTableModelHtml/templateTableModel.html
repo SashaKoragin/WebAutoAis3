@@ -67,7 +67,7 @@
         <mat-form-field class="categoria">
           <mat-label>Модель</mat-label>
           <mat-select [(value)]="data.selectModelMenu" name="model" (selectionChange)="eventSelection($event.value)">
-            <mat-option *ngFor="let model of data.data.modelMenu" [value]="model">
+            <mat-option *ngFor="let model of data.modelMenu" [value]="model">
               {{model.categoria}}
             </mat-option>
           </mat-select>
@@ -105,7 +105,7 @@
 
 <mat-menu #menu="matMenu">
   <ng-template matMenuContent let-row='row'>
-    <div *ngFor="let modelCategoria of data.data.modelDetal | filters:data.selectModelMenu.keyDetal">
+    <div *ngFor="let modelCategoria of data.modelMenuDetalization | filters:data.selectModelMenu.keyDetal">
       <button mat-menu-item (click)="selectOpenDetal(modelCategoria,row)">{{modelCategoria.categoria}}</button>
     </div>
   </ng-template>

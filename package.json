@@ -1,6 +1,6 @@
 {
   "name": "auto-ais3",
-  "version": "1.0.0",
+  "version": "1.2.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -30,6 +30,7 @@
     "moment": "^2.24.0",
     "ngx-permissions": "^7.0.3",
     "popper.js": "^1.16.1",
+    "ng2-signalr": "6.1.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "xlsx": "^0.15.5",

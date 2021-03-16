@@ -31,7 +31,7 @@ export class Select {
   @ViewChild('tables', { static: false }) paginator: MatPaginator;
 
 
-  public update(child: number = 0) {
+  public async update(child: number = 0) {
     try {
       if (this.selecting.errorModel()) {
         if (child == 0) {
@@ -39,7 +39,7 @@ export class Select {
           this.logica.logicaprogress();  //Открываем логику загрузки
         }
         this.columns.Colums = [];    //Обнулить колонки
-        this.select.selectusersql(this.selecting.generatecommandxml(this.columns)).subscribe((model: string) => {
+        await this.select.selectusersql(this.selecting.generatecommandxml(this.columns)).subscribe((model: string) => {
           this.logica.errornull = true;
           if (model !== "null") {
             this.columns.Model.data = (JSON.parse(model)[this.columns.Type])
@@ -95,5 +95,9 @@ export class Select {
       return row;
     }
     return null;
+  }
+
+  public ff(){
+
   }
 }

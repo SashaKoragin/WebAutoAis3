@@ -1,3 +1,4 @@
+
 <selectsql [(logica)]="logica" [(selecting)]="selecting" [(columns)]="columnsPreDataBase" [(select)]="select"
   [logicstooltable]="LOGICSTOOLTABLE"></selectsql>
 
@@ -16,8 +17,10 @@
 
 <mat-menu #menu="matMenu">
   <ng-template matMenuContent let-row='row'>
-    <div *ngFor="let modelCategoria of modelDataBase.data.modelMenu">
+    <div *ngFor="let modelCategoria of modelDataBase.modelMenu">
       <button mat-menu-item (click)="selectOpenDialogModel(modelCategoria,row)">{{modelCategoria.categoria}}</button>
     </div>
   </ng-template>
 </mat-menu>
+
+

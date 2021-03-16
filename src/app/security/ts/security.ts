@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { AuthIdentification } from '../../../Api/RequestService/requestService';
+import { AuthIdentification, AuthIdentificationSignalR } from '../../../Api/RequestService/requestService';
 import { Identification } from '../../../Api/RequestService/modelAutomation';
 
 
@@ -11,7 +11,7 @@ import { Identification } from '../../../Api/RequestService/modelAutomation';
 
 export class Login{
 
-  constructor(public authService: AuthIdentification, public router: Router){}
+  constructor(public authService: AuthIdentification, public router: Router, private signalR:AuthIdentificationSignalR){}
 
 
 
@@ -24,7 +24,9 @@ export class Login{
             this.authService.login().subscribe((model:Identification) => {
               this.authService.user = model;
                 if(!model.isErrorField){
+                  this.signalR.createconection(this.authService);
                   this.authService.addRule();
+                  this.signalR.startserverSignalR();
                   let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/Auto';
                   this.authService.isLoggedIn = true;
                   let navigationExtras: NavigationExtras = {

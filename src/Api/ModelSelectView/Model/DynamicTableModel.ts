@@ -1,4 +1,5 @@
 import { MatTableDataSource } from '@angular/material/table';
+import { Select } from '../View/SelectView';
 
 export class DynamicTableColumnModel {
   //Окп2
@@ -12,13 +13,6 @@ export class DynamicTableColumnModel {
   public columns: Table[] = [{ Type: "TaxJournal121AutoWebPage", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
   { Type: "TaxJournalAutoWebPage", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
   ];
-
-  //Окп2 подписант на документах
-  public selectserverSignature: SelectTableModel[] = [{ text: "Подпись руководителя", indexsevr: 17, indexcolumnmodel: 0 },];
-  //Окп2 подписант на документах
-  public mainselectSignature: SelectTableModel = this.selectserverSignature[0];
-  //Окп2 подписант на документах
-  public columnsSignature: Table[] = [{ Type: "SignatureBoss", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },];
 
   //Предроверочный анализ
   public selectserverPre: SelectTableModel[] = [
@@ -48,12 +42,29 @@ export class DynamicTableColumnModel {
   //Предроверочный анализ База данных
   public selectserverPreDataBase: SelectTableModel[] = [
     { text: "Юридические лица", indexsevr: 13, indexcolumnmodel: 0 },
+    { text: "Юридические лица Анализ книг покупок/продаж с банком", indexsevr: 25, indexcolumnmodel: 1 }
   ]
   //Предроверочный анализ База данных
   public mainselectPreDataBase: SelectTableModel = this.selectserverPreDataBase[0];
   //Предроверочный анализ База данных
+  public mainselectPreDataBaseBookSales: SelectTableModel = this.selectserverPreDataBase[1];
+  //Предроверочный анализ База данных
   public columnsPreDataBase: Table[] = [{ Type: "UlFace", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
+  { Type: "UlFace", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
   ];
+
+  //Выборка ЮЛ книги покупок книги продаж ОВП 2
+  public selectserverOvp2: SelectTableModel[] = [
+    { text: "Юридические лица книги покупок-продажи", indexsevr: 23, indexcolumnmodel: 0 },
+  ]
+  //Выборка ЮЛ книги покупок книги продаж ОВП 2
+  public mainselectOvp2: SelectTableModel = this.selectserverOvp2[0];
+
+  //Выборка ЮЛ книги покупок книги продаж ОВП 2
+  public columnsOvp2: Table[] = [{ Type: "UlFace", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
+  ];
+
+
 
   //Общий журнал 129
   public selectserverAll129: SelectTableModel[] = [
@@ -65,6 +76,32 @@ export class DynamicTableColumnModel {
   //Общий журнал 129 База данных
   public columnsAll129: Table[] = [{ Type: "AllJournal129", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
   ];
+  //ОКП 5
+  public selectserverOkp5: SelectTableModel[] = [
+    { text: "Обработанные 2НДФЛ", indexsevr: 18, indexcolumnmodel: 0 },
+    { text: "Ошибки 2НДФЛ", indexsevr: 19, indexcolumnmodel: 1 },
+    { text: "Не обработанные 2НДФЛ", indexsevr: 20, indexcolumnmodel: 2 },
+    { text: "Средний доход организации 2000", indexsevr: 22, indexcolumnmodel: 3 },
+  ];
+  //ОКП 5
+  public mainselectOkp5: SelectTableModel = this.selectserverOkp5[1];
+  //ОКП 5
+  public columnsOkp5: Table[] = [
+    { Type: "Documen2NDFLIdentification", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
+    { Type: "Documen2NDFLIdentification", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
+    { Type: "Documen2NDFLIdentification", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
+    { Type: "FormulNdfl", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
+  ];
+
+  //ОКП 6
+  public selectServerOkp6: SelectTableModel[] = [
+    { text: "Отправленные документы плательщикам!", indexsevr: 24, indexcolumnmodel: 0 },
+  ]
+  //ОКП 6
+  public mainselectOkp6: SelectTableModel = this.selectServerOkp6[0];
+  //ОКП 6
+  public columnsOkp6: Table[] = [{ Type: "DeliveryDocument", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 }]
+
 }
 
 ///Класс селектора

@@ -1,0 +1,21 @@
+<div class="he d-flex align-items-center">
+  <b class="h3 text-primary ">Выбор представления данных:</b>
+  <mat-form-field class="selectin_sql text-primary">
+    <mat-label class="text-primary">Выборки</mat-label>
+    <mat-select class="text-primary" placeholder="Выборки" [(ngModel)]="dinamicmodel.mainselectOkp5" name="sel"
+      (selectionChange)="errorserver($event)">
+      <mat-option class="text-primary" *ngFor="let sel of dinamicmodel.selectserverOkp5" [value]="sel">
+        {{sel.text}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</div>
+<selectsql [(logica)]="logica" [(selecting)]="selecting" [(columns)]="columns" [(select)]="select"
+  [toolpanel]='TOOLPANEL'></selectsql>
+
+
+<ng-template class="panel" #TOOLPANEL>
+  <button class="panelbutton" mat-button (click)="generateXlsxDoc()">Полная выгрузка</button>
+  
+</ng-template>

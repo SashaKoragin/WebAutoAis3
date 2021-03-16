@@ -16,17 +16,47 @@
 
 <ng-template class="panel" #TOOLPANEL>
 
-  <div class="d-flex flex-row bd-highlight mb-0">
-    <div class="p-1 bd-highlight align-self-center">
-      <label class="mr-2">Ввод ИНН:</label>
-      <input class="mr-2" placeholder="ИНН" [formControl]="inputInn">
-      <label class="mr-2 lableerror" *ngIf="inputInn.invalid">Не соответствует ИНН!</label>
-      <button class="mr-2 font btn btn-primary" mat-button (click)="loadinn(inputInn.value)"
-        [disabled]="inputInn.invalid">Загрузить ИНН</button>
+  <div class="d-flex flex-row bd-highlight mb-0 ">
+    <div class="p-1 bd-highlight align-self-center divFull">
+      <textarea class="mr-2 font areaInn" matInput placeholder="Ввод списка ИНН:" type="text"
+        [formControl]="groupValidationTemplateModel.get('Inn')"></textarea>
+      <label class="mr-2 lableerror font" *ngIf="groupValidationTemplateModel.get('Inn').invalid">Не соответствует
+        ИНН!</label>
+      <mat-form-field class="template">
+        <mat-label class="text-primary">Выбор шаблона:</mat-label>
+        <mat-select class="text-primary" [formControl]="groupValidationTemplateModel.get('Template')"
+          [(ngModel)]="selectedTemplate">
+          <mat-option class="text-primary" *ngFor="let template of TemplateModel" [value]="template">
+            {{template.IdTemplate}}:{{template.NameTemplate}}
+          </mat-option>
+        </mat-select>
+        <div class="lableerror font">
+          <mat-error *ngIf="groupValidationTemplateModel.get('Template').invalid">Не выбран шаблон для добавления!
+          </mat-error>
+        </div>
+      </mat-form-field>
+    </div>
+    <div class="p-1 flex-row bd-highlight mb-0 procent50 card-block">
+      "Сообщение с сервера:"
+      <ul class="chat">
+        <li *ngFor="let message of serverresult" class="right clearfix">
+          <div class="chat-body clearfix">
+            <p>
+              {{ message }}
+            </p>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
-  <div>
-    {{serverresult}}
+  <div class="row mx-md-n5">
+    <div class="col px-md-5">
+      <button class="mr-2 font btn btn-primary font px-md-5" mat-button (click)="loadinn()"
+      [disabled]="groupValidationTemplateModel.invalid">Загрузить ИНН</button>
+    </div>
+    <div class="col px-md-5">
+      <button class="mr-2 font btn btn-primary font px-md-5" [disabled]="this.isDisableType()" mat-button (click)="checkStatusArrayTree()">Снятие статусов массово!</button>
+    </div>
   </div>
 </ng-template>
 

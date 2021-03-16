@@ -1,5 +1,51 @@
 
+.procent50{
+  width: 50%;
+  margin: 5px;
+  min-height: 200px;
+  max-height: 200px;
+  background: beige;
+  border: 5px solid #007bff;
+}
+
+.divFull{
+  width: 35%;
+}
+
 .lableerror{
   color: red;
   font-size: 18px;
+  margin: 2px;
+}
+.template{
+    width: 100%;
+
+    margin: 5px;
+    font-size: 20px;
+    background: beige;
+    border: 5px solid #007bff;
+}
+
+.font{
+  font-size: 20px;
+}
+
+.areaInn {
+    margin: 5px;
+    max-height: 200px;
+    background: beige;
+    border: 5px solid #007bff;
+}
+.serverMessage{
+  width: 100%;
+  margin: 5px;
+  min-height: 200px;
+  max-height: 200px;
+  background: beige;
+  border: 5px solid #007bff;
+}
+
+.card-block {
+  overflow-x: auto;
+  height: 500px;
 }

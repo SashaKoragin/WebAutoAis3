@@ -5,6 +5,7 @@ export class ModelSelect {
   public infoViewAutomationField: InfoViewAutomation[] = null;
   public parameterProcedureWebField: ParameterProcedureWeb = null;
   public resultSelectProcedureWebField: string = null;
+  public templateProcedureField: TemplateProcedure = null;
 }
 
 class ParametrsSelect {
@@ -43,4 +44,16 @@ class ParameterProcedureWeb {
   public modelClassFindField: string
   public parameterProcedureField: string;
   public selectUserField: string;
+}
+
+export class TemplateProcedure {
+  public innField: string[];
+  public idTemplateField: number;
+}
+
+//Шаблоны в БД для добавления ИНН
+export class TemplateModel {
+  public IdTemplate: number;
+  public NameTemplate: string;
+  public DateCreate: Date;
 }

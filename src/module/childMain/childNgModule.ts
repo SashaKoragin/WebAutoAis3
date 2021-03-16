@@ -15,6 +15,12 @@ import { JournalPreCheck } from '../../app/otdels/otdels/PreCheck/Journal129/ts/
 import { ExpandeTableStatement } from '../../app/otdels/otdels/dataBaseUl/templateModelExpandedDb/templateModelExpandedDbTs/templateModelExpandedDb';
 import { ModelOkp2 } from '../../app/otdels/otdels/okp2/Journal121and129/ts/viewOkp2';
 import { SignatureOkp2 } from '../../app/otdels/otdels/okp2/SignatureRuk/ts/signatureOkp2';
+import { IdentytiFaceOkp5 } from '../../app/otdels/otdels/okp5/identityFace/ts/viewIdentytiFaceOkp5';
+import { AddIdentityFace } from '../../app/otdels/otdels/okp5/addIdentityFace/ts/addIdentityFace';
+import { ModelDialogSelectYear } from '../../app/otdels/otdels/dataBaseUl/ts/dialogSelectYear/dialogYearTs/dialogSelectYear';
+import { Sales } from '../../app/otdels/otdels/ovp2/Sales/ts/Sales';
+import { DeliveryDocument } from '../../app/otdels/otdels/okp6/deliveryDocument/ts/deliveryDocument';
+import { SalesBookBankUlFace } from '../../app/otdels/otdels/dataBaseUl/SalesBookBank/ts/salesBookBank';
 
 
 
@@ -33,7 +39,7 @@ import { SignatureOkp2 } from '../../app/otdels/otdels/okp2/SignatureRuk/ts/sign
     ModelPreCheck,DatabaseAutoUl,
     ModelDialogTemplateDataBase,ModelSqlTable,
     FilterParametrs,ModelRaschetBudgPayment,
-    JournalPreCheck,ExpandeTableStatement
+    JournalPreCheck,ExpandeTableStatement,IdentytiFaceOkp5,AddIdentityFace,ModelDialogSelectYear,Sales,DeliveryDocument,SalesBookBankUlFace
   ]
 
 
