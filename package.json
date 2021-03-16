@@ -22,7 +22,7 @@
     "@angular/platform-browser-dynamic": "~9.0.3",
     "@angular/router": "~9.0.3",
     "bootstrap": "^4.4.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "class-transformer": "0.1.9",
     "mat-select-filter": "^2.3.6",
     "material-community-components": "^6.0.0",
