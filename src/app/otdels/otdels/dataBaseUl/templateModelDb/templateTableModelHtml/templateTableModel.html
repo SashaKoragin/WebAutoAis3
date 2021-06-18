@@ -19,7 +19,7 @@
           <label class="text text-primary">Наименование: </label>
         </div>
         <div class="col-8">
-          <label class="content" matTooltip={{data.row.NameSmall}}>{{data.row.NameSmall}}</label>
+          <label class="content" matTooltip={{data.row.Name}}>{{data.row.Name}}</label>
         </div>
         <div class="w-100"></div>
         <div class="col-2">
@@ -40,7 +40,7 @@
           <label class="text text-primary">ОГРН: </label>
         </div>
         <div class="col-8">
-          <label class="content" matTooltip={{data.row.StatusUl}}>{{data.row.Ogrn}}</label>
+          <label class="content" matTooltip={{data.row.Ogrn}}>{{data.row.Ogrn}}</label>
         </div>
         <div class="w-100"></div>
         <div class="col-2">
@@ -54,7 +54,7 @@
           <label class="text text-primary">Статус: </label>
         </div>
         <div class="col-8">
-          <label class="content" matTooltip={{data.row.StatusUl}}>{{data.row.StatusUl}}</label>
+          <label class="content" matTooltip={{data.row.Status}}>{{data.row.Status}}</label>
         </div>
 
       </div>
@@ -74,11 +74,14 @@
         </mat-form-field>
       </div>
     </div>
-     <div class="row justify-content-start align-items-center">
-        <SqlSelectDataBase class="col tableContent" #SqlSelect [logicstooltable]="LOGICS" [@statement]="statementAnimate?'on':'off'" [@state]="animate?'active':'inactive'"></SqlSelectDataBase>
-        <SqlSelectDataBase class="col tableContent" #SqlSelectDetal [toolpanel]="PANEL" [@state]="animate?'inactive':'active'"></SqlSelectDataBase>
-        <TableExpande class="col tableContent" #SqlExpandeTable [modelDetalSelect]="data.selectModelMenu" [(inn)]="data.row.Inn" [@statement]="statementAnimate?'off':'on'"></TableExpande>
-     </div>
+    <div class="row justify-content-start align-items-center">
+      <SqlSelectDataBase class="col tableContent" #SqlSelect [logicstooltable]="LOGICS"
+        [@statement]="statementAnimate?'on':'off'" [@state]="animate?'active':'inactive'"></SqlSelectDataBase>
+      <SqlSelectDataBase class="col tableContent" #SqlSelectDetal [toolpanel]="PANEL"
+        [@state]="animate?'inactive':'active'"></SqlSelectDataBase>
+      <TableExpande class="col tableContent" #SqlExpandeTable [modelDetalSelect]="data.selectModelMenu"
+        [(inn)]="data.row.Inn" [@statement]="statementAnimate?'off':'on'"></TableExpande>
+    </div>
     <div class="close">
       <button class="mt-2 btn btn-lg btn-primary" type="submit" (click)="closeDialog()">Закрыть
         карточку</button>

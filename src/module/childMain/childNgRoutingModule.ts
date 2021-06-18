@@ -13,6 +13,8 @@ import { AddIdentityFace } from '../../app/otdels/otdels/okp5/addIdentityFace/ts
 import { Sales } from '../../app/otdels/otdels/ovp2/Sales/ts/Sales';
 import { DeliveryDocument } from '../../app/otdels/otdels/okp6/deliveryDocument/ts/deliveryDocument';
 import { SalesBookBankUlFace } from '../../app/otdels/otdels/dataBaseUl/SalesBookBank/ts/salesBookBank';
+import { AddPatent } from '../../app/otdels/otdels/okp3/addPatent/ts/addPatentOkp3';
+import { Patent } from '../../app/otdels/otdels/okp3/viewPatentReport/ts/patentOkp3';
 
 const appRoutes: Routes = [
   {
@@ -63,7 +65,15 @@ const appRoutes: Routes = [
       },
       {
         path: 'salesBookBank',
-        component:SalesBookBankUlFace
+        component: SalesBookBankUlFace
+      },
+      {
+        path: 'addPatent',
+        component: AddPatent
+      },
+      {
+        path: 'patent',
+        component: Patent
       }
     ]
   }];

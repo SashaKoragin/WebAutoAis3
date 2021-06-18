@@ -1,0 +1,31 @@
+<selectsql #TABLETEMPLATEPATENT [(logica)]="logica" [(selecting)]="selecting" [(columns)]="columns" [(select)]="select" [toolpanel]='TOOLPANEL'></selectsql>
+
+<ng-template class="panel" #TOOLPANEL>
+  <button class="panelbutton" mat-button (click)="generateXlsxDoc()">Выгрузить отчет!!!</button>
+  <div class="d-flex flex-row bd-highlight mb-0 ">
+    <div class="p-1 bd-highlight divFull">
+      <textarea class="mr-2 font areaPatent" matInput placeholder="Ввод списка Рег. Номеров патентов:" type="text"
+        [formControl]="groupValidationTemplateModel.get('RegNumPatent')"></textarea>
+      <label class="mr-2 lableerror font" *ngIf="groupValidationTemplateModel.get('RegNumPatent').invalid">Не
+        соответствует Рег. Номерам!</label>
+    </div>
+    <div class="p-1 flex-row bd-highlight mb-0 procent50 card-block">
+      "Сообщение с сервера:"
+      <ul class="chat">
+        <li *ngFor="let message of serverresult" class="right clearfix">
+          <div class="chat-body clearfix">
+            <p>
+              {{ message }}
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row mx-md-n5">
+    <div class="col px-md-5">
+      <button class="mr-2 font btn btn-primary font px-md-5 panelbutton" mat-button (click)="loadPatent()"
+        [disabled]="groupValidationTemplateModel.invalid">Загрузить!!!</button>
+    </div>
+  </div>
+</ng-template>

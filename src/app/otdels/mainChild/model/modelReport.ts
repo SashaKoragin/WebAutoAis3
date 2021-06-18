@@ -25,6 +25,28 @@ export class Report {
         }], types: null, pages: null, model: null, isrule: null
       },
       {
+        otdel: 'Отдел камеральных проверок №2',
+        children: [{
+          otdel: null,
+          children: null, types: 'Отчеты налоговых правонарушений', pages: './nalog129', model: 'Отчеты налоговых правонарушений', isrule: ['i7751-Informatizatsii', 'i7751-KP#2', 'i7751-KP#5', 'i7751-L-ServersAdmins']
+        },
+        {
+          otdel: null,
+          children: null, types: 'Подпись руководителя', pages: './SignatureOkp2', model: 'Подпись руководителя', isrule: ['i7751-Informatizatsii', 'i7751-KP#2', 'i7751-L-ServersAdmins']
+        }], types: null, pages: null, model: null, isrule: null
+      },
+      {
+        otdel: 'Отдел камеральных проверок №3',
+        children: [{
+          otdel:null,
+          children:null, types: 'Патенты', pages: './patent', model: 'Патенты', isrule: ['i7751-Informatizatsii', 'i7751-KP#3', 'i7751-L-ServersAdmins', 'i7751-PA']
+        },
+        {
+          otdel: null,
+          children: null, types: 'Добавление Рег-Номеров патентов', pages: './addPatent', model: 'Патенты', isrule: ['i7751-Informatizatsii', 'i7751-KP#3', 'i7751-L-ServersAdmins', 'i7751-PA']
+        }], types: null, pages: null, model: null, isrule: null
+      },
+      {
         otdel: 'Отдел камеральных проверок №5',
         children: [{
           otdel: null,
@@ -43,17 +65,6 @@ export class Report {
           children: null, types: 'Отправленные документы', pages: './DeliveryDocument', model: 'Отправленные документы', isrule: ['i7751-Informatizatsii', 'i7751-KP#6', 'i7751-L-ServersAdmins']
         }
         ], types: null, pages: null, model: null, isrule: null
-      },
-      {
-        otdel: 'Отдел камеральных проверок №2',
-        children: [{
-          otdel: null,
-          children: null, types: 'Отчеты налоговых правонарушений', pages: './nalog129', model: 'Отчеты налоговых правонарушений', isrule: ['i7751-Informatizatsii', 'i7751-KP#2', 'i7751-KP#5', 'i7751-L-ServersAdmins']
-        },
-        {
-          otdel: null,
-          children: null, types: 'Подпись руководителя', pages: './SignatureOkp2', model: 'Подпись руководителя', isrule: ['i7751-Informatizatsii', 'i7751-KP#2', 'i7751-L-ServersAdmins']
-        }], types: null, pages: null, model: null, isrule: null
       },
       {
         otdel: 'Отдел предпроверочного анализа',

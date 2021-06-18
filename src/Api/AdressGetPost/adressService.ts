@@ -1,3 +1,4 @@
+
 export const ServerHost: string = 'I7751-W40204180';  //localhost
 //export const ServerHost: string = 'localhost';
 export const ServerPort: string = '8050';
@@ -39,4 +40,9 @@ export class AdressService {
 
   ///Сводная книги покупок продаж
   public symmarySales = `http://${ServerHost}:${ServerPort}/ServiceAutomation/LoadFileSummarySales`;
+  ///АСК НДС ОТЧЕТ БОЛЬШОЙ
+  public reportAskNds = `http://${ServerHost}:${ServerPort}/ServiceAutomation/GenerateReportAskNds?year=`;
+
+  ///ОКП 3 добавление регистрационных номеров для отработки
+  public addRegNumberPatent = `http://${ServerHost}:${ServerPort}/ServiceAutomation/AddRegNumberPatent?userIdGuid=`;
 }

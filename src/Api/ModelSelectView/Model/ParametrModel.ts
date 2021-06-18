@@ -6,6 +6,7 @@ export class ModelSelect {
   public parameterProcedureWebField: ParameterProcedureWeb = null;
   public resultSelectProcedureWebField: string = null;
   public templateProcedureField: TemplateProcedure = null;
+  public templatePatentField: TemplatePatent = null;
 }
 
 class ParametrsSelect {
@@ -50,6 +51,11 @@ export class TemplateProcedure {
   public innField: string[];
   public idTemplateField: number;
 }
+
+export class TemplatePatent {
+  public regNumberPatentField: number[];
+}
+
 
 //Шаблоны в БД для добавления ИНН
 export class TemplateModel {

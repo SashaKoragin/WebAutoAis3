@@ -21,6 +21,8 @@ import { ModelDialogSelectYear } from '../../app/otdels/otdels/dataBaseUl/ts/dia
 import { Sales } from '../../app/otdels/otdels/ovp2/Sales/ts/Sales';
 import { DeliveryDocument } from '../../app/otdels/otdels/okp6/deliveryDocument/ts/deliveryDocument';
 import { SalesBookBankUlFace } from '../../app/otdels/otdels/dataBaseUl/SalesBookBank/ts/salesBookBank';
+import { AddPatent } from '../../app/otdels/otdels/okp3/addPatent/ts/addPatentOkp3';
+import { Patent } from '../../app/otdels/otdels/okp3/viewPatentReport/ts/patentOkp3';
 
 
 
@@ -39,7 +41,7 @@ import { SalesBookBankUlFace } from '../../app/otdels/otdels/dataBaseUl/SalesBoo
     ModelPreCheck,DatabaseAutoUl,
     ModelDialogTemplateDataBase,ModelSqlTable,
     FilterParametrs,ModelRaschetBudgPayment,
-    JournalPreCheck,ExpandeTableStatement,IdentytiFaceOkp5,AddIdentityFace,ModelDialogSelectYear,Sales,DeliveryDocument,SalesBookBankUlFace
+    JournalPreCheck,ExpandeTableStatement,IdentytiFaceOkp5,AddIdentityFace,ModelDialogSelectYear,Sales,DeliveryDocument,SalesBookBankUlFace,AddPatent,Patent
   ]
 
 

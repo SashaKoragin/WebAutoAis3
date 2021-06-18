@@ -86,7 +86,15 @@ export class DatabaseAutoUl implements OnInit {
   }
 
   selectOpenDialogModel(modelMenu: ModelMenuAndModel, row: any) {
-    this.modelDataBase.row = row;
+    this.modelDataBase.isUl = true;
+    this.modelDataBase.row.Fid = row.Fid;
+    this.modelDataBase.row.Name = row.NameSmall;
+    this.modelDataBase.row.Inn = row.Inn;
+    this.modelDataBase.row.Kpp = row.Kpp;
+    this.modelDataBase.row.Ogrn = row.Ogrn;
+    this.modelDataBase.row.Address = row.Address;
+    this.modelDataBase.row.Status = row.StatusUl;
+    this.modelDataBase.row.RegNumber =row.RegNumDecl;
     this.modelDataBase.allDataRow = this.columnsPreDataBase.Model.data
     this.modelDataBase.selectModelMenu = modelMenu;
     this.dialog.open(ModelDialogTemplateDataBase, this.configDialogForm);

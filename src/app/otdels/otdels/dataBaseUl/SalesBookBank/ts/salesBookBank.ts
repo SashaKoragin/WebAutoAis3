@@ -63,6 +63,32 @@ export class SalesBookBankUlFace implements OnInit {
     })
   }
 
+  public async downloadXlsxReportAskNds(row:any){
+    const dialogRef = this.dialog.open(ModelDialogSelectYear, {
+      data: this.modelYear
+    })
+    dialogRef.afterClosed().subscribe(async (result: YearModeReport) => {
+      if (this.modelYear.selectedYears) {
+        console.log("Выгружаем ИНН: " + row.Inn + " и год отчета: " + this.modelYear.selectedYears);
+        await this.select.generateAskNds(row.Inn, this.modelYear.selectedYears).subscribe(async model => {
+          var blob = new Blob([model], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          var url = window.URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = `Отчет АСК НДС ${row.Inn}`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+        });
+      }
+      else {
+        alert("Не введен год: " + this.modelYear.selectedYears)
+      }
+    })
+  }
+
+
   disableDonloadTemplate(row: any): boolean {
     if (row.StatusFull === "#EC1313") {
       return true

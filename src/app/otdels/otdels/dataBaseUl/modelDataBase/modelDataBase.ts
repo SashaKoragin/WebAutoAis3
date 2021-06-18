@@ -17,15 +17,29 @@ export class YearModeReport {
 
 
 export class ModelDialog {
-   constructor(modelMenu:ModelMenuAndModel[],modelMenuDetalization:ModelMenuAndModel[]){
-     this.modelMenu = modelMenu;
-     this.modelMenuDetalization = modelMenuDetalization;
-   }
-  public row: any;
+  constructor(modelMenu: ModelMenuAndModel[], modelMenuDetalization: ModelMenuAndModel[]) {
+    this.modelMenu = modelMenu;
+    this.modelMenuDetalization = modelMenuDetalization;
+  }
+  public row: RowModel = new RowModel();
   public allDataRow: any;
   public modelMenu: ModelMenuAndModel[];
-  public modelMenuDetalization:ModelMenuAndModel[];
+  public modelMenuDetalization: ModelMenuAndModel[];
   public selectModelMenu: ModelMenuAndModel;
+  public isUl: boolean;
+}
+
+export class RowModel {
+
+  public Fid: number = null;
+  public Name: string = null;
+  public Inn: string = null;
+  public Kpp: string = null;
+  public Ogrn: string = null;
+  public Address: string = null;
+  public Status: string = null;
+  public RegNumber: number = 0;
+  public IndexId: number = 0;
 }
 
 
@@ -57,7 +71,15 @@ export class ModelDataBase {
     { categoria: "Книги покупок/продаж", idSelect: 13, parameterSelectProcedure: 15, keyDetal: null }
   ]
 
-
+  //Модель патентов внутрености
+  public modelMenuOkp3: ModelMenuAndModel[] = [
+    { categoria: "Документы объекта ПСН", idSelect: 14, parameterSelectProcedure: 1, keyDetal: null },
+    { categoria: "Сведения о месте осуществления деятельности", idSelect: 15, parameterSelectProcedure: 2, keyDetal: null },
+    { categoria: "Сведения о транспортных средствах", idSelect: 16, parameterSelectProcedure: 3, keyDetal: null },
+    { categoria: "Сведения об обособленных объектах", idSelect: 17, parameterSelectProcedure: 4, keyDetal: null },
+    { categoria: "Параметры расчета налога", idSelect: 18, parameterSelectProcedure: 5, keyDetal: null },
+    { categoria: "Сведения по фактическому действию патента", idSelect: 19, parameterSelectProcedure: 6, keyDetal: null }
+  ]
 }
 
 

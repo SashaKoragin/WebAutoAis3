@@ -1,9 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AdressService } from '../../AdressGetPost/adressService';
-import { ModelSelect, LogicsSelectAutomation, TemplateProcedure } from './ParametrModel';
-import { templateJitUrl } from '@angular/compiler';
-import { SignalRConfiguration } from 'ng2-signalr';
+import { ModelSelect, LogicsSelectAutomation, TemplateProcedure, TemplatePatent } from './ParametrModel';
 import { FullSelectedModel, SenderTaxJournalOkp2, DepartamentOtdel } from '../../RequestService/modelAutomation';
 import { deserializeArray } from 'class-transformer';
 const url: AdressService = new AdressService();
@@ -96,6 +94,10 @@ export class SelectAllParametrs {
   public loadInn(templateModel: TemplateProcedure, guidUser: string) {
     return this.http.post(url.addInnModel.concat(guidUser), templateModel, httpOptionsJson);
   }
+  ///Загрузка регистрационных номеров патента
+  public loadRegNumberPatent(templatePatent: TemplatePatent, guidUser: string) {
+    return this.http.post(url.addRegNumberPatent.concat(guidUser), templatePatent, httpOptionsJson);
+  }
   ///Снятие статуса для повторной отработки
   public checkStatus(idModel: number[], status: string = null) {
     return this.http.post((status) ? url.checkStatus.concat("?status=", status) : url.checkStatus, idModel, httpOptionsJson);
@@ -110,7 +112,12 @@ export class SelectAllParametrs {
   //Генерация книг покупок и продаж на банк
   public generateBookSalesUl(inn: string, year: string) {
     return this.http.post(url.generateBookSales.concat(year), inn,
-      { responseType: 'arraybuffer', headers: new HttpHeaders({ 'Content-Type': 'application/json' }) })
+      { responseType: 'arraybuffer', headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
+  }
+  //АСК НДС полный отчет
+  public generateAskNds(inn: string, year: string) {
+    return this.http.post(url.reportAskNds.concat(year), inn,
+      { responseType: 'arraybuffer', headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
   }
 
   //Запрос на модели таблиц для разкладки динамически

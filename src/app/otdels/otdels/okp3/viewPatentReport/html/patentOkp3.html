@@ -1,0 +1,23 @@
+<selectsql [(logica)]="logica" [(selecting)]="selecting" [(columns)]="columns" [(select)]="select" [toolpanel]='TOOLPANEL' [logicstooltable]="LOGICSTOOLTABLE"></selectsql>
+
+
+<ng-template class="panel" #TOOLPANEL>
+  <button class="panelbutton" mat-button (click)="generateXlsxDoc()">Выгрузить отчет!!!</button>
+</ng-template>
+
+
+<ng-template #LOGICSTOOLTABLE let-row='row'>
+  <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{row: row}" color="primary"
+    matTooltip="Меню">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+</ng-template>
+
+
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent let-row='row'>
+    <div *ngFor="let modelCategoria of modelDataBase.modelMenu">
+      <button mat-menu-item (click)="selectOpenDialogModel(modelCategoria,row)">{{modelCategoria.categoria}}</button>
+    </div>
+  </ng-template>
+</mat-menu>

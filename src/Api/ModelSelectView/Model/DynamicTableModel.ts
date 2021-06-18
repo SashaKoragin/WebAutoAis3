@@ -102,6 +102,19 @@ export class DynamicTableColumnModel {
   //ОКП 6
   public columnsOkp6: Table[] = [{ Type: "DeliveryDocument", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 }]
 
+
+  ///ОКП 3
+  public selectserverОкp3: SelectTableModel[] = [
+    { text: "Собранные патенты", indexsevr: 26, indexcolumnmodel: 0 },
+    { text: "Патенты", indexsevr: 28, indexcolumnmodel: 1 }
+  ];
+
+  ///ОКП 3
+  public columnsОкp3: Table[] = [
+    { Type: "IsPatentParse", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
+    { Type: "AllPatent", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 }
+  ];
+
 }
 
 ///Класс селектора
