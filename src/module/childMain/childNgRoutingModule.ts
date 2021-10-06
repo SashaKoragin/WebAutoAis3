@@ -15,6 +15,8 @@ import { DeliveryDocument } from '../../app/otdels/otdels/okp6/deliveryDocument/
 import { SalesBookBankUlFace } from '../../app/otdels/otdels/dataBaseUl/SalesBookBank/ts/salesBookBank';
 import { AddPatent } from '../../app/otdels/otdels/okp3/addPatent/ts/addPatentOkp3';
 import { Patent } from '../../app/otdels/otdels/okp3/viewPatentReport/ts/patentOkp3';
+import { Okp1Journal121 } from '../../app/otdels/otdels/okp1/Journal121/ts/viewOkp1Journal121';
+import { ModelRegistrationFace } from '../../app/otdels/otdels/registration/ReestrFace/ts/viewRegistrationFace';
 
 const appRoutes: Routes = [
   {
@@ -29,6 +31,10 @@ const appRoutes: Routes = [
       {
         path: 'DeliveryDocument',
         component: DeliveryDocument
+      },
+      {
+        path: 'nalog121',
+        component: Okp1Journal121
       },
       {
         path: 'nalog129',
@@ -74,6 +80,10 @@ const appRoutes: Routes = [
       {
         path: 'patent',
         component: Patent
+      },
+      {
+        path: 'regNp',
+        component:ModelRegistrationFace
       }
     ]
   }];

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainChildOtdel } from '../../app/otdels/mainChild/ts/mainChild';
 import { ChildNgRoutingAutoModule } from './childNgRoutingModule';
 import { AngularMaterialModule } from '../materialModule/matrialModule';
@@ -23,6 +23,8 @@ import { DeliveryDocument } from '../../app/otdels/otdels/okp6/deliveryDocument/
 import { SalesBookBankUlFace } from '../../app/otdels/otdels/dataBaseUl/SalesBookBank/ts/salesBookBank';
 import { AddPatent } from '../../app/otdels/otdels/okp3/addPatent/ts/addPatentOkp3';
 import { Patent } from '../../app/otdels/otdels/okp3/viewPatentReport/ts/patentOkp3';
+import { Okp1Journal121 } from '../../app/otdels/otdels/okp1/Journal121/ts/viewOkp1Journal121';
+import { ModelRegistrationFace } from '../../app/otdels/otdels/registration/ReestrFace/ts/viewRegistrationFace';
 
 
 
@@ -37,11 +39,12 @@ import { Patent } from '../../app/otdels/otdels/okp3/viewPatentReport/ts/patentO
     ReactiveFormsModule
   ],
   declarations: [
-    MainChildOtdel,ModelOkp2,Select,SignatureOkp2,
-    ModelPreCheck,DatabaseAutoUl,
-    ModelDialogTemplateDataBase,ModelSqlTable,
-    FilterParametrs,ModelRaschetBudgPayment,
-    JournalPreCheck,ExpandeTableStatement,IdentytiFaceOkp5,AddIdentityFace,ModelDialogSelectYear,Sales,DeliveryDocument,SalesBookBankUlFace,AddPatent,Patent
+    MainChildOtdel, ModelOkp2, Select, SignatureOkp2,
+    ModelPreCheck, DatabaseAutoUl,
+    ModelDialogTemplateDataBase, ModelSqlTable,
+    FilterParametrs, ModelRaschetBudgPayment,
+    JournalPreCheck, ExpandeTableStatement, IdentytiFaceOkp5, AddIdentityFace, ModelDialogSelectYear, Sales, DeliveryDocument, SalesBookBankUlFace, AddPatent, Patent, Okp1Journal121,
+    ModelRegistrationFace
   ]
 
 

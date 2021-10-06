@@ -181,7 +181,7 @@ export class ModelDialogTemplateDataBase implements AfterViewInit {
 
   //Костыль дожидаемся обновление DOM дочернего компанента
   private async delay(ms: number): Promise<void> {
-    await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => console.log("Задержка подгрузки DOM!!!"));
+    await new Promise<void>(resolve => setTimeout(() => resolve(), ms)).then(() => console.log("Задержка подгрузки DOM!!!"));
   }
 
 }

@@ -40,12 +40,13 @@ export class ModelOkp2 implements OnInit {
   async donloadAllFile() {
     this.startDonload();
     var modelServer = JSON.parse(JSON.stringify(this.columns.Model.filteredData));
+   // console.log(row);
     var progress = 1 / this.columns.Model.data.length * 100;
     for (var row of modelServer) {
       if (row.Extensions) {
         var blob = await this.select.donloadFile(row.Id, this.columns.Type);
         if (blob) {
-          var nameFile = `${row.Inn}_${row.TypeDocument}_${row.Extensions}`;
+          var nameFile = `${row.RegNumDeclaration}_${row.Inn}_${row.TypeDocument}_${row.Extensions}`;;
           var url = window.URL.createObjectURL(blob);
           this.statusText = `Загрузка файла ${nameFile}`;
           var a = document.createElement('a');
@@ -85,8 +86,9 @@ export class ModelOkp2 implements OnInit {
   async donloadFile(row: any) {
     if (row.Extensions) {
       var blob = await this.select.donloadFile(row.Id, this.columns.Type);
+    //  console.log(row);
       if (blob) {
-        var nameFile = `${row.Inn}_${row.TypeDocument}_${row.Extensions}`;
+        var nameFile = `${row.RegNumDeclaration}_${row.Inn}_${row.TypeDocument}_${row.Extensions}`;
         var url = window.URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.href = url;
@@ -105,3 +107,18 @@ export class ModelOkp2 implements OnInit {
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

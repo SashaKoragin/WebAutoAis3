@@ -45,4 +45,8 @@ export class AdressService {
 
   ///ОКП 3 добавление регистрационных номеров для отработки
   public addRegNumberPatent = `http://${ServerHost}:${ServerPort}/ServiceAutomation/AddRegNumberPatent?userIdGuid=`;
+  ///Модель добавления ИНН
+  public addFlFaceMainRegistration = `http://${ServerHost}:${ServerPort}/ServiceAutomation/AddFlFaceMainRegistration?userIdGuid=`;
+  ///Принудительное завершение обработки!
+  public checkStatusFl = `http://${ServerHost}:${ServerPort}/ServiceAutomation/CheckStatusFl?isExecute=`
 }

@@ -76,6 +76,21 @@ export class DynamicTableColumnModel {
   //Общий журнал 129 База данных
   public columnsAll129: Table[] = [{ Type: "AllJournal129", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
   ];
+
+
+  //ОКП 1
+  public selectServerOkp1: SelectTableModel[] = [
+    { text: "Нарушения ОКП 1", indexsevr: 30, indexcolumnmodel: 0 },
+  ]
+  //ОКП 1
+  public mainselectOkp1: SelectTableModel = this.selectServerOkp1[0];
+  //ОКП 1
+  public columnsOkp1: Table[] = [{ Type: "TaxJournal121Error", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 }]
+
+
+
+
+
   //ОКП 5
   public selectserverOkp5: SelectTableModel[] = [
     { text: "Обработанные 2НДФЛ", indexsevr: 18, indexcolumnmodel: 0 },
@@ -113,6 +128,16 @@ export class DynamicTableColumnModel {
   public columnsОкp3: Table[] = [
     { Type: "IsPatentParse", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
     { Type: "AllPatent", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 }
+  ];
+
+  //Регистрация и учет налогоплательщиков
+  public selectserverRegistration: SelectTableModel[] = [
+    { text: "Реестр ФЛ учетные действия", indexsevr: 31, indexcolumnmodel: 0 },
+  ];
+  
+  //Регистрация и учет налогоплательщиков
+  public columnsRegistration: Table[] = [
+    { Type: "AllJournalRegistrationFl", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
   ];
 
 }

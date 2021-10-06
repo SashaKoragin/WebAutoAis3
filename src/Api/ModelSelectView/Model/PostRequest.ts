@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { AdressService } from '../../AdressGetPost/adressService';
-import { ModelSelect, LogicsSelectAutomation, TemplateProcedure, TemplatePatent } from './ParametrModel';
+import { ModelSelect, LogicsSelectAutomation, TemplateProcedure, TemplatePatent, TemplateInnPattern } from './ParametrModel';
 import { FullSelectedModel, SenderTaxJournalOkp2, DepartamentOtdel } from '../../RequestService/modelAutomation';
 import { deserializeArray } from 'class-transformer';
 const url: AdressService = new AdressService();
@@ -98,11 +98,18 @@ export class SelectAllParametrs {
   public loadRegNumberPatent(templatePatent: TemplatePatent, guidUser: string) {
     return this.http.post(url.addRegNumberPatent.concat(guidUser), templatePatent, httpOptionsJson);
   }
+  ///Загрузка ИНН для регистрации
+  public loadInnRegistration(templateInnPattern: TemplateInnPattern, guidUser: string){
+    return this.http.post(url.addFlFaceMainRegistration.concat(guidUser), templateInnPattern, httpOptionsJson);
+  }
   ///Снятие статуса для повторной отработки
   public checkStatus(idModel: number[], status: string = null) {
     return this.http.post((status) ? url.checkStatus.concat("?status=", status) : url.checkStatus, idModel, httpOptionsJson);
   }
-
+  ///Принудительное завершение обработки!
+  public checkStatusFl(inn:string, isExecute: boolean){
+    return this.http.post(url.checkStatusFl.concat(isExecute.toString()), inn, httpOptionsJson);
+  }
   //Генерация докладной записки по ЮЛ
   public noteGenerateUl(inn: string, year: string) {
     return this.http.post(url.generateNoteReportUl.concat(year), inn,
