@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectAllParametrs } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
+import { SelectAllParameter } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
 import { LogicaDataBase, GenerateParametrs } from '../../../../../../Api/ModelSelectView/Model/GenerateParametrFront';
 import { DynamicTableColumnModel, Table } from '../../../../../../Api/ModelSelectView/Model/DynamicTableModel';
 import { ModelSelect } from '../../../../../../Api/ModelSelectView/Model/ParametrModel';
@@ -9,11 +9,11 @@ import { PublicFunction } from '../../../../../../Api/PublicFunction/PublicFunct
 @Component({
   templateUrl: '../html/viewOkp2.html',
   styleUrls: ['../css/viewOkp2.css'],
-  providers: [SelectAllParametrs]
+  providers: [SelectAllParameter]
 })
 
 export class ModelOkp2 implements OnInit {
-  constructor(public select: SelectAllParametrs) { }
+  constructor(public select: SelectAllParameter) { }
 
 
   public valueProgress: number = 0;
@@ -31,7 +31,7 @@ export class ModelOkp2 implements OnInit {
   }
 
   errorserver(type: any) {
-    this.select.addselectallparametrs(new ModelSelect(this.dinamicmodel.mainselect.indexsevr)).subscribe((model: ModelSelect) => {
+    this.select.addSelectAllParameter(new ModelSelect(this.dinamicmodel.mainselect.indexsevr)).subscribe((model: ModelSelect) => {
       this.selecting = new GenerateParametrs(model);
       this.columns = this.dinamicmodel.columns[this.dinamicmodel.mainselect.indexcolumnmodel]
     })
@@ -40,36 +40,41 @@ export class ModelOkp2 implements OnInit {
   async donloadAllFile() {
     this.startDonload();
     var modelServer = JSON.parse(JSON.stringify(this.columns.Model.filteredData));
-    var progress = 1 / this.columns.Model.data.length * 100;
-    for (var row of modelServer) {
-      if (row.Extensions) {
-        var blob = await this.select.donloadFile(row.Id, this.columns.Type);
-        if (blob) {
-          var nameFile = `${row.Inn}_${row.TypeDocument}_${row.Extensions}`;
-          var url = window.URL.createObjectURL(blob);
-          this.statusText = `Загрузка файла ${nameFile}`;
-          var a = document.createElement('a');
-          a.href = url;
-          a.download = nameFile;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          window.URL.revokeObjectURL(url);
+    if (this.columns.Model.data.length < 200) {
+      var progress = 1 / this.columns.Model.data.length * 100;
+      for (var row of modelServer) {
+        if (row.Extensions) {
+          var blob = await this.select.downloadFile(row.Id, this.columns.Type);
+          if (blob) {
+            var nameFile = `${row.RegNumDeclaration}_${row.Inn}_${row.TypeDocument}_${row.Extensions}`;;
+            var url = window.URL.createObjectURL(blob);
+            this.statusText = `Загрузка файла ${nameFile}`;
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = nameFile;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+          }
+          else {
+            alert('Отсутствует маршрут url для файла!')
+          }
         }
         else {
-          alert('Отсутствует маршрут url для файла!')
+          this.statusText = 'Отсутствует файл для выгрузки!';
         }
-      }
-      else {
-        this.statusText = 'Отсутствует файл для выгрузки!';
-      }
-      this.valueProgress = progress + this.valueProgress
-    };
+        this.valueProgress = progress + this.valueProgress
+      };
+    }
+    else {
+      alert("Колличество файлов превышает 200 штук смотри выборку!!!")
+    }
     this.finishDonload();
   }
 
   startDonload() {
-    this.serverresult = "Количество файлов в выборке" + this.columns.Model.data.length
+    this.serverresult = "Количество файлов в выборке " + this.columns.Model.data.length
     this.IsVisible = true;
     this.statusText = "Начало загрузки ждите!!!"
   }
@@ -82,11 +87,12 @@ export class ModelOkp2 implements OnInit {
   }
 
 
-  async donloadFile(row: any) {
+  async downloadFile(row: any) {
     if (row.Extensions) {
-      var blob = await this.select.donloadFile(row.Id, this.columns.Type);
+      var blob = await this.select.downloadFile(row.Id, this.columns.Type);
+      //  console.log(row);
       if (blob) {
-        var nameFile = `${row.Inn}_${row.TypeDocument}_${row.Extensions}`;
+        var nameFile = `${row.RegNumDeclaration}_${row.Inn}_${row.TypeDocument}_${row.Extensions}`;
         var url = window.URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.href = url;
@@ -105,3 +111,18 @@ export class ModelOkp2 implements OnInit {
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

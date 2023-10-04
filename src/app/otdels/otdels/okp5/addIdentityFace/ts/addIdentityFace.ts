@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { FormControl, } from '@angular/forms';
 import { forbiddenNameValidator } from 'src/Api/ModelSelectView/Model/GenerateParametrFront';
-import { SelectAllParametrs } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
+import { SelectAllParameter } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Table, DynamicTableColumnModel } from '../../../../../../Api/ModelSelectView/Model/DynamicTableModel';
@@ -14,10 +14,10 @@ import { Select } from '../../../../../../Api/ModelSelectView/View/SelectView';
 @Component({
   templateUrl: '../html/addIdentityFace.html',
   styleUrls: ['../css/addIdentityFace.css'],
-  providers: [SelectAllParametrs]
+  providers: [SelectAllParameter]
 })
 export class AddIdentityFace implements OnInit {
-  constructor(public select: SelectAllParametrs) { }
+  constructor(public select: SelectAllParameter) { }
 
   @ViewChild('sql') selectionChild: Select;
   dinamicmodel: DynamicTableColumnModel = new DynamicTableColumnModel();
@@ -31,7 +31,7 @@ export class AddIdentityFace implements OnInit {
   }
 
   errorserver(type: any) {
-    this.select.addselectallparametrs(new ModelSelect(this.dinamicmodel.mainselectOkp5.indexsevr)).subscribe((model: ModelSelect) => {
+    this.select.addSelectAllParameter(new ModelSelect(this.dinamicmodel.mainselectOkp5.indexsevr)).subscribe((model: ModelSelect) => {
       this.selecting = new GenerateParametrs(model);
       this.columns = this.dinamicmodel.columnsOkp5[this.dinamicmodel.mainselectOkp5.indexcolumnmodel]
     })

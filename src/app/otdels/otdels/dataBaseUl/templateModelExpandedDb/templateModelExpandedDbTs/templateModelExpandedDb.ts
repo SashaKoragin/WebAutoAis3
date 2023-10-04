@@ -1,5 +1,5 @@
 import { Component, Input, AfterViewInit, ViewChild, OnInit } from '@angular/core';
-import { SelectAllParametrs } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
+import { SelectAllParameter } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ModelMenuAndModel } from '../../modelDataBase/modelDataBase';
 import { ModelSelect } from '../../../../../../Api/ModelSelectView/Model/ParametrModel';
@@ -21,11 +21,11 @@ import { MatPaginator } from '@angular/material/paginator';
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
-  providers: [SelectAllParametrs]
+  providers: [SelectAllParameter]
 })
 
 export class ExpandeTableStatement {
-  constructor(public select: SelectAllParametrs) { }
+  constructor(public select: SelectAllParameter) { }
 
 
   public dataSource: MatTableDataSource<HeadingStatement> = new MatTableDataSource<HeadingStatement>();
@@ -83,7 +83,7 @@ export class ExpandeTableStatement {
 
   //Костыль дожидаемся обновление DOM дочернего компанента
   private async delay(ms: number): Promise<void> {
-    await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => console.log("Задержка подгрузки DOM!!!"));
+    await new Promise<void>(resolve => setTimeout(() => resolve(), ms)).then(() => console.log("Задержка подгрузки DOM!!!"));
   }
 
 }

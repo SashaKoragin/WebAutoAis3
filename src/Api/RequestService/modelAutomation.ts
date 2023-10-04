@@ -87,6 +87,9 @@ export class DepartamentOtdel {
   public IdSender: number;
   public NameDepartament: string;
   public NameDepartamentActiveDerectory: string;
+  public StatusFace: string;
+  public Office: string;
+  public Telephon: string;
   public SenderTaxJournalOkp2: SenderTaxJournalOkp2;
   public ModelIsEdit?: boolean = false;
 }
@@ -95,4 +98,33 @@ export class DepartamentOtdel {
 export class SenderTaxJournalOkp2 {
   public Id: number;
   public NameUser: string;
+}
+
+
+//Сотрудники организации
+
+export class UserOrg {
+  public IdUser: number;
+  public InnUser: string;
+  public IdProcedure: number;
+  public Family: string;
+  public Name: string;
+  public Surname: string;
+  public DateOfBirth: any;
+  public VidDoc: string;
+  public Seria: string;
+  public Number: string;
+  public DateIn: any;
+  public Code: string;
+  public WhoIn: string;
+  public Location: string;
+  public IsError: boolean;
+  public IsGood: boolean;
+  public MessageInfo: string;
+}
+
+export class QuestionsAndUsers {
+  public IdQuestions: number;
+  public IdUser: number;
+  public ModelQuestions: string;
 }

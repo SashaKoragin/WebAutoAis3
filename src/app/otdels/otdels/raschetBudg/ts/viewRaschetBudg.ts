@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { DynamicTableColumnModel, Table } from '../../../../../Api/ModelSelectView/Model/DynamicTableModel';
 import { LogicaDataBase, GenerateParametrs } from '../../../../../Api/ModelSelectView/Model/GenerateParametrFront';
 import { ModelSelect } from '../../../../../Api/ModelSelectView/Model/ParametrModel';
-import { SelectAllParametrs } from '../../../../../Api/ModelSelectView/Model/PostRequest';
+import { SelectAllParameter } from '../../../../../Api/ModelSelectView/Model/PostRequest';
 
 @Component({
   templateUrl: '../html/viewRaschetBudg.html',
   styleUrls: ['../css/viewRaschetBudg.css'],
-  providers: [SelectAllParametrs]
+  providers: [SelectAllParameter]
 })
 export class ModelRaschetBudgPayment implements OnInit {
 
-  constructor(public select: SelectAllParametrs) { }
+  constructor(public select: SelectAllParameter) { }
 
   dinamicmodel: DynamicTableColumnModel = new DynamicTableColumnModel();
   logica: LogicaDataBase = new LogicaDataBase();
@@ -24,7 +24,7 @@ export class ModelRaschetBudgPayment implements OnInit {
   }
 
   serverInn(type: any) {
-    this.select.addselectallparametrs(new ModelSelect(this.dinamicmodel.mainselectRaschetBudg.indexsevr)).subscribe((model: ModelSelect) => {
+    this.select.addSelectAllParameter(new ModelSelect(this.dinamicmodel.mainselectRaschetBudg.indexsevr)).subscribe((model: ModelSelect) => {
       this.selecting = new GenerateParametrs(model);
       this.columnsPre = this.dinamicmodel.columnsRaschetBudg[this.dinamicmodel.mainselectRaschetBudg.indexcolumnmodel];
     })

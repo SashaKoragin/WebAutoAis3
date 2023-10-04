@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import * as XLSX from 'xlsx';
 import { MatPaginator } from '@angular/material/paginator';
 import { ModelSelect } from '../../ModelSelectView/Model/ParametrModel';
-import { SelectAllParametrs } from '../../ModelSelectView/Model/PostRequest';
+import { SelectAllParameter } from '../../ModelSelectView/Model/PostRequest';
 import { ModelMenuAndModel } from '../../../app/otdels/otdels/dataBaseUl/modelDataBase/modelDataBase';
 
 
@@ -12,12 +12,12 @@ import { ModelMenuAndModel } from '../../../app/otdels/otdels/dataBaseUl/modelDa
   selector: 'SqlSelectDataBase',
   templateUrl: '../Html/modelSelectTable.html',
   styleUrls: ['../Css/modelSelectTable.css'],
-  providers: [SelectAllParametrs]
+  providers: [SelectAllParameter]
 })
 
 export class ModelSqlTable {
 
-  constructor(private select: SelectAllParametrs) {
+  constructor(private select: SelectAllParameter) {
     this.progress = false;
     this.date = false;
     this.errornull = false;
@@ -50,8 +50,6 @@ export class ModelSqlTable {
       this.errornull = false;  //Не показывать ошибки
       this.columns = { Type: null, Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 };
       this.select.detalDataBaseNote(model).subscribe((modelsParameter: ModelSelect) => {
-        console.log(modelsParameter.resultSelectProcedureWebField);
-        console.log(modelsParameter.parameterProcedureWebField.modelClassFindField);
         var data = (JSON.parse(modelsParameter.resultSelectProcedureWebField)[modelsParameter.parameterProcedureWebField.modelClassFindField]);
         if (data.length !== 0) {
           for (var parameter of modelsParameter.infoViewAutomationField) {
@@ -103,7 +101,7 @@ export class ModelSqlTable {
 
   //Костыль дожидаемся обновление DOM дочернего компанента
   private async delay(ms: number): Promise<void> {
-    await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => console.log("Задержка подгрузки DOM!!!"));
+    await new Promise<void>(resolve => setTimeout(() => resolve(), ms)).then(() => console.log("Задержка подгрузки DOM!!!"));
   }
 
 }

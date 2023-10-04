@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild, ElementRef, TemplateRef } from '@angular/core';
 import { GenerateParametrs, LogicaDataBase } from '../Model/GenerateParametrFront';
 import { MatPaginator } from '@angular/material/paginator';
-import { SelectAllParametrs } from '../Model/PostRequest';
+import { SelectAllParameter } from '../Model/PostRequest';
 import * as XLSX from 'xlsx';
 import { Table } from '../Model/DynamicTableModel';
 
@@ -26,7 +26,7 @@ export class Select {
   ///Модель генерации параметров
   @Input() selecting: GenerateParametrs;
   ///Запросы к серверу
-  @Input() select: SelectAllParametrs;
+  @Input() select: SelectAllParameter;
 
   @ViewChild('tables', { static: false }) paginator: MatPaginator;
 
@@ -97,7 +97,7 @@ export class Select {
     return null;
   }
 
-  public ff(){
+  public ff() {
 
   }
 }

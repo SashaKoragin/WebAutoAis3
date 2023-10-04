@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainChildOtdel } from '../../app/otdels/mainChild/ts/mainChild';
 import { ChildNgRoutingAutoModule } from './childNgRoutingModule';
 import { AngularMaterialModule } from '../materialModule/matrialModule';
@@ -23,6 +23,15 @@ import { DeliveryDocument } from '../../app/otdels/otdels/okp6/deliveryDocument/
 import { SalesBookBankUlFace } from '../../app/otdels/otdels/dataBaseUl/SalesBookBank/ts/salesBookBank';
 import { AddPatent } from '../../app/otdels/otdels/okp3/addPatent/ts/addPatentOkp3';
 import { Patent } from '../../app/otdels/otdels/okp3/viewPatentReport/ts/patentOkp3';
+import { Okp1Journal121 } from '../../app/otdels/otdels/okp1/Journal121/ts/viewOkp1Journal121';
+import { ModelRegistrationFace } from '../../app/otdels/otdels/registration/ReestrFace/ts/viewRegistrationFace';
+import { EasJournal } from '../../app/otdels/otdels/okp1/EasJournal/ts/viewEasJournal';
+import { TaxDeclarationFl } from '../../app/otdels/otdels/okp6/TaxDeclarationFl/ts/taxDeclarationFl';
+import { Journal3Ndfl } from '../../app/otdels/otdels/okp6/Journal3Ndfl/ts/Journal3Ndfl';
+import { RealEstateZmIm } from '../../app/otdels/otdels/okp6/RealEstateZmIm/ts/realEstateZmIm';
+import { ModelRegistryReference } from '../../app/otdels/otdels/orn/ReestrReference/ts/addInnFaceRegistryReference';
+import { InterrogationOfWitnesses } from '../../app/otdels/otdels/kao/InterrogationOfWitnesses/ts/interrogationOfWitnesses';
+import { UploadFileToServerReport } from '../../Api/UploadFileToServerReport/View/UploadFileToServerReport';
 
 
 
@@ -37,11 +46,12 @@ import { Patent } from '../../app/otdels/otdels/okp3/viewPatentReport/ts/patentO
     ReactiveFormsModule
   ],
   declarations: [
-    MainChildOtdel,ModelOkp2,Select,SignatureOkp2,
-    ModelPreCheck,DatabaseAutoUl,
-    ModelDialogTemplateDataBase,ModelSqlTable,
-    FilterParametrs,ModelRaschetBudgPayment,
-    JournalPreCheck,ExpandeTableStatement,IdentytiFaceOkp5,AddIdentityFace,ModelDialogSelectYear,Sales,DeliveryDocument,SalesBookBankUlFace,AddPatent,Patent
+    MainChildOtdel, ModelOkp2, Select, SignatureOkp2,
+    ModelPreCheck, DatabaseAutoUl,
+    ModelDialogTemplateDataBase, ModelSqlTable,
+    FilterParametrs, ModelRaschetBudgPayment,
+    JournalPreCheck, ExpandeTableStatement, IdentytiFaceOkp5, AddIdentityFace, ModelDialogSelectYear, Sales, DeliveryDocument, SalesBookBankUlFace, AddPatent, Patent, Okp1Journal121,
+    ModelRegistrationFace, EasJournal, TaxDeclarationFl, Journal3Ndfl, RealEstateZmIm, ModelRegistryReference, InterrogationOfWitnesses, UploadFileToServerReport
   ]
 
 

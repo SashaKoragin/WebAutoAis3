@@ -1,0 +1,137 @@
+<mat-tab-group>
+  <mat-tab label="Допросы свидетелей (Модель)">
+    <selectsql [(logica)]="logica" [(selecting)]="selecting" [(columns)]="columns" [(select)]="select"
+      [logicstooltable]='LOGICSTOOLTABLE'></selectsql>
+    <ng-template #LOGICSTOOLTABLE let-row='row'>
+      <mat-checkbox [matTooltip]="'Просмотр сотрудников'" (click)="$event.stopPropagation();"
+        (change)="selectionRowModel.toggle(row);isCheckIdFile()" [checked]="selectionRowModel.isSelected(row)">
+      </mat-checkbox>
+    </ng-template>
+
+
+    <div [style.display]="isLoad ? 'none' : 'grid'">
+      <div class="tables" #TABLEUSERSORG>
+        <h1 class="main">Сотрудники организации</h1>
+        <table mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="Logic">
+            <th class="logic" mat-header-cell *matHeaderCellDef mat-sort-header>Вопросы</th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox [matTooltip]="'Просмотр вопросов'" (click)="$event.stopPropagation();"
+                (change)="selectionRowQuestions.toggle(row);isCheckQuestions()"
+                [checked]="selectionRowQuestions.isSelected(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="IdUser">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ун сотрудника</th>
+            <td mat-cell *matCellDef="let row">{{row.IdUser}}</td>
+          </ng-container>
+          <ng-container matColumnDef="InnUser">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ИНН сотрудника</th>
+            <td mat-cell *matCellDef="let row">{{row.InnUser}}</td>
+          </ng-container>
+          <ng-container matColumnDef="IdProcedure">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ун процедуры</th>
+            <td mat-cell *matCellDef="let row">{{row.IdProcedure}}</td>
+          </ng-container>
+          <ng-container matColumnDef="Family">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Фамилия</th>
+            <td mat-cell *matCellDef="let row">{{row.Family}}</td>
+          </ng-container>
+          <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Имя</th>
+            <td mat-cell *matCellDef="let row">{{row.Name}}</td>
+          </ng-container>
+          <ng-container matColumnDef="Surname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Отчество</th>
+            <td mat-cell *matCellDef="let row">{{row.Surname}}</td>
+          </ng-container>
+          <ng-container matColumnDef="DateOfBirth">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Дата рождения</th>
+            <td mat-cell *matCellDef="let row">{{row.DateOfBirth}}</td>
+          </ng-container>
+          <ng-container matColumnDef="VidDoc">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Вид документа</th>
+            <td mat-cell *matCellDef="let row">{{row.VidDoc}}</td>
+          </ng-container>
+          <ng-container matColumnDef="Seria">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Серия</th>
+            <td mat-cell *matCellDef="let row">{{row.Seria}}</td>
+          </ng-container>
+          <ng-container matColumnDef="Number">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Номер</th>
+            <td mat-cell *matCellDef="let row">{{row.Number}}</td>
+          </ng-container>
+          <ng-container matColumnDef="DateIn">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Дата вручения</th>
+            <td mat-cell *matCellDef="let row">{{row.DateIn}}</td>
+          </ng-container>
+          <ng-container matColumnDef="Code">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Код документа</th>
+            <td mat-cell *matCellDef="let row">{{row.Code}}</td>
+          </ng-container>
+          <ng-container matColumnDef="IsError">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Признак ошибки</th>
+            <td mat-cell *matCellDef="let row">{{row.IsError}}</td>
+          </ng-container>
+          <ng-container matColumnDef="IsGood">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Признак успеха</th>
+            <td mat-cell *matCellDef="let row">{{row.IsGood}}</td>
+          </ng-container>
+          <ng-container matColumnDef="MessageInfo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Сообщение</th>
+            <td mat-cell *matCellDef="let row">{{row.MessageInfo}}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+      <mat-paginator class="paginator" #usersOrg [pageSizeOptions]="[5, 10]" showFirstLastButtons="true">
+      </mat-paginator>
+      <div [style.display]="isLoadQuestions ? 'none' : 'grid'">
+        <div class="tables" #TABLEQUESTIONS>
+          <h1 class="main">Вопросы сотруднику</h1>
+          <table mat-table [dataSource]="dataSourceQuestions">
+
+            <ng-container matColumnDef="IdQuestions">
+              <th mat-header-cell *matHeaderCellDef>Ун вопроса</th>
+              <td mat-cell *matCellDef="let row">{{row.IdQuestions}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="IdUser">
+              <th mat-header-cell *matHeaderCellDef>Ун сотрудника</th>
+              <td mat-cell *matCellDef="let row">{{row.IdUser}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="ModelQuestions">
+              <th mat-header-cell *matHeaderCellDef>Вопрос</th>
+              <td mat-cell *matCellDef="let row">{{row.ModelQuestions}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsQuestions; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsQuestions;"></tr>
+          </table>
+        </div>
+        <mat-paginator class="paginator" #usersQuestions [pageSizeOptions]="[5, 10]" showFirstLastButtons="true">
+        </mat-paginator>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Загрузка Excel списков (Модель)">
+    <div class="Model">
+      <uploadFile class="Model" [(UserGuid)]="SignalR.iduser"></uploadFile>
+    </div>
+    <div class="p-1 flex-row bd-highlight mb-0 procent50 card-block">
+      "Сообщение с сервера:"
+      <ul class="chat">
+        <li *ngFor="let message of serverResult" class="right clearfix">
+          <div class="chat-body clearfix">
+            <p>
+              {{ message }}
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </mat-tab>
+</mat-tab-group>

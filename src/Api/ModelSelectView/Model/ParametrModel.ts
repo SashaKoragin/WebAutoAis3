@@ -7,6 +7,7 @@ export class ModelSelect {
   public resultSelectProcedureWebField: string = null;
   public templateProcedureField: TemplateProcedure = null;
   public templatePatentField: TemplatePatent = null;
+  public templateInnPatternField: TemplateInnPattern = null;
 }
 
 class ParametrsSelect {
@@ -25,6 +26,11 @@ class ParametrsSelect {
 export class LogicsSelectAutomation {
   public idField: number;
   public selectInfoField: string;
+  public nameDllField: string;
+  public findNameSpaceField: string;
+  public isResultXmlField: boolean;
+  public nameReportListField: string;
+  public nameReportFileField: string;
   public selectedParametrField: string;
   public selectUserField: string;
 }
@@ -56,6 +62,9 @@ export class TemplatePatent {
   public regNumberPatentField: number[];
 }
 
+export class TemplateInnPattern {
+  public innField: string[];
+}
 
 //Шаблоны в БД для добавления ИНН
 export class TemplateModel {

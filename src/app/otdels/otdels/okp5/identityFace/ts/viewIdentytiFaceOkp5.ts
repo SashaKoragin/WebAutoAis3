@@ -1,4 +1,4 @@
-import { SelectAllParametrs } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
+import { SelectAllParameter } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
 import { Component } from '@angular/core';
 import { DynamicTableColumnModel, Table } from '../../../../../../Api/ModelSelectView/Model/DynamicTableModel';
 import { LogicaDataBase, GenerateParametrs } from '../../../../../../Api/ModelSelectView/Model/GenerateParametrFront';
@@ -9,10 +9,10 @@ import { OnInit } from '@angular/core';
 @Component({
   templateUrl: '../html/viewIdentytiFaceOkp5.html',
   styleUrls: ['../css/viewIdentytiFaceOkp5.css'],
-  providers: [SelectAllParametrs]
+  providers: [SelectAllParameter]
 })
 export class IdentytiFaceOkp5 implements OnInit  {
-  constructor(public select: SelectAllParametrs) { }
+  constructor(public select: SelectAllParameter) { }
 
 
 
@@ -27,7 +27,7 @@ export class IdentytiFaceOkp5 implements OnInit  {
   }
 
   errorserver(type: any) {
-    this.select.addselectallparametrs(new ModelSelect(this.dinamicmodel.mainselectOkp5.indexsevr)).subscribe((model: ModelSelect) => {
+    this.select.addSelectAllParameter(new ModelSelect(this.dinamicmodel.mainselectOkp5.indexsevr)).subscribe((model: ModelSelect) => {
       this.selecting = new GenerateParametrs(model);
       this.columns = this.dinamicmodel.columnsOkp5[this.dinamicmodel.mainselectOkp5.indexcolumnmodel]
     })

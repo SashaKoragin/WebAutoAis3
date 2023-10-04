@@ -1,0 +1,9 @@
+<selectsql [(logica)]="logica" [(selecting)]="selecting" [(columns)]="columns" [(select)]="select" [logicstooltable]='LOGICSTOOLTABLE' ></selectsql>
+
+
+
+<ng-template #LOGICSTOOLTABLE  let-row='row' >
+  <button mat-icon-button color="primary" matTooltip="Выгрузить файл"  (click)="downloadFile(row)" >
+    <i class="material-icons">backup</i>
+  </button>
+</ng-template>

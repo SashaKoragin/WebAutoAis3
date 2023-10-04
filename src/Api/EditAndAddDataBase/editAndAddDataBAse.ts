@@ -15,7 +15,7 @@ export class TokenTableModel implements INewLogicaTable<DepartamentOtdel>{
 
   public sender: SenderTaxJournalOkp2[];
 
-  displayedColumns: any[] = ["Logic", "Id", "SenderTaxJournalOkp2.NameUser", "NameDepartament", "NameDepartamentActiveDerectory", "ActionsColumn"];
+  displayedColumns: any[] = ["Logic", "Id", "SenderTaxJournalOkp2.NameUser", "NameDepartament", "NameDepartamentActiveDerectory", "StatusFace", "Office", "Telephon", "ActionsColumn"];
   dataSource: MatTableDataSource<DepartamentOtdel> = new MatTableDataSource<DepartamentOtdel>();
   isAdd: boolean;
   isEdit: boolean;
@@ -128,7 +128,7 @@ export class TokenTableModel implements INewLogicaTable<DepartamentOtdel>{
 
 
   async delay(ms: number): Promise<void> {
-    await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => console.log("Задержка подгрузки DOM!!!"));
+    await new Promise<void>(resolve => setTimeout(() => resolve(), ms)).then(() => console.log("Задержка подгрузки DOM!!!"));
   }
 
   async addtemplate(index: number): Promise<void> {

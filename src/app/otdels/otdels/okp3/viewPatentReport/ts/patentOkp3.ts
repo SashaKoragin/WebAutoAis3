@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectAllParametrs } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
+import { SelectAllParameter } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
 import { DynamicTableColumnModel, Table } from '../../../../../../Api/ModelSelectView/Model/DynamicTableModel';
 import { LogicaDataBase, GenerateParametrs } from '../../../../../../Api/ModelSelectView/Model/GenerateParametrFront';
 import { ModelSelect } from '../../../../../../Api/ModelSelectView/Model/ParametrModel';
@@ -13,12 +13,12 @@ import { ModelDialogTemplateDataBase } from '../../../dataBaseUl/templateModelDb
 @Component({
   templateUrl: '../html/patentOkp3.html',
   styleUrls: ['../css/patentOkp3.css'],
-  providers: [SelectAllParametrs]
+  providers: [SelectAllParameter]
 })
 
 export class Patent implements OnInit {
 
-  constructor(public select: SelectAllParametrs, public dialog: MatDialog) { }
+  constructor(public select: SelectAllParameter, public dialog: MatDialog) { }
 
   modelDataBase: ModelDialog = new ModelDialog(new ModelDataBase().modelMenuOkp3, null)
   dinamicmodel: DynamicTableColumnModel = new DynamicTableColumnModel();
@@ -47,7 +47,7 @@ export class Patent implements OnInit {
   }
 
   serverPatent(type: any) {
-    this.select.addselectallparametrs(new ModelSelect(this.dinamicmodel.selectserverОкp3[1].indexsevr)).subscribe((model: ModelSelect) => {
+    this.select.addSelectAllParameter(new ModelSelect(this.dinamicmodel.selectserverОкp3[1].indexsevr)).subscribe((model: ModelSelect) => {
       this.selecting = new GenerateParametrs(model);
       this.columns = this.dinamicmodel.columnsОкp3[this.dinamicmodel.selectserverОкp3[1].indexcolumnmodel];
     })

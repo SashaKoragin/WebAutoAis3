@@ -15,6 +15,14 @@ import { DeliveryDocument } from '../../app/otdels/otdels/okp6/deliveryDocument/
 import { SalesBookBankUlFace } from '../../app/otdels/otdels/dataBaseUl/SalesBookBank/ts/salesBookBank';
 import { AddPatent } from '../../app/otdels/otdels/okp3/addPatent/ts/addPatentOkp3';
 import { Patent } from '../../app/otdels/otdels/okp3/viewPatentReport/ts/patentOkp3';
+import { Okp1Journal121 } from '../../app/otdels/otdels/okp1/Journal121/ts/viewOkp1Journal121';
+import { ModelRegistrationFace } from '../../app/otdels/otdels/registration/ReestrFace/ts/viewRegistrationFace';
+import { EasJournal } from '../../app/otdels/otdels/okp1/EasJournal/ts/viewEasJournal';
+import { TaxDeclarationFl } from '../../app/otdels/otdels/okp6/TaxDeclarationFl/ts/taxDeclarationFl';
+import { Journal3Ndfl } from '../../app/otdels/otdels/okp6/Journal3Ndfl/ts/Journal3Ndfl';
+import { RealEstateZmIm } from '../../app/otdels/otdels/okp6/RealEstateZmIm/ts/realEstateZmIm';
+import { ModelRegistryReference } from 'src/app/otdels/otdels/orn/ReestrReference/ts/addInnFaceRegistryReference';
+import { InterrogationOfWitnesses } from '../../app/otdels/otdels/kao/InterrogationOfWitnesses/ts/interrogationOfWitnesses';
 
 const appRoutes: Routes = [
   {
@@ -29,6 +37,22 @@ const appRoutes: Routes = [
       {
         path: 'DeliveryDocument',
         component: DeliveryDocument
+      },
+      {
+        path: 'TaxDeclarationFl',
+        component: TaxDeclarationFl
+      },
+      {
+        path: 'Journal3Ndfl',
+        component: Journal3Ndfl
+      },
+      {
+        path: 'nalog121',
+        component: Okp1Journal121
+      },
+      {
+        path: 'easDocument',
+        component: EasJournal
       },
       {
         path: 'nalog129',
@@ -74,6 +98,23 @@ const appRoutes: Routes = [
       {
         path: 'patent',
         component: Patent
+      },
+      {
+        path: 'regNp',
+        component: ModelRegistrationFace
+      },
+      {
+        path: 'RealEstateZmIm',
+        component: RealEstateZmIm
+      },
+      {
+        path: 'registryReference',
+        component: ModelRegistryReference
+      },
+      {
+
+        path: 'InterrogationOfWitnesses',
+        component: InterrogationOfWitnesses
       }
     ]
   }];

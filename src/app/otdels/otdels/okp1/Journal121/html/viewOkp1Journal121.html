@@ -1,0 +1,7 @@
+<selectsql [(logica)]="logica" [(selecting)]="selecting" [(columns)]="columns" [(select)]="select"   [toolpanel]='TOOLPANEL'></selectsql>
+
+
+<ng-template class="panel" #TOOLPANEL>
+  <button class="panelbutton" mat-button (click)="generateXlsxDoc()">Полная выгрузка</button>
+
+</ng-template>

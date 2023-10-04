@@ -1,0 +1,41 @@
+.divFull {
+  width: 35%;
+}
+
+.procent50 {
+  width: 50%;
+  margin: 5px;
+  min-height: 200px;
+  max-height: 200px;
+  background: beige;
+  border: 5px solid #007bff;
+}
+
+.lableerror {
+  color: red;
+  font-size: 18px;
+  margin: 2px;
+}
+
+.font {
+  font-size: 20px;
+}
+
+.areaPatent {
+  margin: 5px;
+  max-height: 200px;
+  background: beige;
+  border: 5px solid #007bff;
+}
+
+.card-block {
+  overflow-x: auto;
+  height: 500px;
+}
+
+.panelbutton {
+  background: azure;
+  margin: inherit;
+  border-radius: 80px;
+  margin: 5px;
+}

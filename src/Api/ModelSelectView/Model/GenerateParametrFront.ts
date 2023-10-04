@@ -194,6 +194,11 @@ export class GenerateParametrs {
     var generate = new GenerateFullCommand();
     var logica = generate.generateCommand(generate.generateVisible(this.selectedtoserver, this.parametrs), this.parametrs);
     logica.idField = this.selectedtoserver.idField;
+    logica.nameDllField = this.selectedtoserver.nameDllField;
+    logica.findNameSpaceField = this.selectedtoserver.findNameSpaceField;
+    logica.isResultXmlField = this.selectedtoserver.isResultXmlField;
+    logica.nameReportListField = this.selectedtoserver.nameReportListField;
+    logica.nameReportFileField = this.selectedtoserver.nameReportFileField;
     return logica;
   }
 
@@ -202,6 +207,11 @@ export class GenerateParametrs {
     var generate = new GenerateFullCommand();
     var logica = generate.generateCommand(generate.generateVisibleDynamic(this.selectedtoserver, this.parametrs, columnDynamic), this.parametrs);
     logica.idField = this.selectedtoserver.idField;
+    logica.nameDllField = this.selectedtoserver.nameDllField;
+    logica.findNameSpaceField = this.selectedtoserver.findNameSpaceField;
+    logica.isResultXmlField = this.selectedtoserver.isResultXmlField;
+    logica.nameReportListField = this.selectedtoserver.nameReportListField;
+    logica.nameReportFileField = this.selectedtoserver.nameReportFileField;
     return logica;
   }
 }

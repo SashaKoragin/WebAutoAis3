@@ -1,5 +1,5 @@
 import { OnInit, Component } from '@angular/core';
-import { SelectAllParametrs } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
+import { SelectAllParameter } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
 import { DynamicTableColumnModel, Table } from '../../../../../../Api/ModelSelectView/Model/DynamicTableModel';
 import { LogicaDataBase, GenerateParametrs } from '../../../../../../Api/ModelSelectView/Model/GenerateParametrFront';
 import { ModelSelect } from '../../../../../../Api/ModelSelectView/Model/ParametrModel';
@@ -12,12 +12,12 @@ import { ModelDialogTemplateDataBase } from '../../../dataBaseUl/templateModelDb
 @Component({
   templateUrl: '../html/Sales.html',
   styleUrls: ['../css/Sales.css'],
-  providers: [SelectAllParametrs]
+  providers: [SelectAllParameter]
 })
 
 export class Sales implements OnInit {
 
-  constructor(public select: SelectAllParametrs, public dialog: MatDialog){ }
+  constructor(public select: SelectAllParameter, public dialog: MatDialog){ }
 
   dinamicmodel: DynamicTableColumnModel = new DynamicTableColumnModel();
   modelDataBase: ModelDialog = new ModelDialog(new ModelDataBase().modelMenuOvp2, new ModelDataBase().modelDetal)
@@ -46,8 +46,9 @@ export class Sales implements OnInit {
   }
 
   serverUl(type: any) {
-    this.select.addselectallparametrs(new ModelSelect(this.dinamicmodel.mainselectOvp2.indexsevr)).subscribe((model: ModelSelect) => {
+    this.select.addSelectAllParameter(new ModelSelect(this.dinamicmodel.mainselectOvp2.indexsevr)).subscribe((model: ModelSelect) => {
       this.selecting = new GenerateParametrs(model);
+      console.log(this.selecting);
       this.columnsOvp2 = this.dinamicmodel.columnsOvp2[this.dinamicmodel.mainselectOvp2.indexcolumnmodel]
     })
   }

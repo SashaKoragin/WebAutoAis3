@@ -80,6 +80,8 @@ export class ModelDataBase {
     { categoria: "Параметры расчета налога", idSelect: 18, parameterSelectProcedure: 5, keyDetal: null },
     { categoria: "Сведения по фактическому действию патента", idSelect: 19, parameterSelectProcedure: 6, keyDetal: null }
   ]
+
+
 }
 
 

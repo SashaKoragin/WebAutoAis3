@@ -1,5 +1,5 @@
 import { OnInit, Component } from '@angular/core';
-import { SelectAllParametrs } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
+import { SelectAllParameter } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
 import { DynamicTableColumnModel, Table } from '../../../../../../Api/ModelSelectView/Model/DynamicTableModel';
 import { LogicaDataBase, GenerateParametrs } from '../../../../../../Api/ModelSelectView/Model/GenerateParametrFront';
 import { ModelSelect } from '../../../../../../Api/ModelSelectView/Model/ParametrModel';
@@ -8,10 +8,10 @@ import { ModelSelect } from '../../../../../../Api/ModelSelectView/Model/Paramet
 @Component({
   templateUrl: '../html/deliveryDocument.html',
   styleUrls: ['../css/deliveryDocument.css'],
-  providers: [SelectAllParametrs]
+  providers: [SelectAllParameter]
 })
 export class DeliveryDocument implements OnInit {
-  constructor(public select: SelectAllParametrs) { }
+  constructor(public select: SelectAllParameter) { }
 
   dinamicmodel: DynamicTableColumnModel = new DynamicTableColumnModel();
   logica: LogicaDataBase = new LogicaDataBase();
@@ -25,7 +25,7 @@ export class DeliveryDocument implements OnInit {
   }
 
   delivery(type: any) {
-    this.select.addselectallparametrs(new ModelSelect(this.dinamicmodel.mainselectOkp6.indexsevr)).subscribe((model: ModelSelect) => {
+    this.select.addSelectAllParameter(new ModelSelect(this.dinamicmodel.mainselectOkp6.indexsevr)).subscribe((model: ModelSelect) => {
       this.selecting = new GenerateParametrs(model);
       this.columns = this.dinamicmodel.columnsOkp6[this.dinamicmodel.mainselectOkp6.indexcolumnmodel]
     })

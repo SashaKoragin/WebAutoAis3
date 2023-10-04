@@ -1,43 +1,41 @@
 <div class="he d-flex align-items-center">
-<b class="h3 text-primary ">Выбор представления данных:</b>
-    <mat-form-field class="selectin_sql text-primary">
-        <mat-label class="text-primary">Выборки</mat-label>
-        <mat-select class="text-primary" placeholder="Выборки" [(ngModel)]="dinamicmodel.mainselect"  name="sel" (selectionChange)="errorserver($event)">
-            <mat-option class="text-primary" *ngFor="let sel of dinamicmodel.selectserver" [value]="sel">
-                {{sel.text}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+  <b class="h3 text-primary ">Выбор представления данных:</b>
+  <mat-form-field class="selectin_sql text-primary">
+    <mat-label class="text-primary">Выборки</mat-label>
+    <mat-select class="text-primary" placeholder="Выборки" [(ngModel)]="dinamicmodel.mainselect" name="sel"
+      (selectionChange)="errorserver($event)">
+      <mat-option class="text-primary" *ngFor="let sel of dinamicmodel.selectserver" [value]="sel">
+        {{sel.text}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
-   <selectsql #TABLETEMPLATE [(logica)]="logica" [(selecting)]="selecting" [(columns)]="columns" [(select)]="select" [logicstooltable]='LOGICSTOOLTABLE' [toolpanel]='TOOLPANEL'></selectsql>
+<selectsql #TABLETEMPLATE [(logica)]="logica" [(selecting)]="selecting" [(columns)]="columns" [(select)]="select"
+  [logicstooltable]='LOGICSTOOLTABLE' [toolpanel]='TOOLPANEL'></selectsql>
 
 <ng-template class="panel" #TOOLPANEL>
   <div class="d-flex flex-row bd-highlight mb-0">
     <div class="p-1 bd-highlight align-self-center">
-      <button class="panelbutton"  mat-button (click)="donloadAllFile()" >Выгрузить отобранные файлы!</button>
+      <button class="panelbutton" mat-button (click)="donloadAllFile()">Выгрузить отобранные файлы!</button>
     </div>
     <div class="p-1 bd-highlight align-self-center">
       {{serverresult}}
     </div>
   </div>
-  <div class="w-75 d-flex flex-row d-inline-block" style="height: 20px;" >
+  <div class="w-75 d-flex flex-row d-inline-block" style="height: 20px;">
     <div class="p-1 w-25 bd-highlight align-self-center">
-      <mat-progress-bar
-        [style.display]="!IsVisible ? 'none':'block'"
-        style="height: 20px;"
-        class="text-primary"
-        mode="determinate"
-        [value]="valueProgress">
+      <mat-progress-bar [style.display]="!IsVisible ? 'none':'block'" style="height: 20px;" class="text-primary"
+        mode="determinate" [value]="valueProgress">
       </mat-progress-bar>
     </div>
     <div class="p-1 bd-highlight align-self-center">
-        {{statusText}}
+      {{statusText}}
     </div>
   </div>
 </ng-template>
 
-<ng-template #LOGICSTOOLTABLE  let-row='row' >
-  <button mat-icon-button color="primary" matTooltip="Выгрузить файл"  (click)="donloadFile(row)" >
+<ng-template #LOGICSTOOLTABLE let-row='row'>
+  <button mat-icon-button color="primary" matTooltip="Выгрузить файл" (click)="downloadFile(row)">
     <i class="material-icons">backup</i>
   </button>
 </ng-template>
