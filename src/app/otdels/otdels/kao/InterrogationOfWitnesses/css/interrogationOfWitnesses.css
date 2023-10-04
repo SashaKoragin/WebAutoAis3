@@ -1,0 +1,62 @@
+.Model {
+  min-height: 100px;
+  display: flex;
+}
+
+.procent50 {
+  width: 100%;
+  min-height: 200px;
+  background: beige;
+  border: 5px solid #007bff;
+}
+
+.tableContent {
+  max-width: max-content;
+}
+
+th.mat-header-cell {
+  text-align: center;
+  white-space: pre-wrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: groove;
+  color: rgba(0, 0, 0, .87);
+  background: cadetblue;
+  font-family: 'Times New Roman';
+  font-size: 16px;
+  font-weight: bold;
+}
+
+td.mat-cell {
+  text-align: left;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: groove;
+  background: darkkhaki;
+  font-family: 'Times New Roman';
+  font-size: 14px;
+  font-weight: bold;
+}
+
+td.cell {
+  text-align: center;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: groove;
+  color: rgba(0, 0, 0, .87);
+  background: darkkhaki;
+  font-family: 'Times New Roman';
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.main{
+  text-align: center;
+}
+
+table.mat-table
+{
+  width: 100%;
+}

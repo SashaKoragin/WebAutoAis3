@@ -15,7 +15,7 @@ export class TokenTableModel implements INewLogicaTable<DepartamentOtdel>{
 
   public sender: SenderTaxJournalOkp2[];
 
-  displayedColumns: any[] = ["Logic", "Id", "SenderTaxJournalOkp2.NameUser", "NameDepartament", "NameDepartamentActiveDerectory", "ActionsColumn"];
+  displayedColumns: any[] = ["Logic", "Id", "SenderTaxJournalOkp2.NameUser", "NameDepartament", "NameDepartamentActiveDerectory", "StatusFace", "Office", "Telephon", "ActionsColumn"];
   dataSource: MatTableDataSource<DepartamentOtdel> = new MatTableDataSource<DepartamentOtdel>();
   isAdd: boolean;
   isEdit: boolean;

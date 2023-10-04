@@ -1,7 +1,7 @@
 import { Component, Inject, ViewChild, AfterViewInit, Pipe, PipeTransform } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ModelDialog, ModelMenuAndModel, RowModel } from '../../modelDataBase/modelDataBase';
-import { SelectAllParametrs } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
+import { SelectAllParameter } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
 import { ModelSqlTable } from 'src/Api/ModelSelectTable/View/modelSelectTable';
 import { trigger, style, animate, state, transition, keyframes } from '@angular/animations';
 import { ExpandeTableStatement } from '../../templateModelExpandedDb/templateModelExpandedDbTs/templateModelExpandedDb';
@@ -19,7 +19,7 @@ export class FilterParametrs implements PipeTransform {
   selector: 'templateSql',
   templateUrl: '../templateTableModelHtml/templateTableModel.html',
   styleUrls: ['../templateTableModelCss/templateTableModel.css'],
-  providers: [SelectAllParametrs],
+  providers: [SelectAllParameter],
   animations: [
     trigger('state', [
       state('inactive', style({ 'display': 'none' })),
@@ -49,7 +49,7 @@ export class ModelDialogTemplateDataBase implements AfterViewInit {
   constructor(
     public dialogDataBase: MatDialogRef<ModelDialogTemplateDataBase>,
     @Inject(MAT_DIALOG_DATA) public data: ModelDialog,
-    public select: SelectAllParametrs) {
+    public select: SelectAllParameter) {
   }
 
   public modelConverter: ModelConvert = new ModelConvert();

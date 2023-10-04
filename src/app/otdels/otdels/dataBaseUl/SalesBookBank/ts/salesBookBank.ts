@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { SelectAllParametrs } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
+import { SelectAllParameter } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
 import { DynamicTableColumnModel, Table } from '../../../../../../Api/ModelSelectView/Model/DynamicTableModel';
 import { LogicaDataBase, GenerateParametrs } from '../../../../../../Api/ModelSelectView/Model/GenerateParametrFront';
 import { ModelSelect } from '../../../../../../Api/ModelSelectView/Model/ParametrModel';
@@ -14,11 +14,11 @@ import { YearModeReport } from '../../modelDataBase/modelDataBase';
 @Component({
   templateUrl: '../html/salesBookBank.html',
   styleUrls: ['../css/salesBookBank.css'],
-  providers: [SelectAllParametrs]
+  providers: [SelectAllParameter]
 })
 
 export class SalesBookBankUlFace implements OnInit {
-  constructor(public select: SelectAllParametrs, public dialog: MatDialog) { }
+  constructor(public select: SelectAllParameter, public dialog: MatDialog) { }
 
   modelYear: YearModeReport = new YearModeReport();
   dinamicmodel: DynamicTableColumnModel = new DynamicTableColumnModel();
@@ -32,7 +32,7 @@ export class SalesBookBankUlFace implements OnInit {
   }
 
   serverUl(type: any) {
-    this.select.addselectallparametrs(new ModelSelect(this.dinamicmodel.mainselectPreDataBaseBookSales.indexsevr)).subscribe((model: ModelSelect) => {
+    this.select.addSelectAllParameter(new ModelSelect(this.dinamicmodel.mainselectPreDataBaseBookSales.indexsevr)).subscribe((model: ModelSelect) => {
       this.selecting = new GenerateParametrs(model);
       this.columnsPreDataBase = this.dinamicmodel.columnsPreDataBase[this.dinamicmodel.mainselectPreDataBaseBookSales.indexcolumnmodel]
     })

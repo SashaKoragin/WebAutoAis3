@@ -14,7 +14,7 @@ import { AuthIdentificationSignalR } from '../../../../../../Api/RequestService/
 
 export class SignatureOkp2 implements OnInit {
   constructor(public select: SelectAndEditDataBase,
-    public editandadd: EditAndAddAndDelete, public signalR:AuthIdentificationSignalR) { }
+    public editandadd: EditAndAddAndDelete, public signalR: AuthIdentificationSignalR) { }
 
 
   @ViewChild('TEMPLATESENDER', { static: true }) templateSender: ElementRef;
@@ -29,7 +29,7 @@ export class SignatureOkp2 implements OnInit {
 
 
 
-  public senderTableTaxJournal = new TokenTableModel(this.editandadd,this.signalR);
+  public senderTableTaxJournal = new TokenTableModel(this.editandadd, this.signalR);
 
   ngOnInit(): void {
     this.start();

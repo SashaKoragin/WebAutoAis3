@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { SelectAllParametrs } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
+import { SelectAllParameter } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
 import { DynamicTableColumnModel, Table } from '../../../../../../Api/ModelSelectView/Model/DynamicTableModel';
 import { LogicaDataBase, GenerateParametrs } from '../../../../../../Api/ModelSelectView/Model/GenerateParametrFront';
 import { ModelSelect, TemplateModel, TemplateProcedure } from '../../../../../../Api/ModelSelectView/Model/ParametrModel';
@@ -13,11 +13,11 @@ import { BroadcastEventListener } from 'ng2-signalr';
 @Component({
   templateUrl: '../html/wiewPreCheck.html',
   styleUrls: ['../css/wiewPreCheck.css'],
-  providers: [SelectAllParametrs]
+  providers: [SelectAllParameter]
 })
 
 export class ModelPreCheck implements OnInit {
-  constructor(public select: SelectAllParametrs, public SignalR: AuthIdentificationSignalR) { }
+  constructor(public select: SelectAllParameter, public SignalR: AuthIdentificationSignalR) { }
 
 
 
@@ -87,7 +87,7 @@ export class ModelPreCheck implements OnInit {
   }
 
   serverInn(type: any) {
-    this.select.addselectallparametrs(new ModelSelect(this.dinamicmodel.mainselectPre.indexsevr)).subscribe((model: ModelSelect) => {
+    this.select.addSelectAllParameter(new ModelSelect(this.dinamicmodel.mainselectPre.indexsevr)).subscribe((model: ModelSelect) => {
       this.selecting = new GenerateParametrs(model);
       this.columnsPre = this.dinamicmodel.columnsPre[this.dinamicmodel.mainselectPre.indexcolumnmodel];
     })

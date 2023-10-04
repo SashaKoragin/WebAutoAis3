@@ -53,23 +53,50 @@
             </td>
           </ng-container>
 
+          <ng-container matColumnDef="StatusFace">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Статус лица</th>
+            <td mat-cell *matCellDef="let row" [matTooltip]="row.StatusFace">
+              <Label [style.display]="row.ModelIsEdit ? 'none':'inline'">{{row.StatusFace}}</Label>
+              <div [ngClass]=row.Id.toString() id="{{row.Id}}" [style.display]="!row.ModelIsEdit ? 'none':'block'">
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Office">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Кабинет</th>
+            <td mat-cell *matCellDef="let row" [matTooltip]="row.Office">
+              <Label [style.display]="row.ModelIsEdit ? 'none':'inline'">{{row.Office}}</Label>
+              <div [ngClass]=row.Id.toString() id="{{row.Id}}" [style.display]="!row.ModelIsEdit ? 'none':'block'">
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Telephon">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Телефон</th>
+            <td mat-cell *matCellDef="let row" [matTooltip]="row.Telephon">
+              <Label [style.display]="row.ModelIsEdit ? 'none':'inline'">{{row.Telephon}}</Label>
+              <div [ngClass]=row.Id.toString() id="{{row.Id}}" [style.display]="!row.ModelIsEdit ? 'none':'block'">
+              </div>
+            </td>
+          </ng-container>
+
           <ng-container matColumnDef="ActionsColumn">
             <th mat-header-cell *matHeaderCellDef>
-                <button mat-icon-button color="primary" [disabled]="senderTableTaxJournal.isAdd" focusable="false"
-                  (click)="senderTableTaxJournal.add()">
-                  <i class="material-icons">person_add</i>
-                </button>
+              <button mat-icon-button color="primary" [disabled]="senderTableTaxJournal.isAdd" focusable="false"
+                (click)="senderTableTaxJournal.add()">
+                <i class="material-icons">person_add</i>
+              </button>
             </th>
 
             <td mat-cell *matCellDef="let row">
-                <button mat-icon-button *ngIf="!row.ModelIsEdit" [disabled]="senderTableTaxJournal.isEdit"
-                  color="accent" (click)="senderTableTaxJournal.edit(row);">
-                  <i class="material-icons">edit</i>
-                </button>
-                <button mat-icon-button *ngIf="!row.ModelIsEdit" [disabled]="senderTableTaxJournal.isEdit"
-                  (click)="senderTableTaxJournal.delete(row)">
-                  <i class="material-icons">delete</i>
-                </button>
+              <button mat-icon-button *ngIf="!row.ModelIsEdit" [disabled]="senderTableTaxJournal.isEdit" color="accent"
+                (click)="senderTableTaxJournal.edit(row);">
+                <i class="material-icons">edit</i>
+              </button>
+              <button mat-icon-button *ngIf="!row.ModelIsEdit" [disabled]="senderTableTaxJournal.isEdit"
+                (click)="senderTableTaxJournal.delete(row)">
+                <i class="material-icons">delete</i>
+              </button>
               <div *ngIf="row.ModelIsEdit">
                 <button mat-icon-button type="submit" color="primary" focusable="false"
                   (click)="senderTableTaxJournal.save()">
@@ -115,6 +142,24 @@
           <input matInput placeholder="Отдел Active Derectory"
             [ngModel]="senderTableTaxJournal.model?.NameDepartamentActiveDerectory"
             (ngModelChange)="senderTableTaxJournal.model.NameDepartamentActiveDerectory = $event" />
+        </mat-form-field>
+
+        <!--Статус налогоплательщика-->>
+        <mat-form-field id="template" class="validation">
+          <input matInput placeholder="Статус налогоплательщика" [ngModel]="senderTableTaxJournal.model?.StatusFace"
+            (ngModelChange)="senderTableTaxJournal.model.StatusFace = $event" />
+        </mat-form-field>
+
+        <!--Кабинет-->>
+        <mat-form-field id="template" class="validation">
+          <input matInput placeholder="Кабинет" [ngModel]="senderTableTaxJournal.model?.Office"
+            (ngModelChange)="senderTableTaxJournal.model.Office = $event" />
+        </mat-form-field>
+
+        <!--Телефон-->>
+        <mat-form-field id="template" class="validation">
+          <input matInput placeholder="Телефон" [ngModel]="senderTableTaxJournal.model?.Telephon"
+            (ngModelChange)="senderTableTaxJournal.model.Telephon = $event" />
         </mat-form-field>
       </div>
 

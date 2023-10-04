@@ -1,5 +1,4 @@
-
-export const ServerHost: string = 'I7751-W40204180';  //localhost
+export const ServerHost: string = '77068-APP065';  //localhost
 //export const ServerHost: string = 'localhost';
 export const ServerPort: string = '8050';
 //К примеру новая структура
@@ -8,8 +7,10 @@ export class AdressService {
   public identificationUser = `http://${ServerHost}:${ServerPort}/ServiceAutomation/Identification`;
   public selectparametr = `http://${ServerHost}:${ServerPort}/ServiceAutomation/GenerateSqlSelect`;
   public selectxml = `http://${ServerHost}:${ServerPort}/ServiceAutomation/Select`;
-  public donloadFileOkp2 = `http://${ServerHost}:${ServerPort}/ServiceAutomation/LoadFileTaxJournal`;
-  public donloadFile121 = `http://${ServerHost}:${ServerPort}/ServiceAutomation/LoadFileTax121`
+  public downloadFileOkp2 = `http://${ServerHost}:${ServerPort}/ServiceAutomation/LoadFileTaxJournal`;
+  public downloadFile121 = `http://${ServerHost}:${ServerPort}/ServiceAutomation/LoadFileTax121`
+  public downloadFileEas = `http://${ServerHost}:${ServerPort}/ServiceAutomation/LoadFileEasJournal`
+  public downloadFileRequirements = `http://${ServerHost}:${ServerPort}/ServiceAutomation/LoadFile3NdflRequirements`
 
   ///Получение всех шаблонов в БД Автоматизация
   public allTemplate = `http://${ServerHost}:${ServerPort}/ServiceAutomation/LoadAllTemplateDb`;
@@ -49,4 +50,19 @@ export class AdressService {
   public addFlFaceMainRegistration = `http://${ServerHost}:${ServerPort}/ServiceAutomation/AddFlFaceMainRegistration?userIdGuid=`;
   ///Принудительное завершение обработки!
   public checkStatusFl = `http://${ServerHost}:${ServerPort}/ServiceAutomation/CheckStatusFl?isExecute=`
+  ///Добавление ИНН в реестр для отработки формирование справок
+  public addInnFaceRegistryReference = `http://${ServerHost}:${ServerPort}/ServiceAutomation/AddInnFaceRegistryReference?userIdGuid=`;
+  ///Удаление записи по ИНН
+  public deleteRegistryReference = `http://${ServerHost}:${ServerPort}/ServiceAutomation/DeleteRegistryReference`;
+
+  ///Загрузка файла списков Excel в БД
+  public addFileModel = `http://${ServerHost}:${ServerPort}/ServiceAutomation/AddFileModel?userIdGuid=`;
+
+  ///Все сотрудники организации
+  public allUsersOrg = `http://${ServerHost}:${ServerPort}/ServiceAutomation/AllUsersOrg?inn=`;
+
+  ///Все вопросы сотруднику
+  // http://localhost:8050/ServiceAutomation/SelectQuestions?idUsers=2
+  public allQuestions = `http://${ServerHost}:${ServerPort}/ServiceAutomation/SelectQuestions?idUsers=`;
+
 }

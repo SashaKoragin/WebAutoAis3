@@ -2,25 +2,53 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, NgModule } from '@angular/core';
 import { AdressService } from '../../AdressGetPost/adressService';
 import { ModelSelect, LogicsSelectAutomation, TemplateProcedure, TemplatePatent, TemplateInnPattern } from './ParametrModel';
-import { FullSelectedModel, SenderTaxJournalOkp2, DepartamentOtdel } from '../../RequestService/modelAutomation';
+import { FullSelectedModel, SenderTaxJournalOkp2, DepartamentOtdel, UserOrg, QuestionsAndUsers } from '../../RequestService/modelAutomation';
 import { deserializeArray } from 'class-transformer';
+import { UploadFile } from '../../ModelTable/FileModel';
 const url: AdressService = new AdressService();
 const httpOptionsJson = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
+export class SelectModel {
+  UserOrg: UserOrg[];
+  QuestionsAndUsers: QuestionsAndUsers[];
+}
 
 @Injectable()
-export class SelectAllParametrs {
+export class SelectAllParameter {
   constructor(private http: HttpClient) { }
+
+  public select: SelectModel = new SelectModel();
+
+  //Вытащить всех сотрудников
+  async allUsers(Inn: string) {
+    this.select.UserOrg = await this.http.get(url.allUsersOrg.concat(Inn), httpOptionsJson).toPromise().then((model) => {
+      if (model) {
+        return deserializeArray<UserOrg>(UserOrg, model.toString());
+      }
+    });
+  }
+
+  async allQuestions(idUser: string) {
+    this.select.QuestionsAndUsers = await this.http.get(url.allQuestions + idUser, httpOptionsJson).toPromise().then((model) => {
+      if (model) {
+        return deserializeArray<QuestionsAndUsers>(QuestionsAndUsers, model.toString());
+      }
+    });
+  }
 
   ///Получение шаблонов в БД
   allTemplateDataBase() {
     return this.http.get(url.allTemplate);
   }
 
+  public addFileModel(upload: UploadFile, UserGuid: string) {
+    return this.http.post(url.addFileModel.concat(UserGuid), upload, httpOptionsJson);
+  }
+
   ///Запрос на получение генерируемых параметров
-  addselectallparametrs(model: ModelSelect) {
+  addSelectAllParameter(model: ModelSelect) {
     return this.http.post(url.selectparametr, model, httpOptionsJson);
   }
 
@@ -66,14 +94,20 @@ export class SelectAllParametrs {
 
 
   ///Выгрузка файла
-  async donloadFile(modelRow: any, type: string): Promise<Blob> {
+  async downloadFile(modelRow: any, type: string): Promise<Blob> {
     var urls = null;
     switch (type) {
       case "TaxJournalAutoWebPage":
-        urls = url.donloadFileOkp2;
+        urls = url.downloadFileOkp2;
         break;
       case "TaxJournal121AutoWebPage":
-        urls = url.donloadFile121;
+        urls = url.downloadFile121;
+        break;
+      case "TaxEasJournal":
+        urls = url.downloadFileEas;
+        break;
+      case "Declaration3Ndfl":
+        urls = url.downloadFileRequirements;
         break;
       default:
         urls = null;
@@ -99,15 +133,24 @@ export class SelectAllParametrs {
     return this.http.post(url.addRegNumberPatent.concat(guidUser), templatePatent, httpOptionsJson);
   }
   ///Загрузка ИНН для регистрации
-  public loadInnRegistration(templateInnPattern: TemplateInnPattern, guidUser: string){
+  public loadInnRegistration(templateInnPattern: TemplateInnPattern, guidUser: string) {
     return this.http.post(url.addFlFaceMainRegistration.concat(guidUser), templateInnPattern, httpOptionsJson);
   }
+  ///Загрузка ИНН для регистрации
+  public loadInnOrn(templateInnPattern: TemplateInnPattern, guidUser: string) {
+    return this.http.post(url.addInnFaceRegistryReference.concat(guidUser), templateInnPattern, httpOptionsJson);
+  }
+  ///Удаление записи из журнала
+  public deleteInn(inn: string) {
+    return this.http.post(url.deleteRegistryReference, inn, httpOptionsJson);
+  }
+
   ///Снятие статуса для повторной отработки
   public checkStatus(idModel: number[], status: string = null) {
     return this.http.post((status) ? url.checkStatus.concat("?status=", status) : url.checkStatus, idModel, httpOptionsJson);
   }
   ///Принудительное завершение обработки!
-  public checkStatusFl(inn:string, isExecute: boolean){
+  public checkStatusFl(inn: string, isExecute: boolean) {
     return this.http.post(url.checkStatusFl.concat(isExecute.toString()), inn, httpOptionsJson);
   }
   //Генерация докладной записки по ЮЛ

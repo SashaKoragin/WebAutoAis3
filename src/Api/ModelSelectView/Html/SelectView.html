@@ -66,21 +66,21 @@
       <button mat-button (click)="ExportTOExcel()">Выгрузить</button>
     </form>
     <div class="panel" [ngTemplateOutlet]="toolpanel"></div>
-    <div class="container-table mat-elevation-z8" #TABLE>
-      <table mat-table #table [dataSource]="columns.Model">
-        <ng-container *ngFor="let column of columns.Colums" [matColumnDef]="column.columnDef">
-          <th mat-header-cell [style.background]="column.color" *matHeaderCellDef>{{ column.header }}</th>
-          <td mat-cell [style.background]="column.color==='null'?returnColorColumns(column.cell(row)):column.color"
-            *matCellDef="let row">
-            <div [ngTemplateOutlet]="column.cell(row) === 'Button' ? logicstooltable : lableText"
-              [ngTemplateOutletContext]="{row:row,column:column}"></div>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="columns.displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: columns.displayedColumns;"></tr>
-      </table>
+    <div class="mat-elevation-z8" #TABLE>
+        <table class="T" mat-table #table [dataSource]="columns.Model">
+          <ng-container *ngFor="let column of columns.Colums" [matColumnDef]="column.columnDef">
+            <th mat-header-cell [style.background]="column.color" *matHeaderCellDef>{{ column.header }}</th>
+            <td mat-cell [style.background]="column.color==='null'?returnColorColumns(column.cell(row)):column.color"
+              *matCellDef="let row">
+              <div [ngTemplateOutlet]="column.cell(row) === 'Button' ? logicstooltable : lableText"
+                [ngTemplateOutletContext]="{row:row,column:column}"></div>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columns.displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: columns.displayedColumns;"></tr>
+        </table>
     </div>
     <mat-paginator class="paginator" #tables [pageSizeOptions]="[10, 50, 100,columns.allCountRow]"
-      showFirstLastButtons="true"></mat-paginator>
+    showFirstLastButtons="true"></mat-paginator>
   </div>
 </div>
 

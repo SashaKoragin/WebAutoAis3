@@ -25,6 +25,13 @@ import { AddPatent } from '../../app/otdels/otdels/okp3/addPatent/ts/addPatentOk
 import { Patent } from '../../app/otdels/otdels/okp3/viewPatentReport/ts/patentOkp3';
 import { Okp1Journal121 } from '../../app/otdels/otdels/okp1/Journal121/ts/viewOkp1Journal121';
 import { ModelRegistrationFace } from '../../app/otdels/otdels/registration/ReestrFace/ts/viewRegistrationFace';
+import { EasJournal } from '../../app/otdels/otdels/okp1/EasJournal/ts/viewEasJournal';
+import { TaxDeclarationFl } from '../../app/otdels/otdels/okp6/TaxDeclarationFl/ts/taxDeclarationFl';
+import { Journal3Ndfl } from '../../app/otdels/otdels/okp6/Journal3Ndfl/ts/Journal3Ndfl';
+import { RealEstateZmIm } from '../../app/otdels/otdels/okp6/RealEstateZmIm/ts/realEstateZmIm';
+import { ModelRegistryReference } from '../../app/otdels/otdels/orn/ReestrReference/ts/addInnFaceRegistryReference';
+import { InterrogationOfWitnesses } from '../../app/otdels/otdels/kao/InterrogationOfWitnesses/ts/interrogationOfWitnesses';
+import { UploadFileToServerReport } from '../../Api/UploadFileToServerReport/View/UploadFileToServerReport';
 
 
 
@@ -44,7 +51,7 @@ import { ModelRegistrationFace } from '../../app/otdels/otdels/registration/Rees
     ModelDialogTemplateDataBase, ModelSqlTable,
     FilterParametrs, ModelRaschetBudgPayment,
     JournalPreCheck, ExpandeTableStatement, IdentytiFaceOkp5, AddIdentityFace, ModelDialogSelectYear, Sales, DeliveryDocument, SalesBookBankUlFace, AddPatent, Patent, Okp1Journal121,
-    ModelRegistrationFace
+    ModelRegistrationFace, EasJournal, TaxDeclarationFl, Journal3Ndfl, RealEstateZmIm, ModelRegistryReference, InterrogationOfWitnesses, UploadFileToServerReport
   ]
 
 

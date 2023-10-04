@@ -12,7 +12,7 @@
 </div>
 
 <selectsql #TABLETEMPLATE [(logica)]="logica" [(selecting)]="selecting" [(columns)]="columnsPre" [(select)]="select"
-  [logicstooltable]="dinamicmodel.mainselectPre.indexsevr==8?LOGICSTOOLTABLE:null" [toolpanel]='TOOLPANEL'></selectsql>
+  [logicstooltable]="dinamicmodel.mainselectPre.indexsevr==7?LOGICSTOOLTABLE:null" [toolpanel]='TOOLPANEL'></selectsql>
 
 <ng-template class="panel" #TOOLPANEL>
 
@@ -52,11 +52,11 @@
   <div class="row mx-md-n5">
     <div class="col px-md-5">
       <button class="mr-2 font btn btn-primary font px-md-5" mat-button (click)="loadinn()"
-      [disabled]="groupValidationTemplateModel.invalid">Загрузить ИНН</button>
+        [disabled]="groupValidationTemplateModel.invalid">Загрузить ИНН</button>
     </div>
-    <div class="col px-md-5">
+    <!-- <div class="col px-md-5">
       <button class="mr-2 font btn btn-primary font px-md-5" [disabled]="this.isDisableType()" mat-button (click)="checkStatusArrayTree()">Снятие статусов массово!</button>
-    </div>
+    </div> -->
   </div>
 </ng-template>
 

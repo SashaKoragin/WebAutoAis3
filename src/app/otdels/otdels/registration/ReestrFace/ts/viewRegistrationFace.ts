@@ -1,5 +1,5 @@
 import { OnInit, Component, ViewChild } from '@angular/core';
-import { SelectAllParametrs } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
+import { SelectAllParameter } from '../../../../../../Api/ModelSelectView/Model/PostRequest';
 import { DynamicTableColumnModel, Table } from '../../../../../../Api/ModelSelectView/Model/DynamicTableModel';
 import { LogicaDataBase, GenerateParametrs } from '../../../../../../Api/ModelSelectView/Model/GenerateParametrFront';
 import { ModelSelect, TemplateInnPattern } from '../../../../../../Api/ModelSelectView/Model/ParametrModel';
@@ -12,10 +12,10 @@ import { BroadcastEventListener } from 'ng2-signalr';
 @Component({
   templateUrl: '../html/viewRegistrationFace.html',
   styleUrls: ['../css/viewRegistrationFace.css'],
-  providers: [SelectAllParametrs]
+  providers: [SelectAllParameter]
 })
 export class ModelRegistrationFace implements OnInit {
-  constructor(public select: SelectAllParametrs, public SignalR: AuthIdentificationSignalR) { }
+  constructor(public select: SelectAllParameter, public SignalR: AuthIdentificationSignalR) { }
 
 
   public serverresult: string[] = [];
@@ -37,7 +37,7 @@ export class ModelRegistrationFace implements OnInit {
 
 
   modelFace(type: any) {
-    this.select.addselectallparametrs(new ModelSelect(this.dinamicmodel.selectserverRegistration[0].indexsevr)).subscribe((model: ModelSelect) => {
+    this.select.addSelectAllParameter(new ModelSelect(this.dinamicmodel.selectserverRegistration[0].indexsevr)).subscribe((model: ModelSelect) => {
       this.selecting = new GenerateParametrs(model);
       this.columns = this.dinamicmodel.columnsRegistration[this.dinamicmodel.selectserverRegistration[0].indexcolumnmodel]
     })

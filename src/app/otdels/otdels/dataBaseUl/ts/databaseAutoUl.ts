@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectAllParametrs } from '../../../../../Api/ModelSelectView/Model/PostRequest';
+import { SelectAllParameter } from '../../../../../Api/ModelSelectView/Model/PostRequest';
 import { LogicaDataBase, GenerateParametrs } from '../../../../../Api/ModelSelectView/Model/GenerateParametrFront';
 import { DynamicTableColumnModel, Table } from '../../../../../Api/ModelSelectView/Model/DynamicTableModel';
 import { ModelSelect } from '../../../../../Api/ModelSelectView/Model/ParametrModel';
@@ -11,11 +11,11 @@ import { ModelDialogSelectYear } from './dialogSelectYear/dialogYearTs/dialogSel
 @Component({
   templateUrl: '../html/databaseAutoUl.html',
   styleUrls: ['../css/databaseAutoUl.css'],
-  providers: [SelectAllParametrs]
+  providers: [SelectAllParameter]
 })
 
 export class DatabaseAutoUl implements OnInit {
-  constructor(public select: SelectAllParametrs, public dialog: MatDialog) { }
+  constructor(public select: SelectAllParameter, public dialog: MatDialog) { }
 
 
   modelYear: YearModeReport = new YearModeReport();
@@ -47,7 +47,7 @@ export class DatabaseAutoUl implements OnInit {
   }
 
   serverUl(type: any) {
-    this.select.addselectallparametrs(new ModelSelect(this.dinamicmodel.mainselectPreDataBase.indexsevr)).subscribe((model: ModelSelect) => {
+    this.select.addSelectAllParameter(new ModelSelect(this.dinamicmodel.mainselectPreDataBase.indexsevr)).subscribe((model: ModelSelect) => {
       this.selecting = new GenerateParametrs(model);
       this.columnsPreDataBase = this.dinamicmodel.columnsPreDataBase[this.dinamicmodel.mainselectPreDataBase.indexcolumnmodel]
     })

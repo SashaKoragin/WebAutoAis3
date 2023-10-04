@@ -26,6 +26,11 @@ class ParametrsSelect {
 export class LogicsSelectAutomation {
   public idField: number;
   public selectInfoField: string;
+  public nameDllField: string;
+  public findNameSpaceField: string;
+  public isResultXmlField: boolean;
+  public nameReportListField: string;
+  public nameReportFileField: string;
   public selectedParametrField: string;
   public selectUserField: string;
 }
