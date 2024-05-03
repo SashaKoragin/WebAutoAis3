@@ -32,6 +32,10 @@ import { RealEstateZmIm } from '../../app/otdels/otdels/okp6/RealEstateZmIm/ts/r
 import { ModelRegistryReference } from '../../app/otdels/otdels/orn/ReestrReference/ts/addInnFaceRegistryReference';
 import { InterrogationOfWitnesses } from '../../app/otdels/otdels/kao/InterrogationOfWitnesses/ts/interrogationOfWitnesses';
 import { UploadFileToServerReport } from '../../Api/UploadFileToServerReport/View/UploadFileToServerReport';
+import { PrintDocument } from '../../app/otdels/otdels/uz1/PrintDocument/ts/printDocument';
+import { DigitalizationDocument } from '../../app/otdels/otdels/registration/DigitalizationDocument/ts/DigitalizationDocument.1';
+import { HelpDigitalizationDocument } from '../../app/otdels/otdels/registration/HelpDigitalizationDocument/ts/HelpDigitalizationDocument';
+import { ContainerModel } from '../../app/otdels/otdels/registration/ContainerModel/ts/ContainerModel';
 
 
 
@@ -50,8 +54,9 @@ import { UploadFileToServerReport } from '../../Api/UploadFileToServerReport/Vie
     ModelPreCheck, DatabaseAutoUl,
     ModelDialogTemplateDataBase, ModelSqlTable,
     FilterParametrs, ModelRaschetBudgPayment,
-    JournalPreCheck, ExpandeTableStatement, IdentytiFaceOkp5, AddIdentityFace, ModelDialogSelectYear, Sales, DeliveryDocument, SalesBookBankUlFace, AddPatent, Patent, Okp1Journal121,
-    ModelRegistrationFace, EasJournal, TaxDeclarationFl, Journal3Ndfl, RealEstateZmIm, ModelRegistryReference, InterrogationOfWitnesses, UploadFileToServerReport
+    JournalPreCheck, ExpandeTableStatement, IdentytiFaceOkp5, AddIdentityFace, ModelDialogSelectYear, Sales, DeliveryDocument, SalesBookBankUlFace, AddPatent, Patent,
+    Okp1Journal121, ModelRegistrationFace, EasJournal, TaxDeclarationFl, Journal3Ndfl, RealEstateZmIm, ModelRegistryReference, InterrogationOfWitnesses, UploadFileToServerReport,
+    PrintDocument, DigitalizationDocument, HelpDigitalizationDocument, ContainerModel
   ]
 
 

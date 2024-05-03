@@ -52,11 +52,14 @@ td.cell {
   font-weight: bold;
 }
 
-.main{
+.main {
   text-align: center;
 }
 
-table.mat-table
-{
+table.mat-table {
   width: 100%;
+}
+
+.check {
+  margin-right: 50px
 }

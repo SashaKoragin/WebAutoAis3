@@ -6,12 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['../css/main.css']
 })
 export class MainComponent {
-
-function(n:number):boolean{
-  if(n>1){
-    return true;
-  }
- return false;
-}
+  constructor() {}
 
 }

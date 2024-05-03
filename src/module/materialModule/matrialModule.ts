@@ -42,7 +42,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldControl } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -93,7 +93,7 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
         MatTooltipModule,
         MatTreeModule,
         PortalModule,
-        ScrollingModule,
+        ScrollingModule
     ],
     providers:[
       {

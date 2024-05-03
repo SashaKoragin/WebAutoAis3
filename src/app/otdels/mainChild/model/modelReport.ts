@@ -33,6 +33,14 @@ export class Report {
         ], types: null, pages: null, model: null, isrule: null
       },
       {
+        otdel: 'Отдел урегулирования задолженности №1',
+        children: [{
+          otdel: null,
+          children: null, types: 'Печать документов (Реестры)', pages: './printDoc', model: 'Печать документов (Реестры)', isrule: ['i7751-IT', 'i7751-UZ#1', 'i7751-L-ServersAdmins', 'i7751-Rukovodstvo']
+        },
+        ], types: null, pages: null, model: null, isrule: null
+      },
+      {
         otdel: 'Отдел камеральных проверок №1',
         children: [{
           otdel: null,
@@ -127,11 +135,23 @@ export class Report {
       },
       {
         otdel: 'Отдел регистрации и учета НП',
-        children: [{
-          otdel: null,
-          children: null, types: 'Реестр НП для Уч.действий (Ввод)', pages: './regNp', model: 'Реестр НП для Уч.действий', isrule: ['i7751-IT', 'i7751-L-ServersAdmins', 'i7751-RiUN', 'i7751-Rukovodstvo']
-
-        }], types: null, pages: null, model: null, isrule: null
+        children: [
+          {
+            otdel: null,
+            children: null, types: 'Справочники цифровизации', pages: './helpDigitalizationDocument', model: 'Справочники цифровизации', isrule: ['i7751-IT', 'i7751-L-ServersAdmins', 'i7751-RiUN', 'i7751-Rukovodstvo']
+          },
+          {
+            otdel: null,
+            children: null, types: 'Цифровизация документов', pages: './digitalizationDocument', model: 'Цифровизация документов', isrule: ['i7751-IT', 'i7751-L-ServersAdmins', 'i7751-RiUN', 'i7751-Rukovodstvo']
+          },
+          {
+            otdel: null,
+            children: null, types: 'Комплектация тары', pages: './container', model: 'Комплектация тары', isrule: ['i7751-IT', 'i7751-L-ServersAdmins', 'i7751-RiUN', 'i7751-Rukovodstvo']
+          },
+          {
+            otdel: null,
+            children: null, types: 'Реестр НП для Уч.действий (Ввод)', pages: './regNp', model: 'Реестр НП для Уч.действий', isrule: ['i7751-IT', 'i7751-L-ServersAdmins', 'i7751-RiUN', 'i7751-Rukovodstvo']
+          }], types: null, pages: null, model: null, isrule: null
       },
       {
         otdel: 'Отдел расчетов с бюджетом',

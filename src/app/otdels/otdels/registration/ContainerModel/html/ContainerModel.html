@@ -1,0 +1,111 @@
+<mat-tab-group (window:keyup)="documentContainerTableJournal.testScanElement($event)" autofocus>
+  <mat-tab label="Формирование тары">
+    <form class="search">
+      <mat-form-field class="search_blok">
+        <span matPrefix><i class="material-icons">youtube_searched_for</i></span>
+        <input matInput (keyup)="documentContainerTableJournal.filtersTable($event.target.value)"
+          placeholder="Поиск данных">
+      </mat-form-field>
+      <button class="actual" mat-button (click)="excel.ExportTOExcel(tableDocumentContainer)">Выгрузить
+        контейнеры</button>
+      <div>
+        <button class="btn btn-primary" type="button" matTooltip="Обновить данные" (click)="updateDataBase()">
+          Обновить данные
+        </button>
+      </div>
+    </form>
+    <div class="tables" #TABLEDOCUMENTCONTAINER>
+      <table mat-table [dataSource]="documentContainerTableJournal.dataSource" matSort>
+
+        <ng-container matColumnDef="IdContainer">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Ун записи</th>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.IdContainer">
+            {{row?.IdContainer}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="BarcodeContainer">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Штрих-код ФКУ</th>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.BarcodeContainer">
+            <Label [style.display]="row.ModelIsEdit ? 'none':'inline'">{{row.BarcodeContainer}}</Label>
+            <div [ngClass]=row.IdContainer.toString() id="{{row.IdContainer}}"
+              [style.display]="!row.ModelIsEdit ? 'none':'block'">
+            </div>
+
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="CountCurrent">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Текущее количество листов в Таре</th>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.CountCurrent">
+            {{row?.CountCurrent}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="CountDocumentMin">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Минимальное количество листов в Таре</th>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.CountDocumentMin">
+            {{row?.CountDocumentMin}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="CountDocumentMax">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Максимальное количество листов в Таре</th>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.CountDocumentMax">
+            {{row?.CountDocumentMax}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="IsFinishContainer">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Признак готовности контейнера</th>
+          <td mat-cell *matCellDef="let row"
+            [matTooltip]="row?.IsFinishContainer === true ? 'Сформирован': 'Готов к формированию'">
+            {{ row?.IsFinishContainer === true?'Сформирован': 'Готов к формированию'}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="ActionsColumn">
+          <th mat-header-cell *matHeaderCellDef>
+            <button mat-icon-button color="primary" [disabled]="documentContainerTableJournal.isAdd" focusable="false"
+              (click)="documentContainerTableJournal.add()">
+              <i class="material-icons">person_add</i>
+            </button>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button *ngIf="!row.ModelIsEdit" [disabled]="documentContainerTableJournal.isEdit"
+              color="accent" (click)="documentContainerTableJournal.edit(row);">
+              <i class="material-icons">edit</i>
+            </button>
+            <button mat-icon-button *ngIf="!row.ModelIsEdit" color="primary" matTooltip="Отчет по таре"
+              (click)="documentContainerTableJournal.printReportContainer(row)">
+              <i class="material-icons">print</i>
+            </button>
+            <button mat-icon-button *ngIf="!row.ModelIsEdit" matTooltip="Детализация по таре"
+              (click)="documentContainerTableJournal.printDetailingContainer(row)">
+              <i class="material-icons printDetail">print</i>
+            </button>
+            <div *ngIf="row.ModelIsEdit">
+              <button mat-icon-button type="submit" color="primary" focusable="false"
+                (click)="documentContainerTableJournal.save()">
+                <i class="material-icons">check</i>
+              </button>
+              <button mat-icon-button color="primary" focusable="false"
+                (click)="documentContainerTableJournal.cancel(row)">
+                <i class="material-icons">cancel</i>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="documentContainerTableJournal.displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: documentContainerTableJournal.displayedColumns;"></tr>
+      </table>
+      <mat-paginator class="paginator" #documentContainer
+        [pageSizeOptions]="[5, 10, 25, paginatorDocumentContainer.length]" showFirstLastButtons="true"></mat-paginator>
+    </div>
+
+    <div [style.display]="'none'" #TEMPLATEDOCUMENTCONTAINER>
+      <mat-form-field id="template" class="validation">
+        <input matInput placeholder="Штрих-код ФКУ" type="number"
+          [ngModel]="documentContainerTableJournal.model?.BarcodeContainer"
+          (ngModelChange)="documentContainerTableJournal.model.BarcodeContainer = $event" />
+      </mat-form-field>
+    </div>
+
+  </mat-tab>
+</mat-tab-group>

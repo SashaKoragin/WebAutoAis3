@@ -1,10 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, NgModule } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AdressService } from '../../AdressGetPost/adressService';
 import { ModelSelect, LogicsSelectAutomation, TemplateProcedure, TemplatePatent, TemplateInnPattern } from './ParametrModel';
-import { FullSelectedModel, SenderTaxJournalOkp2, DepartamentOtdel, UserOrg, QuestionsAndUsers } from '../../RequestService/modelAutomation';
-import { deserializeArray } from 'class-transformer';
+import { FullSelectedModel, SenderTaxJournalOkp2, DepartamentOtdel, UserOrg, QuestionsAndUsers, OrganizationOgrnInventory, GrnInventories, DirectoryDocument, DocumentInventories, InfoDocument, DocumentContainer, WebSyteInventory, EventProcessError, AisGrnEventErrorModel } from '../../RequestService/modelAutomation';
+import { deserializeArray, deserialize } from 'class-transformer';
 import { UploadFile } from '../../ModelTable/FileModel';
+import { VirtualFilter, VirtualFilterToServer } from '../../../app/otdels/otdels/registration/DigitalizationDocument/ts/FilterModelInventoryOgrn';
+
+
 const url: AdressService = new AdressService();
 const httpOptionsJson = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,11 +24,30 @@ export class SelectAllParameter {
 
   public select: SelectModel = new SelectModel();
 
+
+
   //Вытащить всех сотрудников
   async allUsers(Inn: string) {
     this.select.UserOrg = await this.http.get(url.allUsersOrg.concat(Inn), httpOptionsJson).toPromise().then((model) => {
       if (model) {
         return deserializeArray<UserOrg>(UserOrg, model.toString());
+      }
+    });
+  }
+
+  //Проставить признак завершение обработки организации
+  async closedMainOrg(Inn: string) {
+    await this.http.post(url.closedMainOrg.concat(Inn), httpOptionsJson).toPromise().then((model) => {
+      if (model) {
+        alert(model);
+      }
+    });
+  }
+  //Проставить признак плательщик анулирован
+  async closedUserOrg(userOrg: UserOrg) {
+    await this.http.post(url.closedUserOrg, userOrg, httpOptionsJson).toPromise().then((model) => {
+      if (model) {
+        alert(model);
       }
     });
   }
@@ -200,6 +222,78 @@ export class SelectAndEditDataBase {
   ///Модель Базы Данных
   public select: FullSelectedModel = new FullSelectedModel();
 
+
+  //Фильтр модели для Ретросканиррования
+  async selectVirtualFilter(userLogin: string) {
+    this.select.VirtualFilter = await this.http.get(url.selectModelFilter.concat(userLogin), httpOptionsJson).toPromise().then((model) => {
+      if (model) {
+        return deserializeArray<VirtualFilter>(VirtualFilter, model.toString());
+      }
+    });
+  }
+
+  //Вытащить всех сотрудников
+  async allOgrnInventory(virtualFilter: VirtualFilterToServer) {
+    this.select.WebSyteInventory = await this.http.post(url.allOgrnInventory, virtualFilter, httpOptionsJson).toPromise().then((model) => {
+      if (model) {
+        return deserialize<WebSyteInventory>(WebSyteInventory, model.toString());
+      }
+    });
+  }
+  ///Справочник документов
+  async allDirectoryDocument() {
+    this.select.DirectoryDocument = await this.http.get(url.allDirectoryDocument, httpOptionsJson).toPromise().then((model) => {
+      if (model) {
+        return deserializeArray<DirectoryDocument>(DirectoryDocument, model.toString());
+      }
+    });
+  }
+
+  ///Загрузка всех процессов протекающих в системе
+  async allEventError() {
+    this.select.EventProcessError = await this.http.get(url.selectAllEventError, httpOptionsJson).toPromise().then((model) => {
+      if (model) {
+        return deserializeArray<EventProcessError>(EventProcessError, model.toString());
+      }
+    });
+  }
+
+  ///Детализация процессов в системе
+  async allDetailingEventError(idProcess: number) {
+    this.select.AisGrnEventErrorModel = await this.http.get(url.selectDetailingEventError.concat(idProcess.toString()), httpOptionsJson).toPromise().then((model) => {
+      if (model) {
+        return deserializeArray<AisGrnEventErrorModel>(AisGrnEventErrorModel, model.toString());
+      }
+    });
+
+  }
+  //Процедура присваивание процессу статуса готово в случае жонглирования ГРН
+  async setStatusReadyProcess(idProcess: number) {
+    await this.http.post(url.setStatusReadyProcess.concat(idProcess.toString()), httpOptionsJson).toPromise().then((message) => {
+      if (message) {
+        alert(message);
+      }
+    });
+
+  }
+
+  ///Справочник пользователя краткая информация о документе
+  async allInfoDocument() {
+    this.select.InfoDocument = await this.http.get(url.allInfoDocument, httpOptionsJson).toPromise().then((model) => {
+      if (model) {
+        return deserializeArray<InfoDocument>(InfoDocument, model.toString());
+      }
+    });
+  }
+  ///Запрос всех внесенных контейнеров в БД
+  async allDocumentContainer() {
+    this.select.DocumentContainer = await this.http.get(url.allDocumentContainer, httpOptionsJson).toPromise().then((model) => {
+      if (model) {
+        return deserializeArray<DocumentContainer>(DocumentContainer, model.toString());
+      }
+    });
+  }
+
   ///Выборка всех подписантов
   private async allSenderTaxJournal() {
     this.select.SenderTaxJournalOkp2 = await this.http.get(url.allSenderGet, httpOptionsJson).toPromise().then((model) => {
@@ -237,6 +331,114 @@ export class EditAndAddAndDelete {
   addAndUpdateSenderTaxJourna(department: DepartamentOtdel) {
     return this.http.post(url.addAndEditDepartment, department, httpOptionsJson);
   }
+  //Редактирование или добавление ОГРН
+  addAndUpdateOrganizationOgrnInventory(organizationOgrnInventory: OrganizationOgrnInventory, connectionId: string) {
+    return this.http.post(url.addAndEditOrganizationOgrnInventory.concat(connectionId), organizationOgrnInventory, httpOptionsJson);
+  }
 
+  ///Добавление ГРН документов
+  addAndUpdateGrnInventory(grnInventories: GrnInventories, connectionId: string) {
+    return this.http.post(url.addAndEditGrnInventory.concat(connectionId), grnInventories, httpOptionsJson);
+  }
+  ///Добавление ГРН документов
+  addAndEditDocumentInventory(documentInventory: DocumentInventories, connectionId: string) {
+    return this.http.post(url.addAndEditDocumentInventory.concat(connectionId), documentInventory, httpOptionsJson);
+  }
+  ///Удаление документа инвентаризации со статусом 1 и 5
+  deleteDocumentInventory(documentInventory: DocumentInventories) {
+    return this.http.post(url.deleteDocumentInventory, documentInventory, httpOptionsJson);
+  }
+
+
+  ///Добавление или обновление краткой информации о документе
+  addAndUpdateInfoDocument(infoDocument: InfoDocument) {
+    return this.http.post(url.addAndEditAllInfoDocument, infoDocument, httpOptionsJson);
+  }
+
+  ///Добавление тары документа ФКУ
+  addDocumentContainer(documentContainer: DocumentContainer) {
+    return this.http.post(url.addDocumentContainer, documentContainer, httpOptionsJson);
+  }
+  ///Отчет по таре
+  printReportContainer(documentContainer: DocumentContainer) {
+    this.http.post(url.reportDocumentContainer, documentContainer,
+      { responseType: 'arraybuffer', headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).subscribe(model => {
+        var blob = new Blob([model], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = "Отчет по таре - " + documentContainer.BarcodeContainer;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      });
+  }
+
+  ///Печать детализации контейнера
+  printDetailingContainer(documentContainer: DocumentContainer) {
+    this.http.post(url.reportDetailingContainer, documentContainer,
+      { responseType: 'arraybuffer', headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).subscribe(model => {
+        var blob = new Blob([model], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = "Детализация - " + documentContainer.BarcodeContainer;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      });
+  }
+  ///Генерация Штрих-кодов
+  createBarcode(grnInventories: GrnInventories) {
+    this.http.post(url.printBarcode, grnInventories,
+      { responseType: 'arraybuffer', headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).subscribe(model => {
+        if (model.byteLength === 0) {
+          alert("В данной группе ГРН возникла ошибка требуется исправить и перезапустить процесс!!!")
+          return;
+        }
+        var blob = new Blob([model], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = "BarCode-" + grnInventories.IdDocGrn;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      });
+  }
+
+  ///Отчет для просмотра синхронизации
+  createReportSynchronization(grnInventories: GrnInventories) {
+    this.http.post(url.reportSynchronization, grnInventories,
+      { responseType: 'arraybuffer', headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).subscribe(model => {
+        var blob = new Blob([model], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = "Отчет синхронизации-" + grnInventories.IdDocGrn;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      });
+  }
+  //Отчет о статистики документов
+  reportStatisticsDocumentInventory() {
+    this.http.post(url.reportStatisticsDocumentInventory, null,
+      { responseType: 'arraybuffer', headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).subscribe(model => {
+        var blob = new Blob([model], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = "Отчет статистики";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      });
+  }
 
 }

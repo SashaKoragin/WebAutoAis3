@@ -41,7 +41,7 @@ export class ModelRegistryReference implements OnInit {
 
   public subscribeservers() {
     this.subscribeMessageSql = new BroadcastEventListener<string>('SqlServer');
-    this.SignalR.conect.listen(this.subscribeMessageSql);
+    this.SignalR.connect.listen(this.subscribeMessageSql);
     this.subscribeMessageSql.subscribe((message: string) => {
       this.serverresult.push(message);
       if (message === 'Обработка закончена!') {

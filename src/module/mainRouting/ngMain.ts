@@ -10,6 +10,10 @@ import { AuthModule } from '../mainLogin/NgAuth';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { AngularMaterialModule } from '../materialModule/matrialModule';
 
+import { AuthIdentificationSignalR } from '../../Api/RequestService/requestService';
+
+
+
 
 @NgModule({
   imports: [
@@ -27,6 +31,6 @@ import { AngularMaterialModule } from '../materialModule/matrialModule';
     MainComponent
   ],
   bootstrap: [MainComponent],
-
+  providers: [AuthIdentificationSignalR]
 })
 export class AppModule { }

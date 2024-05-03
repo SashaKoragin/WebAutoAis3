@@ -163,14 +163,24 @@ export class DynamicTableColumnModel {
     { Type: "FaceRegistryReference", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
   ];
 
-    //Отдел работы с налогоплательщиками
+    //Контрольно-аналитический отдел
     public selectKao: SelectTableModel[] = [
       { text: "Выборка организаций и вопросов сведетелям", indexsevr: 39, indexcolumnmodel: 0 },
     ];
 
-    //Регистрация и учет налогоплательщиков
+    //Контрольно-аналитический отдел
     public columnsKao: Table[] = [
       { Type: "MainOrgAndQuestions", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
+    ];
+
+    //Отдел урегулирование задолженности
+    public selectOuz1: SelectTableModel[] = [
+      { text: "Выборка ведение реестра печати документов", indexsevr: 40, indexcolumnmodel: 0 },
+    ];
+
+    //Отдел урегулирование задолженности
+    public columnsOuz1: Table[] = [
+      { Type: "ViewRegisterDocumentsPrinting", Colums: [], Model: new MatTableDataSource<any>(), displayedColumns: null, allCountRow: 0 },
     ];
 
 }

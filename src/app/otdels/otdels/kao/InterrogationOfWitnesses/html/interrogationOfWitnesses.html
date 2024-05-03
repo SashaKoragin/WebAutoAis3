@@ -1,11 +1,17 @@
 <mat-tab-group>
   <mat-tab label="Допросы свидетелей (Модель)">
     <selectsql [(logica)]="logica" [(selecting)]="selecting" [(columns)]="columns" [(select)]="select"
-      [logicstooltable]='LOGICSTOOLTABLE'></selectsql>
+      [logicstooltable]='LOGICSTOOLTABLE' #selectsql></selectsql>
     <ng-template #LOGICSTOOLTABLE let-row='row'>
-      <mat-checkbox [matTooltip]="'Просмотр сотрудников'" (click)="$event.stopPropagation();"
+      <mat-checkbox class="check" [matTooltip]="'Просмотр сотрудников'" (click)="$event.stopPropagation();"
         (change)="selectionRowModel.toggle(row);isCheckIdFile()" [checked]="selectionRowModel.isSelected(row)">
       </mat-checkbox>
+
+      <button mat-icon-button type="submit" color="primary" focusable="false"
+        matTooltip="Аннулировать организацию из автомата!" (click)="closedMainOrg(row)">
+        <i class="material-icons">check</i>
+      </button>
+
     </ng-template>
 
 
@@ -16,10 +22,14 @@
           <ng-container matColumnDef="Logic">
             <th class="logic" mat-header-cell *matHeaderCellDef mat-sort-header>Вопросы</th>
             <td mat-cell *matCellDef="let row">
-              <mat-checkbox [matTooltip]="'Просмотр вопросов'" (click)="$event.stopPropagation();"
+              <mat-checkbox class="check" [matTooltip]="'Просмотр вопросов'" (click)="$event.stopPropagation();"
                 (change)="selectionRowQuestions.toggle(row);isCheckQuestions()"
                 [checked]="selectionRowQuestions.isSelected(row)">
               </mat-checkbox>
+              <button mat-icon-button type="submit" color="primary" focusable="false"
+                matTooltip="Аннулировать сотрудника из автомата!" (click)="closedUserOrg(row)">
+                <i class="material-icons">check</i>
+              </button>
             </td>
           </ng-container>
           <ng-container matColumnDef="IdUser">

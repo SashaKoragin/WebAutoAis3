@@ -1,0 +1,470 @@
+<mat-tab-group>
+  <mat-tab label="Ретросканирование (Реестры)">
+    <div class="container-fluid" [style.display]="progress ? 'none' : 'grid'">
+      <div class="row">
+        <div class="col">
+          <div>
+            <button class="btn btn-primary" type="button" matTooltip="Обновить данные" (click)="updateDataBase()">
+              Обновить данные
+            </button>
+          </div>
+          <div>
+            <button class="btn btn-primary" type="button" matTooltip="Добавить новый ОГРН"
+              (click)="editAndAddOrganizationOgrnInventory.addRoot()">
+              Добавить новый ОГРН
+            </button>
+            <button class="btn btn-primary" type="button" matTooltip="Статистика о листах"
+              (click)="editAndAddOrganizationOgrnInventory.reportStatisticsDocumentInventory()">
+              Статистика о листах
+            </button>
+
+          </div>
+          <div class="search">
+            <mat-form-field class="search_blok">
+              <span matPrefix><i class="material-icons">youtube_searched_for</i></span>
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Поиск данных">
+            </mat-form-field>
+            <mat-form-field class="filter">
+              <mat-label class="text-primary">Фильтрация ОГРН</mat-label>
+              <mat-select class="text-primary" [(value)]="filterModel.filterDataBaseFirst"
+                (selectionChange)="updateDataBase()">
+                <mat-option class="text-primary" *ngFor="let filter of filterModel.allVirtualFilter" [value]="filter">
+                  {{filter.NameFilter}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+          <cdk-virtual-scroll-viewport class="scroll" appendOnly itemSize="50">
+            <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" #TEMPLATETREEMODEL>
+              <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+                <div class="menuDiv">
+                  <div class="help" [style.display]="node.model.length ===0 ? 'none' : 'flex'">
+                    <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.item"
+                      [disabled]="node.model?.OrganizationOgrnInventory?.IsHiddenWeb">
+                      <mat-icon class="mat-icon-rtl-mirror">{{treeControl.isExpanded(node) ? 'expand_more' :
+                        'chevron_right'}}
+                      </mat-icon>
+                    </button>
+                    <button class="content" matTreeNodeToggle mat-icon-button
+                      [disabled]="node.model?.OrganizationOgrnInventory?.IsHiddenWeb"> {{
+                      node.model.TreeAllModel?.length === null ? node.model?.DocumentInventories?.length:
+                      node.model?.TreeAllModel?.length }}
+                    </button>
+                    <div class="style" [style.display]="node.model?.GrnInventories === null ? 'inline': 'none'">
+                      <div class="setting">
+                        <div class="parameter">
+                          <div>Логин пользователя</div>
+                          <div class="styleText" [style.display]="'flex'"
+                            [matTooltip]="node.model?.OrganizationOgrnInventory?.UserLogin">
+                            {{node.model?.OrganizationOgrnInventory?.UserLogin}}</div>
+                        </div>
+                        <div class="parameter">
+                          <div>Номер ОГРН</div>
+                          <div class="styleText"
+                            [style.display]="node.model?.OrganizationOgrnInventory?.ModelIsEdit ? 'none':'flex'"
+                            [matTooltip]="node.model?.OrganizationOgrnInventory?.NumberOgrn">
+                            {{node.model?.OrganizationOgrnInventory?.NumberOgrn}}</div>
+                          <div id="{{node.model?.OrganizationOgrnInventory?.IdOgrn}}"
+                            [style.display]="!node.model?.OrganizationOgrnInventory?.ModelIsEdit ? 'none':'flex'">
+                          </div>
+                        </div>
+                        <div class="style">
+                          <button mat-icon-button *ngIf="!node.model?.OrganizationOgrnInventory?.ModelIsEdit"
+                            color="accent" matTooltip="Редактировать"
+                            (click)="editAndAddOrganizationOgrnInventory.edit(node, node.model?.OrganizationOgrnInventory)"
+                            [disabled]="editAndAddOrganizationOgrnInventory.isEdit || node.model?.OrganizationOgrnInventory?.IsHiddenWeb">
+                            <i class="material-icons">edit</i>
+                          </button>
+                          <button mat-icon-button *ngIf="!node.model?.OrganizationOgrnInventory?.ModelIsEdit"
+                            matTooltip="Удалить"
+                            (click)="editAndAddOrganizationOgrnInventory.delete(node, node.model?.OrganizationOgrnInventory)"
+                            [disabled]="editAndAddOrganizationOgrnInventory.isEdit || node.model?.OrganizationOgrnInventory?.IsHiddenWeb">
+                            <i class="material-icons">delete</i>
+                          </button>
+                        </div>
+                        <div class="style" *ngIf="node.model?.OrganizationOgrnInventory?.ModelIsEdit">
+                          <button mat-icon-button type="submit" color="primary" focusable="false" matTooltip="Сохранить"
+                            [disabled]="editAndAddOrganizationOgrnInventory.modelValid?.getRowValidatorModel[0].invalid"
+                            (click)="editAndAddOrganizationOgrnInventory.save(node)">
+                            <i class="material-icons">check</i>
+                          </button>
+                          <button mat-icon-button color="primary" focusable="false" matTooltip="Отменить"
+                            (click)="editAndAddOrganizationOgrnInventory.cancel(node, 0)">
+                            <i class="material-icons">cancel</i>
+                          </button>
+                        </div>
+                        <button
+                          [disabled]="editAndAddOrganizationOgrnInventory.isEdit || node.model?.OrganizationOgrnInventory?.IsHiddenWeb"
+                          (click)="editAndAddGrnInventories.addRootChild(node, node.model.OrganizationOgrnInventory)"
+                          class="AddBlueviolet" matTooltip="Добавить ГРН">
+                          <mat-icon>add</mat-icon>
+                        </button>
+                        <div>
+                          <button mat-icon-button *ngIf="!node.model?.OrganizationOgrnInventory?.ModelIsEdit"
+                            [style.display]="node.model?.OrganizationOgrnInventory?.IsHiddenWeb ? 'none' : 'grid'"
+                            [disabled]="editAndAddOrganizationOgrnInventory.isEdit" matTooltip="Скрыть"
+                            (click)="editAndAddOrganizationOgrnInventory.isHiddenAndNotHidden(node, node.model?.OrganizationOgrnInventory, true)">
+                            <i class="material-icons iconsvisibilityOn">visibility</i>
+                          </button>
+                          <button mat-icon-button *ngIf="!node.model?.OrganizationOgrnInventory?.ModelIsEdit"
+                            [style.display]="node.model?.OrganizationOgrnInventory?.IsHiddenWeb ? 'grid' : 'none' "
+                            [disabled]="editAndAddOrganizationOgrnInventory.isEdit" matTooltip="Раскрыть"
+                            (click)="editAndAddOrganizationOgrnInventory.isHiddenAndNotHidden(node, node.model?.OrganizationOgrnInventory, false)">
+                            <i class="material-icons iconsvisibilityOff">visibility_off</i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="style" [style.display]="node.model?.GrnInventories !== null ? 'inline' : 'none' ">
+                      <div class="setting">
+                        <div class="parameter">
+                          <div>Номер ГРН/ОГРН</div>
+                          <div class="styleText"
+                            [style.display]="node.model?.GrnInventories?.ModelIsEdit ? 'none':'flex'"
+                            [matTooltip]="node.model?.GrnInventories?.NumberOgrnGrn">
+                            {{node.model?.GrnInventories?.NumberOgrnGrn}}</div>
+                          <div [ngClass]=node.model?.GrnInventories?.IdDocGrn.toString()
+                            [style.display]="!node.model?.GrnInventories?.ModelIsEdit ? 'none':'flex'">
+                          </div>
+                        </div>
+                        <div class="parameter">
+                          <div>Признак готовности</div>
+                          <div class="styleText" [style.display]="'flex'"
+                            [matTooltip]="node.model?.GrnInventories?.IsStartProcess===true ? 'Готово': 'Не готово'">
+                            {{node.model?.GrnInventories?.IsStartProcess===true?'Готово': 'Не готово'}}
+                          </div>
+                        </div>
+                        <div class="parameter">
+                          <div>Признак нахождения в БД по ГРН</div>
+                          <div class="styleText" [style.display]="'flex'"
+                            [matTooltip]="node.model?.GrnInventories?.IsFindGrnDataBase ===true ? 'Найдено в БД': 'Не найдено в БД'">
+                            {{node.model?.GrnInventories?.IsFindGrnDataBase === true?'Найдено в БД': 'Не найдено в БД'}}
+                          </div>
+                        </div>
+                        <div class="parameter">
+                          <div>Статус обработки пачки документов в БД</div>
+                          <div class="styleText" [style.display]="'flex'"
+                            [matTooltip]="node.model?.GrnInventories?.StatusFinish===true ? 'Отработано': 'Не отработано'">
+                            {{node.model?.GrnInventories?.StatusFinish === true?'Отработано': 'Не отработано'}}
+                          </div>
+                        </div>
+                        <div class="parameter">
+                          <div>Краткое описание документа</div>
+                          <div class="styleText"
+                            [style.display]="node.model?.GrnInventories?.ModelIsEdit ? 'none':'flex'"
+                            [matTooltip]="node.model?.GrnInventories?.NameDocument">
+                            {{node.model?.GrnInventories?.NameDocument}}</div>
+                          <div [ngClass]=node.model?.GrnInventories?.IdDocGrn.toString()
+                            [style.display]="!node.model?.GrnInventories?.ModelIsEdit ? 'none':'flex'">
+                          </div>
+                        </div>
+                        <div class="style">
+                          <button mat-icon-button *ngIf="!node.model?.GrnInventories?.ModelIsEdit" color="accent"
+                            matTooltip="Редактировать"
+                            (click)="editAndAddGrnInventories.edit(node, node.model?.GrnInventories)"
+                            [disabled]="editAndAddGrnInventories.isEdit">
+                            <i class="material-icons">edit</i>
+                          </button>
+                          <button mat-icon-button *ngIf="!node.model?.GrnInventories?.ModelIsEdit" matTooltip="Удалить"
+                            (click)="editAndAddGrnInventories.delete(node, node.model.GrnInventories.IdDocGrn)"
+                            [disabled]="editAndAddGrnInventories.isEdit">
+                            <i class="material-icons">delete</i>
+                          </button>
+                        </div>
+                        <div class="style" *ngIf="node.model?.GrnInventories?.ModelIsEdit">
+                          <button mat-icon-button type="submit" color="primary" focusable="false" matTooltip="Сохранить"
+                            [disabled]="editAndAddGrnInventories.modelValid?.getRowValidatorModel[1].invalid"
+                            (click)="editAndAddGrnInventories.save(node)">
+                            <i class="material-icons">check</i>
+                          </button>
+                          <button mat-icon-button color="primary" focusable="false" matTooltip="Отменить"
+                            (click)="editAndAddGrnInventories.cancel(node)">
+                            <i class="material-icons">cancel</i>
+                          </button>
+                        </div>
+                        <button mat-icon-button
+                          (click)="editAndAddDocumentInventory.addChildGrnDocument(node, node.model.GrnInventories.IdDocGrn, node.model.GrnInventories.StatusFinish)"
+                          class="AddGreen" matTooltip="Добавить документ">
+                          <mat-icon>add</mat-icon>
+                        </button>
+                        <button mat-icon-button color="primary" matTooltip="Сформировать Штрих-коды"
+                          (click)="editAndAddGrnInventories.createBarcode(node.model.GrnInventories)">
+                          <i class="material-icons">print</i>
+                        </button>
+                        <button mat-icon-button color="primary" matTooltip="Отчет синхронизации"
+                          (click)="editAndAddGrnInventories.createReportSynchronization(node.model.GrnInventories)">
+                          <i class="material-icons">cloud_download</i>
+                        </button>
+                        <button mat-icon-button *ngIf="!node.model?.GrnInventories?.ModelIsEdit"
+                          (click)="editAndAddGrnInventories.isCheckProcess(node, node.model?.GrnInventories)"
+                          class="AddGreen" matTooltip="Готовность дела для процесса!">
+                          <mat-icon>check</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div [style.display]="treeControl.isExpanded(node) ? 'contents' : 'none'">
+                    <div class="styleTable">
+                      <table class="table table-striped"
+                        [style.display]="node.model?.DocumentInventories?.length > 0 ? 'contents' : 'none'">
+                        <tr>
+                          <th class="column">Наименование из справочника</th>
+                          <th class="column">Краткое наименование документа</th>
+                          <th class="column">Количество страниц</th>
+                          <th class="column">Номер штрих-кода</th>
+                          <th class="column">Статус обработки документа</th>
+                          <th class="column">Стадия обработки</th>
+                          <th class="column">Логика</th>
+                        </tr>
+                        <tbody>
+                          <tr *ngFor="let groupTechnique of node.model.DocumentInventories">
+                            <th class="borderSelect">
+                              <div [style.display]="groupTechnique.ModelIsEdit ? 'none':'inline'"
+                                [matTooltip]="groupTechnique?.DirectoryDocument?.NameDocumentDataBase">
+                                {{groupTechnique?.DirectoryDocument?.NameDocumentDataBase}}</div>
+                              <div [tabIndex]="groupTechnique.IdDocument.toString()"
+                                [style.display]="!groupTechnique.ModelIsEdit ? 'none':'inline'">
+                              </div>
+                            </th>
+                            <th class="border">
+                              <div [style.display]="groupTechnique.ModelIsEdit ? 'none':'inline'"
+                                [matTooltip]="groupTechnique?.InfoDocument?.NameDocumentInfo">
+                                {{groupTechnique?.InfoDocument?.NameDocumentInfo}}</div>
+                              <div [tabIndex]="groupTechnique.IdDocument.toString()"
+                                [style.display]="!groupTechnique.ModelIsEdit ? 'none':'inline'">
+                              </div>
+                            </th>
+                            <th class="border">
+                              <div [style.display]="groupTechnique.ModelIsEdit ? 'none':'inline'"
+                                [matTooltip]="groupTechnique.CountPage">
+                                {{groupTechnique.CountPage}}</div>
+                              <div [tabIndex]="groupTechnique.IdDocument.toString()"
+                                [style.display]="!groupTechnique.ModelIsEdit ? 'none':'inline'">
+                              </div>
+                            </th>
+                            <th class="border">
+                              <div [style.display]="'inline'" [matTooltip]="groupTechnique.GuidDocument">
+                                {{groupTechnique.GuidDocument}}
+                              </div>
+                            </th>
+                            <th class="border">
+                              <div [style.display]="'inline'" [matTooltip]="groupTechnique.StateDocument">
+                                {{groupTechnique.StateDocument}}
+                              </div>
+                            </th>
+                            <th class="border">
+                              <div [style.display]="'inline'"
+                                [matTooltip]="groupTechnique?.StatusDocument?.NameMessage">
+                                {{groupTechnique?.StatusDocument?.NameMessage}}
+                              </div>
+                            </th>
+                            <th class="border">
+                              <div class="style">
+                                <button mat-icon-button *ngIf="!groupTechnique.ModelIsEdit" color="accent"
+                                  matTooltip="Редактировать"
+                                  (click)="editAndAddDocumentInventory.edit(node, groupTechnique)"
+                                  [disabled]="editAndAddDocumentInventory.isEdit">
+                                  <i class="material-icons">edit</i>
+                                </button>
+                                <button mat-icon-button *ngIf="!groupTechnique.ModelIsEdit" matTooltip="Удалить"
+                                  (click)="editAndAddDocumentInventory.delete(node, groupTechnique)"
+                                  [disabled]="editAndAddDocumentInventory.isEdit">
+                                  <i class="material-icons">delete</i>
+                                </button>
+                                <button mat-icon-button *ngIf="!groupTechnique.ModelIsEdit" color="primary"
+                                  focusable="false" matTooltip="Повторное ретросканирование"
+                                  (click)="editAndAddDocumentInventory.isReturnDocument(node, groupTechnique)">
+                                  <i class="material-icons">check</i>
+                                </button>
+                              </div>
+                              <div class="style" *ngIf="groupTechnique.ModelIsEdit">
+                                <button mat-icon-button type="submit" color="primary" focusable="false"
+                                  matTooltip="Сохранить"
+                                  [disabled]="editAndAddDocumentInventory.modelValid?.getRowValidatorModel[2].invalid"
+                                  (click)="editAndAddDocumentInventory.save(node)">
+                                  <i class="material-icons">check</i>
+                                </button>
+                                <button mat-icon-button color="primary" focusable="false" matTooltip="Отменить"
+                                  (click)="editAndAddDocumentInventory.cancel(node)">
+                                  <i class="material-icons">cancel</i>
+                                </button>
+                              </div>
+                            </th>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </mat-tree-node>
+            </mat-tree>
+            <div [style.display]="'none'" #TemplateOgrn>
+              <mat-form-field id="template" class="validation">
+                <input matInput placeholder="Номер ОГРН" type="number"
+                  [formControl]="editAndAddOrganizationOgrnInventory.modelValid?.getRowValidatorModel[0].get('NumberOgrn')"
+                  [ngModel]="editAndAddOrganizationOgrnInventory.model.NumberOgrn"
+                  (ngModelChange)="editAndAddOrganizationOgrnInventory.model.NumberOgrn = $event" />
+              </mat-form-field>
+            </div>
+            <div [style.display]="'none'" #TemplateGgrn>
+              <mat-form-field id="template" class="validation">
+                <input matInput placeholder="Номер ГРН" type="number"
+                  [formControl]="editAndAddGrnInventories.modelValid?.getRowValidatorModel[1].get('NumberOgrnGrn')"
+                  [ngModel]="editAndAddGrnInventories.model.NumberOgrnGrn"
+                  (ngModelChange)="editAndAddGrnInventories.model.NumberOgrnGrn = $event" />
+              </mat-form-field>
+              <mat-form-field id="template" class="validation">
+                <input matInput placeholder="Наименование документа"
+                  [formControl]="editAndAddGrnInventories.modelValid?.getRowValidatorModel[1].get('NameDocument')"
+                  [ngModel]="editAndAddGrnInventories.model.NameDocument"
+                  (ngModelChange)="editAndAddGrnInventories.model.NameDocument = $event" />
+              </mat-form-field>
+            </div>
+
+            <div [style.display]="'none'" #TemplateDocument>
+              <mat-form-field id="template" class="validation"
+                (click)="editAndAddDocumentInventory.callbackFiltersAll(formDocumentInventory)">
+                <mat-select
+                  [formControl]="editAndAddDocumentInventory.modelValid?.getRowValidatorModel[2].get('NameDocumentDataBase')"
+                  [placeholder]="editAndAddDocumentInventory.model.DirectoryDocument?.NameDocumentDataBase"
+                  [(ngModel)]="editAndAddDocumentInventory.model.DirectoryDocument" name="document">
+                  <mat-select-filter class="filter" #formDocumentInventory
+                    [placeholder]="editAndAddDocumentInventory.model.DirectoryDocument?.NameDocumentDataBase"
+                    [displayMember]="'NameDocumentDataBase'" [array]="editAndAddDocumentInventory.directoryDocument"
+                    (filteredReturn)="editAndAddDocumentInventory.filteredDirectoryDocument = $event">
+                  </mat-select-filter>
+                  <mat-option [value]='null'>None</mat-option>
+                  <mat-option *ngFor="let document of editAndAddDocumentInventory.filteredDirectoryDocument"
+                    [value]="document">
+                    {{document.NameDocumentDataBase}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field id="template" class="validation"
+                (click)="editAndAddDocumentInventory.callbackFiltersAll(formInfo)">
+                <mat-select
+                  [formControl]="editAndAddDocumentInventory.modelValid?.getRowValidatorModel[2].get('NameDocumentInfo')"
+                  [placeholder]="editAndAddDocumentInventory.model.InfoDocument?.NameDocumentInfo"
+                  [(ngModel)]="editAndAddDocumentInventory.model.InfoDocument" name="document">
+                  <mat-select-filter class="filter" #formInfo
+                    [placeholder]="editAndAddDocumentInventory.model.InfoDocument?.NameDocumentInfo"
+                    [displayMember]="'NameDocumentInfo'" [array]="editAndAddDocumentInventory.infoDocument"
+                    (filteredReturn)="editAndAddDocumentInventory.filteredInfoDocument =$event">
+                  </mat-select-filter>
+                  <mat-option [value]='null'>None</mat-option>
+                  <mat-option *ngFor="let document of editAndAddDocumentInventory.filteredInfoDocument"
+                    [value]="document">
+                    {{document.NameDocumentInfo}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field id="template" class="validation">
+                <input matInput placeholder="Количество страниц"
+                  [formControl]="editAndAddDocumentInventory.modelValid?.getRowValidatorModel[2].get('CountPage')"
+                  [ngModel]="editAndAddDocumentInventory.model.CountPage"
+                  (ngModelChange)="editAndAddDocumentInventory.model.CountPage = $event" />
+              </mat-form-field>
+
+            </div>
+          </cdk-virtual-scroll-viewport>
+        </div>
+      </div>
+    </div>
+    <div [style.display]="progress ? 'inline' : 'none'">
+      <p>Идет загрузка данных подождите пожалуйста!!!</p>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+  </mat-tab>
+  <mat-tab label="Список процессов запуска заданий и их статусы">
+    <form class="search">
+      <div>
+        <button class="btn btn-primary" type="button" matTooltip="Обновить данные" (click)="updateDataBase()">
+          Обновить данные
+        </button>
+      </div>
+      <mat-form-field class="search_blok">
+        <span matPrefix><i class="material-icons">youtube_searched_for</i></span>
+        <input matInput (keyup)="eventProcessTableJournal.filterstable($event.target.value)" placeholder="Поиск данных">
+      </mat-form-field>
+      <button class="actual" mat-button (click)="excel.ExportTOExcel(tableEventError)">Выгрузить процессы</button>
+    </form>
+    <div class="tables" #TABLEEVENTERRORS>
+      <table mat-table [dataSource]="eventProcessTableJournal.dataSource" matSort>
+        <ng-container matColumnDef="ActionsColumn">
+          <th class="logic" mat-header-cell *matHeaderCellDef mat-sort-header>Логика</th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox class="check" [matTooltip]="'Просмотр ГРН АИС3'" (click)="$event.stopPropagation();"
+              (change)="selectionRowGrnAis3.toggle(row);isSelectGrnAis3()"
+              [checked]="selectionRowGrnAis3.isSelected(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="IdProcess">
+          <th class="id" mat-header-cell *matHeaderCellDef mat-sort-header>Ун записи процесса</th>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.IdProcess">
+            {{row?.IdProcess}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="FullKeyProcess">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Список ГРН ав процессе</th>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.FullKeyProcess">
+            {{row?.FullKeyProcess}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Actions">
+          <th class="logic" mat-header-cell *matHeaderCellDef>Задачи</th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button type="submit" color="primary" focusable="false"
+              matTooltip="Сбросить дублирующее задание по ключам" (click)="setStatusReadyProcess(row?.IdProcess)">
+              <i class="material-icons">check</i>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="NameStatusEvent">
+          <th class="message" mat-header-cell *matHeaderCellDef mat-sort-header>Сообщение о процессе</th>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.StatusEvent.NameStatusEvent">
+            {{row?.StatusEvent.NameStatusEvent}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="eventProcessTableJournal.displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: eventProcessTableJournal.displayedColumns;"></tr>
+      </table>
+      <mat-paginator class="paginator" #paginatorEventErrors [pageSizeOptions]="[5, 10, 25, paginatorEventError.length]"
+        showFirstLastButtons="true"></mat-paginator>
+    </div>
+
+    <div [style.display]="isLoadDetailingEventError ? 'none' : 'grid'">
+      <div class="tables" #TABLEDETAILINGEVENTERROR>
+        <h1 class="main">Детализация ОГРН-ГРН процессов</h1>
+        <table mat-table [dataSource]="dataSourceDetailingEventError">
+
+          <ng-container matColumnDef="IdGrnAis3">
+            <th class="id" mat-header-cell *matHeaderCellDef>Ун записи</th>
+            <td mat-cell *matCellDef="let row" [matTooltip]="row.AisGrnDocument.IdGrnAis3">
+              {{row.AisGrnDocument.IdGrnAis3}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="NumberOgrnGrn">
+            <th class="numberOgrnGrn" mat-header-cell *matHeaderCellDef>ОГРН-ГРН</th>
+            <td mat-cell *matCellDef="let row" [matTooltip]="row.NumberOgrnGrn">{{row.NumberOgrnGrn}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="FullNameGrnAis3">
+            <th mat-header-cell *matHeaderCellDef>Полное описание а АИС-3</th>
+            <td mat-cell *matCellDef="let row" [matTooltip]="row.AisGrnDocument.FullNameGrnAis3">
+              {{row.AisGrnDocument.FullNameGrnAis3}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsDetailingEventError; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsDetailingEventError;"></tr>
+        </table>
+      </div>
+      <mat-paginator class="paginator" #detailingEventError [pageSizeOptions]="[5, 10]" showFirstLastButtons="true">
+      </mat-paginator>
+    </div>
+  </mat-tab>
+</mat-tab-group>
