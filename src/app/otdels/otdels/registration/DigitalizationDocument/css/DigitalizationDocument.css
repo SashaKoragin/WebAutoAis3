@@ -1,0 +1,273 @@
+::ng-deep .mat-tooltip {
+  background: transparent grey !important;
+  font-size: 16px !important;
+}
+
+::ng-deep .mat-tab-label .mat-tab-label-content {
+  font-size: 20px;
+}
+
+
+.search_blok {
+  width: 20%;
+  margin-right: 25px
+}
+
+.basic-container {
+  background: none;
+}
+
+.content {
+  margin: 10px;
+  background-color: black;
+  font-size: larger;
+  cursor: pointer;
+  color: white;
+}
+
+.element-detail {
+  display: contents;
+}
+
+.scroll {
+  margin-bottom: 300px;
+  height: 1000px;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.AddBlueviolet {
+  color: blueviolet;
+}
+
+.AddGreen {
+  color: green;
+}
+
+.setting {
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  border-bottom-style: ridge;
+  /* border: 1px solid black; */
+}
+
+.help {
+  align-items: center;
+}
+
+.styleText {
+  font-size: 24px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.btn {
+  margin: 10px;
+}
+
+/* .menuDiv {
+  display: contents;
+} */
+
+.validation {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.parameter {
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  /* font-size: 24px;
+   */
+}
+
+.styleTable {
+  margin-left: 10px;
+}
+
+.border {
+  border: 2px ridge #24943A;
+  background-color: #D4EED1;
+  text-align: center;
+  vertical-align: text-bottom;
+  font-family: system-ui;
+  width: max-content;
+}
+
+.borderSelect {
+  background-color: #D4EED1;
+  text-align: center;
+  font-family: system-ui;
+  width: 650px;
+}
+
+.column {
+  text-align: center;
+  width: max-content;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: groove;
+  color: rgba(0, 0, 0, .87);
+  background: #24943A;
+  font-family: 'Times New Roman';
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.validation {
+  width: -webkit-fill-available;
+}
+
+th.mat-header-cell {
+  text-align: center;
+  white-space: pre-wrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: groove;
+  background: cadetblue;
+  font-family: 'Times New Roman';
+  font-size: 16px;
+  font-weight: bold;
+}
+
+td.mat-cell {
+  text-align: left;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: groove;
+  background: darkkhaki;
+  font-family: 'Times New Roman';
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.tables {
+  position: relative;
+  max-height: 600px;
+  overflow: auto;
+}
+
+::ng-deep .mat-tab-label-content {
+  font-size: 16px;
+  color: black;
+  font-weight: bold;
+}
+
+::ng-deep .mat-tooltip {
+  background: grey !important;
+  font-size: 18px !important;
+}
+
+::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Times New Roman';
+}
+
+table {
+  border: groove;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.search_blok {
+  width: 50%;
+}
+
+.search {
+  width: 50%;
+}
+
+table {
+  border: groove;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.validation {
+  width: 100%;
+}
+
+.paginator {
+  margin-bottom: 100px;
+}
+
+.tables {
+  position: relative;
+  max-height: 600px;
+  overflow: auto;
+}
+
+.actual {
+  background-color: green;
+  cursor: pointer;
+  align-items: center;
+  margin: 10px;
+}
+
+th,
+td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+th.mat-header-cell {
+  text-align: center;
+  white-space: pre-wrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: groove;
+  background: cadetblue;
+  font-family: 'Times New Roman';
+  font-size: 16px;
+  font-weight: bold;
+}
+
+td.mat-cell {
+  text-align: left;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: groove;
+  background: darkkhaki;
+  font-family: 'Times New Roman';
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.logic {
+  width: 100px;
+}
+
+.id {
+  width: 200px;
+}
+
+.message {
+  width: 350px;
+}
+
+.numberOgrnGrn {
+  width: 250px;
+}
+
+.iconsvisibilityOn {
+  color: green;
+}
+
+.iconsvisibilityOff {
+  color: red;
+}
+
+.filter {
+  font-size: 20px;
+  width: 40%
+}
+
+.content[disabled] {
+  color: beige
+}

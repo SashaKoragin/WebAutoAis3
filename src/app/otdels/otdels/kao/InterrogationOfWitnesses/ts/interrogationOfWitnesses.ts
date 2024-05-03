@@ -12,6 +12,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UserOrg, QuestionsAndUsers } from '../../../../../../Api/RequestService/modelAutomation';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { Select } from '../../../../../../Api/ModelSelectView/View/SelectView';
+import { PublicFunction } from '../../../../../../Api/PublicFunction/PublicFunction';
 
 
 @Component({
@@ -34,6 +36,8 @@ export class InterrogationOfWitnesses implements OnInit {
 
   selectionRowQuestions = new SelectionModel<any>(false, []);
 
+  @ViewChild('selectsql', { static: false }) sqlSelect: Select
+
   @ViewChild('TABLEUSERSORG', { static: false }) tableUsers: ElementRef;
   @ViewChild('usersOrg', { static: true }) paginatorUsersOrg: MatPaginator;
   @ViewChild(MatSort, { static: true }) sortUsersOrg: MatSort;
@@ -54,7 +58,7 @@ export class InterrogationOfWitnesses implements OnInit {
   public subscribeMessageSql: any = null;
   public subscribeServers() {
     this.subscribeMessageSql = new BroadcastEventListener<string>('SqlServer');
-    this.SignalR.conect.listen(this.subscribeMessageSql);
+    this.SignalR.connect.listen(this.subscribeMessageSql);
     this.subscribeMessageSql.subscribe((message: string) => {
       this.serverResult.push(message);
       if (message === 'Обработка закончена!') {
@@ -75,15 +79,28 @@ export class InterrogationOfWitnesses implements OnInit {
     })
   }
 
+  ///Проставить отработали организацию
+  async closedMainOrg(row: any) {
+    await this.select.closedMainOrg(row.Inn);
+    this.sqlSelect.update(1);
+  }
+
+  ///Проставить отработали организацию
+  async closedUserOrg(row: UserOrg) {
+    var convertDataServer = new PublicFunction();
+    var modelServer = convertDataServer.convertDateToServer<UserOrg>(row);
+    await this.select.closedUserOrg(modelServer);
+    this.isCheckIdFile();
+  }
+
+
   async isCheckIdFile() {
     if (this.selectionRowModel.selected.length === 1) {
-      console.log(this.selectionRowModel.selected);
       await this.select.allUsers(this.selectionRowModel.selected[0].Inn);
       this.dataSource.paginator = this.paginatorUsersOrg;
       this.dataSource.sort = this.sortUsersOrg
       this.dataSource.data = this.select.select.UserOrg;
       this.isLoad = false;
-
     }
     else {
       this.isLoad = true;

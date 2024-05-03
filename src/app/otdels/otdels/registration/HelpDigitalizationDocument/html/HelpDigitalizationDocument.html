@@ -1,0 +1,74 @@
+<mat-tab-group [style.display]="isload ? 'none' : 'grid'">
+  <mat-tab label="Справочник краткого описания">
+    <form class="search">
+      <mat-form-field class="search_blok">
+        <span matPrefix><i class="material-icons">youtube_searched_for</i></span>
+        <input matInput (keyup)="infoDocumentTableJournal.filterstable($event.target.value)" placeholder="Поиск данных">
+      </mat-form-field>
+      <button class="actual" mat-button (click)="excel.ExportTOExcel(tableInfoDocument)">Выгрузить отделы и
+        подписантов</button>
+    </form>
+    <div class="tables" #TABLEINFODOCUMENT>
+      <table mat-table [dataSource]="infoDocumentTableJournal.dataSource" matSort>
+
+        <ng-container matColumnDef="IdInfo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Ун записи</th>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.IdInfo">
+            {{row?.IdInfo}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="NameDocumentInfo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Краткое наименование документа</th>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row.NameDocumentInfo">
+            <Label [style.display]="row.ModelIsEdit ? 'none':'inline'">{{row.NameDocumentInfo}}</Label>
+            <div [ngClass]=row.IdInfo.toString() id="{{row.IdInfo}}"
+              [style.display]="!row.ModelIsEdit ? 'none':'block'">
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ActionsColumn">
+          <th mat-header-cell *matHeaderCellDef>
+            <button mat-icon-button color="primary" [disabled]="infoDocumentTableJournal.isAdd" focusable="false"
+              (click)="infoDocumentTableJournal.add()">
+              <i class="material-icons">person_add</i>
+            </button>
+          </th>
+
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button *ngIf="!row.ModelIsEdit" [disabled]="infoDocumentTableJournal.isEdit" color="accent"
+              (click)="infoDocumentTableJournal.edit(row);">
+              <i class="material-icons">edit</i>
+            </button>
+            <button mat-icon-button *ngIf="!row.ModelIsEdit" [disabled]="infoDocumentTableJournal.isEdit"
+              (click)="infoDocumentTableJournal.delete(row)">
+              <i class="material-icons">delete</i>
+            </button>
+            <div *ngIf="row.ModelIsEdit">
+              <button mat-icon-button type="submit" color="primary" focusable="false"
+                (click)="infoDocumentTableJournal.save()">
+                <i class="material-icons">check</i>
+              </button>
+              <button mat-icon-button color="primary" focusable="false" (click)="infoDocumentTableJournal.cancel(row)">
+                <i class="material-icons">cancel</i>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="infoDocumentTableJournal.displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: infoDocumentTableJournal.displayedColumns;"></tr>
+      </table>
+      <mat-paginator class="paginator" #infoDocument [pageSizeOptions]="[5, 10, 25, paginatorInfoDocument.length]"
+        showFirstLastButtons="true"></mat-paginator>
+    </div>
+    <div [style.display]="'none'" #TEMPLATEINFODOCUMENT>
+
+      <!-- Отдел -->
+      <mat-form-field id="template" class="validation">
+        <input matInput placeholder="Краткое наименование документа"
+          [ngModel]="infoDocumentTableJournal.model?.NameDocumentInfo"
+          (ngModelChange)="infoDocumentTableJournal.model.NameDocumentInfo = $event" />
+      </mat-form-field>
+    </div>
+  </mat-tab>
+</mat-tab-group>

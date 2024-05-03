@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SignalR, ISignalRConnection, IConnectionOptions, ConnectionStatus } from 'ng2-signalr';
+import { SignalR, ISignalRConnection, IConnectionOptions, ConnectionStatus, BroadcastEventListener } from 'ng2-signalr';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Identification } from './modelAutomation';
 import { AdressService, ServerHost } from '../AdressGetPost/adressService';
@@ -33,7 +33,6 @@ export class AuthIdentification {
     try {
       console.log('Подключились к серверу!');
       this.permissionsService.addPermission(this.user.groupRuleServerField);
-      console.log(this.user.groupRuleServerField);
       console.log('Подключили роли!');
     } catch (e) {
       alert(e.toString());
@@ -70,14 +69,17 @@ export class AuthIdentification {
 
 export class AuthIdentificationSignalR {
 
-  constructor(public signalR: SignalR) { }
+  constructor(private http: HttpClient, public signalR: SignalR) { }
 
   public iduser: string = null;
-  public conect: ISignalRConnection = null;
+  //Подписка
+  public subscribeDisconnected: any = null;
+  public connect: ISignalRConnection = null;
   public status: ConnectionStatus = null;
+  public error: any = null;
   public autorization: AuthIdentification = null;
 
-  createconection(autorizationUsers: AuthIdentification) {
+  createConnection(autorizationUsers: AuthIdentification) {
     try {
       this.autorization = autorizationUsers;
       var options: IConnectionOptions =
@@ -90,8 +92,8 @@ export class AuthIdentificationSignalR {
         executeStatusChangeInZone: true
         //Можно задать ping интервал
       }
-      this.conect = this.signalR.createConnection(options);
-      this.statusSubscriSignalR()
+      this.connect = this.signalR.createConnection(options);
+      this.statusSubscribeSignalR();
     } catch (e) {
       alert(e.toString());
     }
@@ -99,31 +101,44 @@ export class AuthIdentificationSignalR {
 
 
   //Запуск подписи на событие
-  async startserverSignalR() {
+  async startServerSignalR() {
     if (this.status === null) {
-      await this.conect.start();
-      this.iduser = this.conect.id
-      console.log('Запустили сервер!');
-      console.log('Подписались на статус соединения!');
+      await this.connect.start();
+      this.iduser = this.connect.id
     }
+    this.subscribeDisconnected = new BroadcastEventListener<string>('Disconnected');
+    this.connect.listen(this.subscribeDisconnected);
+    this.subscribeDisconnected.subscribe((substring: string) => {
+      alert(substring);
+      this.stopServerSignalR();
+      this.autorization.logoutDisconnect();
+    });
+    console.log('Запустили сервер!');
+
+    console.log('Подписались на статус соединения!');
   }
 
-  stopserverSignalR() {
+  stopServerSignalR() {
     console.log('Отключили роли!');
     if (new Array('connected', 'disconnected').some(x => x === this.status.name)) {
       console.log('Остановили сервер!');
       console.log('Отписались от статуса соединения!');
-      this.conect.stop();
+      this.connect.stop();
       this.iduser = null;
       this.status = null;
     }
   }
 
-  private statusSubscriSignalR() {
-    this.conect.status.subscribe((state: ConnectionStatus) => {
+  private statusSubscribeSignalR() {
+    this.connect.errors.subscribe((error: any) => {
+      this.error = error;
+      console.log(this.status + " And " + this.error);
+    });
+    this.connect.status.subscribe((state: ConnectionStatus) => {
       this.status = state;
+      console.log(this.status + " And " + this.error);
       if (state.name === "disconnected") {
-        this.stopserverSignalR();
+        this.stopServerSignalR();
         this.autorization.logoutDisconnect();
         alert("Потеря соединения с сайтом Обновите страницу!!!");
       }

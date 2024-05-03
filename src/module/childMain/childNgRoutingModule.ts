@@ -23,6 +23,10 @@ import { Journal3Ndfl } from '../../app/otdels/otdels/okp6/Journal3Ndfl/ts/Journ
 import { RealEstateZmIm } from '../../app/otdels/otdels/okp6/RealEstateZmIm/ts/realEstateZmIm';
 import { ModelRegistryReference } from 'src/app/otdels/otdels/orn/ReestrReference/ts/addInnFaceRegistryReference';
 import { InterrogationOfWitnesses } from '../../app/otdels/otdels/kao/InterrogationOfWitnesses/ts/interrogationOfWitnesses';
+import { PrintDocument } from '../../app/otdels/otdels/uz1/PrintDocument/ts/printDocument';
+import { DigitalizationDocument } from '../../app/otdels/otdels/registration/DigitalizationDocument/ts/DigitalizationDocument.1';
+import { HelpDigitalizationDocument } from '../../app/otdels/otdels/registration/HelpDigitalizationDocument/ts/HelpDigitalizationDocument';
+import { ContainerModel } from '../../app/otdels/otdels/registration/ContainerModel/ts/ContainerModel';
 
 const appRoutes: Routes = [
   {
@@ -115,6 +119,22 @@ const appRoutes: Routes = [
 
         path: 'InterrogationOfWitnesses',
         component: InterrogationOfWitnesses
+      },
+      {
+        path: 'printDoc',
+        component: PrintDocument
+      },
+      {
+        path: 'helpDigitalizationDocument',
+        component: HelpDigitalizationDocument
+      },
+      {
+        path: 'digitalizationDocument',
+        component: DigitalizationDocument
+      },
+      {
+        path: 'container',
+        component: ContainerModel
       }
     ]
   }];
